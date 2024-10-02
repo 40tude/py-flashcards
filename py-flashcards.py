@@ -1,4 +1,7 @@
-# locally
+# Locally :
+#   you must define session key before to run/debug the app
+#       ./secrets.ps1
+#       ls env:FLASH*                 # to double check
 #   python py-flashcards.py or F5
 #   flask --app py-flashcards run
 
@@ -8,12 +11,16 @@ from markdown import markdown
 import re
 from pathlib import Path
 import random
+import os
 
 logging.basicConfig(level=logging.INFO)  # set logging level. Msg>= info are recorded
 app = Flask(__name__)
 
 # Load configurations from config.py
-app.config.from_object("config")
+# Locally : you must have run ./secrets.ps1 (see above)
+# In production on Heroku FLASHCARDS_SECRET_KEY must have been set
+app.secret_key = os.environ.get("FLASHCARDS_SECRET_KEY")
+# app.config.from_object("config")
 # without session key, Flask does not allow the app to set or access the session dictionary
 # print(app.config["SECRET_KEY"])
 # print(app.secret_key)

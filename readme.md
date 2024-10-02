@@ -10,24 +10,23 @@
 * create file mypy.ini
 * create file py-flashcards.py
 * conda install flask mypy markdown pygments -y
-* create a config.py similar to
+* create a secrets.ps1 similar to
 ```
-import os
-SECRET_KEY = os.environ.get("FLASHCARDS_SECRET_KEY", "your_code")
-
+$env:FLASHCARDS_SECRET_KEY = "blablabla..."
 ```
 * create .gitignore
-    * add a line with : config.py
+    * at least, add a line with : secrets.ps1
 * Strike F5 in VScode
     * Should be running locally
+    * CTRL+C
 * From VSCode commit on github 
 * conda list -e > ./assets/requirements_conda.txt
 * pip list --format=freeze > requirements.txt
-    * At the end of requirements.txt add the line gunicorn==23.0.0
+    * At the end of requirements.txt manually add the line "gunicorn==23.0.0"
     * I have to do that because I run WIN11 and I can't install gunicorn
     * gunicorn is only used in "production" on heroku
 * create file Procfile
-    * ATTENTION - py-flashcards:app
+    * Pay attention to :  py-flashcards:app
     * name of the .py file, :, app
 * create file runtime.txt
 * From VSCode commit to github
@@ -40,6 +39,7 @@ SECRET_KEY = os.environ.get("FLASHCARDS_SECRET_KEY", "your_code")
     * git remote add heroku https://git.heroku.com/py-flashcards.git
     * git push heroku main
     * heroku config:set FLASK_ENV=production
+    * heroku config:set FLASHCARDS_SECRET_KEY=blablabla 
     * heroku open
     * This should work
 
