@@ -34,6 +34,9 @@ SECRET_KEY = os.environ.get("FLASHCARDS_SECRET_KEY", "your_code")
 * VSCode integrated terminal (CTRL + ù)
     * heroku login
     * heroku create py-flashcards
+        * https://py-flashcards-41b349ab0591.herokuapp.com/ 
+        * https://git.heroku.com/py-flashcards.git
+        * are created
     * git remote add heroku https://git.heroku.com/py-flashcards.git
     * git push heroku main
     * heroku config:set FLASK_ENV=production
