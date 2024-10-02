@@ -1,58 +1,68 @@
+### ATTENTION
+* Heroku does not allow "_" in project name
+* Use "-" to name your project instead
 
+# Note
+* I use WIN11 (while Heroku runs Linux) but most of the information are platform independent
+* I use conda
 
-
-* **ATTENTION** heroku do not allow "_" in project name
-    * Use "-" instead
+# How to
+You should have received all the files. The lines below explain how the project was initially set up.
 * conda create --name py-flashcards python=3.12 -y
 * conda activate py-flashcards
-* create directory py-flashcards
+* create directory py-flashcards + cd ./py-flashcards 
 * code .
 * create file mypy.ini
 * create file py-flashcards.py
 * conda install flask mypy markdown pygments -y
 * create a secrets.ps1 similar to
+
 ```
-$env:FLASHCARDS_SECRET_KEY = "blablabla..."
+$env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
 ```
 * create .gitignore
     * at least, add a line with : secrets.ps1
+* Open a terminal in VSCode (CTRL + ù)
+    * ./secrets.ps1
 * Strike F5 in VScode
-    * Should be running locally
+    * The app should be running locally
     * CTRL+C
-* From VSCode commit on github 
 * conda list -e > ./assets/requirements_conda.txt
 * pip list --format=freeze > requirements.txt
     * At the end of requirements.txt manually add the line "gunicorn==23.0.0"
     * I have to do that because I run WIN11 and I can't install gunicorn
     * gunicorn is only used in "production" on heroku
+    * If you run Linux
+        * conda install gunicorn -y
+        * pip list --format=freeze > requirements.txt
 * create file Procfile
     * Pay attention to :  py-flashcards:app
-    * name of the .py file, :, app
+    * name of the Python file + ":" + app
 * create file runtime.txt
 * From VSCode commit to github
-* VSCode integrated terminal (CTRL + ù)
+* From the VSCode integrated terminal 
     * heroku login
     * heroku create py-flashcards
         * https://py-flashcards-41b349ab0591.herokuapp.com/ 
         * https://git.heroku.com/py-flashcards.git
-        * are created
+        * are created for example
     * git remote add heroku https://git.heroku.com/py-flashcards.git
     * git push heroku main
     * heroku config:set FLASK_ENV=production
-    * heroku config:set FLASHCARDS_SECRET_KEY=blablabla 
+    * heroku config:set FLASHCARDS_SECRET_KEY=<blablabla> 
     * heroku open
     * This should work
 
-* Workflow
+# Workflow
     * Modify files etc.
-    * Commit on github from vscode    
+    * Commit on github from VSCode    
     * git push heroku main
     * heroku open (or visit the app web page)
 
-* Q : How to check gunicorn works is serving the app
-* A : 
-    * integrated terminal
+# Q&A
+* Q : How to check gunicorn is serving the app on Heroku?
+* A : Open a terminal locally
     * heroku logs --tail
-    * CTRL+C
+    * CTRL+C 
     * CTRL+F gunicorn
-    * You should see : [INFO] Starting gunicorn 23.0.0
+    * You should see a line similar to : `[INFO] Starting gunicorn 23.0.0`
