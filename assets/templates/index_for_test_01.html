@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Flask</title>
+
+    <!-- css for Pygments color syntax (Python source code in the HTML page) -->
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/pygments/2.10.0/styles/default.min.css -->
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/pygments/2.10.0/styles/monokai.min.css -->
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/pygments/2.10.0/styles/colorful.min.cs -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.10.0/styles/colorful.min.cs">
+
+    <!-- MathJax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+        async></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        {{ content | safe }}
+    </div>
+</body>
+
+</html>
