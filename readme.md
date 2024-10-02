@@ -27,6 +27,8 @@ SECRET_KEY = os.environ.get("FLASHCARDS_SECRET_KEY", "your_code")
     * I have to do that because I run WIN11 and I can't install gunicorn
     * gunicorn is only used in "production" on heroku
 * create file Procfile
+    * ATTENTION - py-flashcards:app
+    * name of the .py file, :, app
 * create file runtime.txt
 * From VSCode commit to github
 * VSCode integrated terminal (CTRL + ù)

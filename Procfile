@@ -1,0 +1,1 @@
+web: gunicorn py-flashcards:app --workers=3
