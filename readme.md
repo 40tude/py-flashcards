@@ -7,7 +7,7 @@
 * I use conda
 
 # How to
-You should have received all the files. The lines below explain how the project was initially set up.
+You should have all the files already. The lines below explain how the project was initially set up.
 * conda create --name py-flashcards python=3.12 -y
 * conda activate py-flashcards
 * create directory py-flashcards + cd ./py-flashcards 
@@ -66,3 +66,8 @@ $env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
     * CTRL+C 
     * CTRL+F gunicorn
     * You should see a line similar to : `[INFO] Starting gunicorn 23.0.0`
+
+# About contributions
+This project was developed for personal and educational purposes. Feel free to explore and use it to enhance your own learning in machine learning.
+
+Given the nature of the project, external contributions are not actively sought or encouraged. However, constructive feedback aimed at improving the project (in terms of speed, accuracy, comprehensiveness, etc.) is welcome. Please note that this project was created as part of a certification process, and it is unlikely to be maintained after the final presentation.    
