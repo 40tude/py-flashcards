@@ -26,10 +26,14 @@ app.secret_key = os.environ.get("FLASHCARDS_SECRET_KEY")
 # -----------------------------------------------------------------------------
 # TODO : The order & position of this function matters => FIXIT
 def parse_markdown(markdown_text: str) -> list:
-    pattern = re.compile(r"\* Question : (.*?)\* Réponse\s*: (.*?)(?=\n\* Question|\Z)", re.DOTALL)
+    # delete any markdown comment first
+    markdown_text = re.sub(r"<!--.*?-->", "", markdown_text, flags=re.DOTALL)
+
+    # pattern = re.compile(r"\* Question : (.*?)\* Answer\s*: (.*?)(?=\n\* Question|\Z)", re.DOTALL)
+    pattern = re.compile(r"Question\s*:\s*(.*?)\nAnswer\s*:\s*(.*?)(?=\nQuestion|\Z)", re.DOTALL)
     matches = pattern.findall(markdown_text)
     return [
-        {"question": "**Question : **" + match[0].strip(), "answer": "**Answer : **" + match[1].strip()}
+        {"question": "###Question :\n" + match[0].strip(), "answer": "###Answer :\n" + match[1].strip()}
         for match in matches
     ]
 
@@ -40,13 +44,15 @@ def load_qa_files(directory: str) -> list:
     qa_pairs = []
     qa_files = [file for file in Path(directory).iterdir() if file.is_file()]
     for qa_file in qa_files:
+        # app.logger.info(f"qa_file : {qa_file}")
         try:
             with qa_file.open("r", encoding="utf-8") as f:
                 markdown_text = f.read()
+                # app.logger.info(f"markdown_text : {markdown_text}")
                 qa_pairs.extend(parse_markdown(markdown_text))
         except Exception as e:
             print(f"Error reading file {qa_file.name}: {e}")
-    # print(qa_pairs)
+    # app.logger.info(f"qa_pairs : {qa_pairs}")
     return qa_pairs
 
 
