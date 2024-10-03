@@ -9,6 +9,11 @@ It can include markdown
 </p>
 
 
+
+
+* Question : Il a dit quoi Albert ?
+* Réponse  : 
+
 $$ E = mc^2 $$
 
 
@@ -18,7 +23,7 @@ $$ E = mc^2 $$
 * Question : SCRAPY - How can you enable AutoThrottle in Scrapy?
 * Réponse  : By uncommenting the appropriate lines in the ``settings.py`` file.
 
-```
+```python
 # settings.py
 
 BOT_NAME = 'myproject'

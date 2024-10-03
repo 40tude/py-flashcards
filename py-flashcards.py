@@ -1,5 +1,5 @@
 # Locally :
-#   you must define session key before to run/debug the app
+#   you must define the session key before to run/debug the app
 #       ./secrets.ps1
 #       ls env:FLASH*                 # to double check
 #   python py-flashcards.py or F5
@@ -16,13 +16,10 @@ import os
 logging.basicConfig(level=logging.INFO)  # set logging level. Msg>= info are recorded
 app = Flask(__name__)
 
-# Load configurations from config.py
-# Locally : you must have run ./secrets.ps1 (see above)
-# In production on Heroku FLASHCARDS_SECRET_KEY must have been set
+# If you run the app locally you must run ./secrets.ps1 first (see above)
+# In production on Heroku FLASHCARDS_SECRET_KEY must have been set manually (see readme.md)
+# Without session key, Flask does not allow the app to set or access the session dictionary
 app.secret_key = os.environ.get("FLASHCARDS_SECRET_KEY")
-# app.config.from_object("config")
-# without session key, Flask does not allow the app to set or access the session dictionary
-# print(app.config["SECRET_KEY"])
 # print(app.secret_key)
 
 
@@ -55,13 +52,12 @@ def load_qa_files(directory: str) -> list:
 
 k_QAFolder = "./static/md"
 qa_pairs = load_qa_files(k_QAFolder)
-# qa_pairs: list[str] = []
 
 
 # -----------------------------------------------------------------------------
 @app.route("/")
 def index() -> str:
-    # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    # debug, info, warning, error, critical
     app.logger.info("access to home page")
 
     if "unseen_QA" not in session or not session["unseen_QA"]:
