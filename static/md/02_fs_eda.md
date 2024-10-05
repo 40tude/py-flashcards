@@ -5,6 +5,11 @@
 
 $$ E = mc^2 $$
 
+
+
+
+#### Code snippet  
+
 ```python
 # -----------------------------------------------------------------------------
 def preprocessor(df):
@@ -15,6 +20,14 @@ def preprocessor(df):
     # format
     df.columns = df.columns.str.lower()
     df.columns = df.columns.str.replace("/", "_")
+```
+
+
+
+#### Code snippet 
+
+```python
+# TODO : add sample code
 ```
 
 -->
@@ -32,9 +45,19 @@ Answer  : A new matrix where each element is the dot product of rows and columns
 
 Question : NUMPY - How are eigenvalues and eigenvectors of a matrix in NumPy computed?
 Answer  : 
+
+#### Code snippet 
+
 ```python
-np.linalg.eig()
+...
+cov_mat = X.T.dot(X)
+eig_val, eig_vec = np.linalg.eig(cov_mat)
+eig_val, eig_vec
+
 ```
+
+
+
 Question : NUMPY - What does the "@" symbol represent in NumPy in linear algebra context?
 Answer  : Matrix multiplication
 
@@ -43,13 +66,23 @@ Answer  : A way to access a portion of an array or matrix
 
 Question : NUMPY - How do you create an array of zeros in NumPy?
 Answer  : 
+
+#### Code snippet 
+
 ```python
-np.zeros()
+mat_a = np.zeros([2, 2], dtype = int)
+mat_a
 ```
 
 Question : NUMPY - How do you change the shape of an existing NumPy array?
 Answer  : 
+
+#### Code snippet 
+
 ```python
+vec = np.arange(0, 100)
+vec2 = vec.reshape(4, 5, 5)
+vec2
 reshape()
 ```
 
@@ -68,30 +101,61 @@ Answer  : The number of standard deviations a data point is from the mean
 Question : STAT101 - Which sampling method should be avoided due to potential bias?
 Answer  : Convenience Sampling (vs Random Sampling Stratified Sampling  Cluster Sampling)
 
+
+
 Question : PANDAS - How do you read a CSV file using Pandas?
 Answer  : 
+
+#### Code snippet 
+
 ```python
-pd.read_csv(filename)
+from pathlib import Path
+k_Current_dir = Path.cwd()
+k_AssetsDir   = "assets"                       
+k_Filename    = "cities.csv"                   
+df_cities = pd.read_csv(k_Current_dir/k.AssetsDir/k.Filename, nrows = 2)
 ```
+
+
+
 Question : PANDAS - What are the two primary data structures in Pandas?
 Answer  : DataFrames and Series
 
 Question : PANDAS - How do you convert a string to a datetime object in Pandas?
 Answer  : 
+
+#### Code snippet 
+
 ```python
 pd.to_datetime() 
 pd.to_datetime(df['dates'], format='%Y-%m-%d')
 …
 ```
 
+
+
 Question : PANDAS - What is the purpose of the .dt accessor in Pandas?
 Answer  : To access datetime properties and methods on Series
 
+#### Code snippet 
+
+```python
+dates = pd.Series(pd.date_range("2024-01-01", periods=5, freq="12D)) 
+date.dt.day
+```
+
+
+
 Question : PANDAS - How can you extract the year from a datetime object in Pandas?
 Answer  : 
+
+#### Code snippet 
+
 ```python
 datetime_object.year
 ```
+
+
 
 Question : PANDAS - What does the Timedelta type represent in Pandas?
 Answer  : The difference between two datetime values

@@ -5,6 +5,11 @@
 
 $$ E = mc^2 $$
 
+
+
+
+#### Code snippet  
+
 ```python
 # -----------------------------------------------------------------------------
 def preprocessor(df):
@@ -17,6 +22,9 @@ def preprocessor(df):
     df.columns = df.columns.str.replace("/", "_")
 ```
 
+
+
+#### Code snippet 
 
 ```python
 # TODO : add sample code
@@ -35,17 +43,20 @@ def preprocessor(df):
 Question : PYTHON - Give 2 examples of mutable data collection?
 Answer  : List, Dictionary
 
+
+
 Question : PYTHON - How do you add a single element to the end of a list? How can you remove an item from a list using its value?
 Answer  : 
 
-Code snippet 1 :
+#### Code snippet 
 
 ```python
 append()
 delete()
+
 ```
 
-Code snippet 2 :
+#### Code snippet 
 
 ```python
 list_villes=["Aix en Provence", "Paris", "Ghisonaccia"]
@@ -54,13 +65,26 @@ for ville in list_villes:
     urls.append(
         f"https://www.booking.com/searchresults.fr.html?ss={ville}&checkin=2024-05-02&checkout=2024-05-05&group_adults=2&no_rooms=1&group_children=0",
     )
+
 ```
 
 Question : PYTHON - How can you access the value associated with a specific key in a dictionary?
-Answer  : Brackets []
+Answer  : Use brackets or .get(). Pay attention when the key does'nt exist yet.
+
+#### Code snippet 
+
+```python
+you = {'name': 'Zoubida', 'age': 42}
+
+print(f'First name : {you.get('name')}')
+print(f"Age        : {you['age']}")
+```
+
 
 Question : PYTHON - How do you add a new key-value pair to a dictionary?
 Answer  : 
+
+#### Code snippet 
 
 ```python
 dico["bob"] = 42
@@ -69,6 +93,9 @@ dico["bob"] = 42
 
 Question : PYTHON - How can you iterate over both keys and values in a dictionary?
 Answer  : 
+
+#### Code snippet 
+
 ```python
 person = {
   "nom" : "ROBERT",
@@ -78,8 +105,11 @@ print(person["nom"])
 person.items()
 ```
 
+
 Question : PYTHON - How can you add a default argument to a function?
 Answer  : By assigning a value to the parameter (param="bob") in the function declaration.
+
+#### Code snippet 
 
 ```python
 def volume(length=1, width=1, depth=1):
@@ -100,11 +130,15 @@ Answer  :
 * Les **arguments** d'une fonction sont les valeurs passées à la fonction.
 
 
+
+
 Question : PYTHON - What is the purpose of giving an alias to exceptions?
 Answer  : To customize the error message displayed to the user.
 
 Question : PYTHON - How can you create your own exception in Python?
 Answer  : By using the ``raise`` statement with a specific error message.
+
+#### Code snippet 
 
 ```python
 def find_seat(self, n):
@@ -112,8 +146,12 @@ def find_seat(self, n):
         raise Exception("n should be a positive integer")
 ```
 
+
+
 Question : PYTHON - Which method is used to initialize the attributes of a class in Python?
 Answer  : 
+
+#### Code snippet 
 
 ```python
 class Employee():
@@ -133,12 +171,16 @@ class Employee():
 Question : PYTHON - Pourquoi voudriez-vous implémenter la méthode ``__call__()`` dans la classe d'un de vos modèles?
 Answer  : If the model class has a ``__call__()`` method then we can call it as a function. 
  
+#### Code snippet 
+
 ```python
 print("model output:", my_model(data))
 ```
 
 Question : PYTHON - What does the ``self`` keyword represent in Python classes?
 Answer  : It refers to the instance of the class.
+
+#### Code snippet 
 
 ```python
 class MyImputer():
@@ -164,8 +206,9 @@ class MyImputer():
 Question : PYTHON - What does the ``ValueError`` exception indicate?
 Answer  : It is raised when a method is called with incorrect arguments. 
 
-```python
+#### Code snippet 
 
+```python
 class MyCustomImputer(BaseEstimator, TransformerMixin):
 
     def __init__(self, strategy='mean'):

@@ -38,6 +38,8 @@ The attention mechanism that learns contextual relationships between words in a 
 
 $$ E = mc^2 $$
 
+#### Code snippet  
+
 ```python
 # -----------------------------------------------------------------------------
 def preprocessor(df):
@@ -48,6 +50,14 @@ def preprocessor(df):
     # format
     df.columns = df.columns.str.lower()
     df.columns = df.columns.str.replace("/", "_")
+```
+
+
+
+#### Code snippet 
+
+```python
+# TODO : add sample code
 ```
 
 -->
