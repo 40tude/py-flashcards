@@ -64,7 +64,7 @@ $env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
 ## To deploy on Heroku
 * Modify files etc.
 * Commit on github from VSCode    
-* git push heroku main
+* ``git push heroku main``
 * type ``heroku open`` in the terminal (or visit the app web page)
 
 # Q&A
