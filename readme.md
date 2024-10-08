@@ -10,7 +10,8 @@
 You should have all the files already. The lines below explain how the project was initially set up.
 * conda create --name py-flashcards python=3.12 -y
 * conda activate py-flashcards
-* create directory py-flashcards + cd ./py-flashcards 
+* create directory py-flashcards 
+* cd ./py-flashcards 
 * code .
 * create file mypy.ini
 * create file py-flashcards.py
@@ -54,10 +55,17 @@ $env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
     * This should work
 
 # Workflow
-    * Modify files etc.
-    * Commit on github from VSCode    
-    * git push heroku main
-    * heroku open (or visit the app web page)
+## To run locally
+* Open a terminal in VSCode and run ``./secrets.ps1`` once
+* Modify files etc.
+* Commit on github from VSCode    
+* Strike F5 while ``py-flashcards.py`` is open
+
+## To deploy on Heroku
+* Modify files etc.
+* Commit on github from VSCode    
+* git push heroku main
+* type ``heroku open`` in the terminal (or visit the app web page)
 
 # Q&A
 * Q : How to check gunicorn is serving the app on Heroku?

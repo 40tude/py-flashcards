@@ -1,4 +1,13 @@
 <!-- 
+08 10 2024
+DONE : Les quizz de la section Python ont été vu
+
+-->
+
+
+
+
+<!-- 
 <p align="center">
 <img src="../static/md/assets/img1.png" alt="attention" width="577"/>
 </p>
@@ -23,6 +32,8 @@ def preprocessor(df):
 ```
 
 
+Question : 
+Answer   : 
 
 #### Code snippet 
 
@@ -40,12 +51,12 @@ def preprocessor(df):
 ############################################################ 
 -->
 
-Question : PYTHON - Give 2 examples of mutable data collection?
+Question : PYTHON - Data types - Give 2 examples of mutable data collection?
 Answer  : List, Dictionary
 
 
 
-Question : PYTHON - How do you add a single element to the end of a list? How can you remove an item from a list using its value?
+Question : PYTHON - Data types - How do you add a single element to the end of a list? How can you remove an item from a list using its value?
 Answer  : 
 
 #### Code snippet 
@@ -68,7 +79,22 @@ for ville in list_villes:
 
 ```
 
-Question : PYTHON - How can you access the value associated with a specific key in a dictionary?
+
+
+Question : PYTHON - Data types - What is the syntax for creating a slice of a list that includes elements from index 2 to index 5 (excluding index 5)?
+Answer  : 
+
+#### Code snippet 
+
+```python
+list[2:5]
+```
+
+
+
+
+
+Question : PYTHON - Data types - How can you access the value associated with a specific key in a dictionary?
 Answer  : Use brackets or .get(). Pay attention when the key does'nt exist yet.
 
 #### Code snippet 
@@ -81,7 +107,9 @@ print(f"Age        : {you['age']}")
 ```
 
 
-Question : PYTHON - How do you add a new key-value pair to a dictionary?
+
+
+Question : PYTHON - Data types - How do you add a new key-value pair to a dictionary?
 Answer  : 
 
 #### Code snippet 
@@ -91,7 +119,9 @@ dico["bob"] = 42
 ```
 
 
-Question : PYTHON - How can you iterate over both keys and values in a dictionary?
+
+
+Question : PYTHON - Data types - How can you iterate over both keys and values in a dictionary?
 Answer  : 
 
 #### Code snippet 
@@ -106,7 +136,9 @@ person.items()
 ```
 
 
-Question : PYTHON - How can you add a default argument to a function?
+
+
+Question : PYTHON - Functions - How can you add a default argument to a function?
 Answer  : By assigning a value to the parameter (param="bob") in the function declaration.
 
 #### Code snippet 
@@ -124,18 +156,17 @@ volume(width=4)
 
 
 
-Question : PYTHON - Différence entre **arguments** et **paramètres**
-Answer  : 
-* Les **paramètres** d'une fonction sont les noms listés dans la définition de la fonction. 
-* Les **arguments** d'une fonction sont les valeurs passées à la fonction.
+Question : PYTHON - Functions - What does the acronym DRY stand for in programming?
+Answer   : Don't repeat yourself
 
 
 
-
-Question : PYTHON - What is the purpose of giving an alias to exceptions?
+Question : PYTHON - Functions - What is the purpose of giving an alias to exceptions?
 Answer  : To customize the error message displayed to the user.
 
-Question : PYTHON - How can you create your own exception in Python?
+
+
+Question : PYTHON - Functions - How can you create your own exception in Python?
 Answer  : By using the ``raise`` statement with a specific error message.
 
 #### Code snippet 
@@ -148,7 +179,8 @@ def find_seat(self, n):
 
 
 
-Question : PYTHON - Which method is used to initialize the attributes of a class in Python?
+
+Question : PYTHON - Classes - Which method is used to initialize the attributes of a class in Python?
 Answer  : 
 
 #### Code snippet 
@@ -168,16 +200,9 @@ class Employee():
 ```
 
 
-Question : PYTHON - Pourquoi voudriez-vous implémenter la méthode ``__call__()`` dans la classe d'un de vos modèles?
-Answer  : If the model class has a ``__call__()`` method then we can call it as a function. 
- 
-#### Code snippet 
 
-```python
-print("model output:", my_model(data))
-```
 
-Question : PYTHON - What does the ``self`` keyword represent in Python classes?
+Question : PYTHON - Classes - What does the ``self`` keyword represent in Python classes?
 Answer  : It refers to the instance of the class.
 
 #### Code snippet 
@@ -203,7 +228,7 @@ class MyImputer():
 ```
 
 
-Question : PYTHON - What does the ``ValueError`` exception indicate?
+Question : PYTHON - Classes - What does the ``ValueError`` exception indicate?
 Answer  : It is raised when a method is called with incorrect arguments. 
 
 #### Code snippet 
@@ -228,3 +253,29 @@ class MyCustomImputer(BaseEstimator, TransformerMixin):
     def transform(self, X):
         return np.where(np.isnan(X), self.fill_value, X)
 ```        
+
+
+<!-- 
+############################################################
+## Questions qui ne proviennent pas des quizz
+############################################################ 
+-->
+
+Question : PYTHON - Différence entre **arguments** et **paramètres**
+Answer  : 
+* Les **paramètres** d'une fonction sont les noms listés dans la définition de la fonction. 
+* Les **arguments** d'une fonction sont les valeurs passées à la fonction.
+
+
+
+
+
+Question : PYTHON - Pourquoi voudriez-vous implémenter la méthode ``__call__()`` dans la classe d'un de vos modèles?
+Answer  : If the model class has a ``__call__()`` method then we can call it as a function. 
+ 
+#### Code snippet 
+
+```python
+print("model output:", my_model(data))
+```
+
