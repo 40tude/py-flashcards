@@ -479,7 +479,7 @@ Answer  :
 
 Question : What is the effect of the batch size on the training of the model? 
 Answer  : 
-It includes
+
 * **Computational Efficiency :** Larger batch sizes result in faster training as more samples are processed in parallel.
 * **Stability :** Larger batch sizes provide a more stable estimate of the gradient, which can lead to smoother convergence. They might get stuck in local minima more easily.
 * **Generalization :** Smaller batch sizes can help the model generalize better as they introduce more randomness in the updates, which can prevent the model from overfitting.
