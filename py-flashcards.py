@@ -1,8 +1,5 @@
-# Locally :
-#   you must define the session key before to run/debug the app
-#       ./secrets.ps1
-#       ls env:FLASH*                         # to double check
-#   python py-flashcards.py or strike F5
+# First, read the readme.md
+# I can't do it for you :-)
 
 import os
 import re
@@ -11,19 +8,11 @@ import logging
 import sqlite3
 from pathlib import Path
 from markdown import markdown
+from werkzeug.wrappers import Response
 from typing import List, Dict, Tuple, Optional
 from flask import Flask, render_template, session, redirect, url_for
 
-
-# logging.basicConfig(level=logging.INFO)
-# app = Flask(__name__)
-
-# If you run the app locally you must run ./secrets.ps1 first (see above)
-# In production on Heroku FLASHCARDS_SECRET_KEY must have been set manually (see readme.md)
-# Without session key, Flask does not allow the app to set or access the session dictionary
-# app.secret_key = os.environ.get("FLASHCARDS_SECRET_KEY")
-
-# Database file path
+# ----------------------------------------------------------------------
 k_DB_Path = "./flashcards.db"
 k_QAFolder = "./static/md"
 
@@ -145,6 +134,7 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
 
 # ----------------------------------------------------------------------
 # create_app() function is the entry point which configure the Flask app before it runs
+# double check the content of Procfile file
 def create_app() -> Flask:
 
     logging.basicConfig(level=logging.INFO)
@@ -189,7 +179,7 @@ def create_app() -> Flask:
 
     # ----------------------------------------------------------------------
     @app.route("/next")
-    def next():
+    def next() -> Response:
         """Route to go to the next question.
 
         Returns:
@@ -205,6 +195,12 @@ def create_app() -> Flask:
 # ----------------------------------------------------------------------
 if __name__ == "__main__":
 
+    # TODO : it seems that locally the application starts twice...
+    # Fix it
+    # When used locally, make sure the database is rebuilt
+    # if os.path.exists(k_DB_Path):
+    #     os.remove(k_DB_Path)
+    # print(f"******************************")
     app = create_app()
     app.logger.info("main()")
     app.run(debug=True)

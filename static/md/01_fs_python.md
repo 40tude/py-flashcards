@@ -52,7 +52,10 @@ Answer   :
 -->
 
 Question : PYTHON - Data types - Give 2 examples of mutable data collection?
-Answer  : List, Dictionary
+Answer  : 
+
+* List
+* Dictionary
 
 
 
@@ -95,7 +98,9 @@ list[2:5]
 
 
 Question : PYTHON - Data types - How can you access the value associated with a specific key in a dictionary?
-Answer  : Use brackets or .get(). Pay attention when the key does'nt exist yet.
+Answer  : 
+
+Use brackets or .get(). Pay attention when the key does'nt exist yet.
 
 #### Code snippet 
 
@@ -139,7 +144,9 @@ person.items()
 
 
 Question : PYTHON - Functions - How can you add a default argument to a function?
-Answer  : By assigning a value to the parameter (param="bob") in the function declaration.
+Answer  : 
+
+By assigning a value to the parameter (param="bob") in the function declaration.
 
 #### Code snippet 
 
@@ -157,17 +164,23 @@ volume(width=4)
 
 
 Question : PYTHON - Functions - What does the acronym DRY stand for in programming?
-Answer   : Don't repeat yourself
+Answer   : 
+
+Don't repeat yourself
 
 
 
 Question : PYTHON - Functions - What is the purpose of giving an alias to exceptions?
-Answer  : To customize the error message displayed to the user.
+Answer  : 
+
+To customize the error message displayed to the user.
 
 
 
 Question : PYTHON - Functions - How can you create your own exception in Python?
-Answer  : By using the ``raise`` statement with a specific error message.
+Answer  : 
+
+By using the ``raise`` statement with a specific error message.
 
 #### Code snippet 
 
@@ -203,7 +216,9 @@ class Employee():
 
 
 Question : PYTHON - Classes - What does the ``self`` keyword represent in Python classes?
-Answer  : It refers to the instance of the class.
+Answer  : 
+
+It refers to the instance of the class.
 
 #### Code snippet 
 
@@ -229,7 +244,9 @@ class MyImputer():
 
 
 Question : PYTHON - Classes - What does the ``ValueError`` exception indicate?
-Answer  : It is raised when a method is called with incorrect arguments. 
+Answer  : 
+
+It is raised when a method is called with incorrect arguments. 
 
 #### Code snippet 
 
@@ -262,7 +279,8 @@ class MyCustomImputer(BaseEstimator, TransformerMixin):
 -->
 
 Question : PYTHON - Différence entre **arguments** et **paramètres**
-Answer  : 
+Answer  :
+
 * Les **paramètres** d'une fonction sont les noms listés dans la définition de la fonction. 
 * Les **arguments** d'une fonction sont les valeurs passées à la fonction.
 
@@ -271,7 +289,9 @@ Answer  :
 
 
 Question : PYTHON - Pourquoi voudriez-vous implémenter la méthode ``__call__()`` dans la classe d'un de vos modèles?
-Answer  : If the model class has a ``__call__()`` method then we can call it as a function. 
+Answer  : 
+
+If the model class has a ``__call__()`` method then we can call it as a function. 
  
 #### Code snippet 
 

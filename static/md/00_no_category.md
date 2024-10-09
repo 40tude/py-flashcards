@@ -77,12 +77,13 @@ Answer   :
 
 Question : NLP - What is the purpose of oov_token in ``tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=k_num_words, oov_token="_UNKNOWN_")``
 Answer  : 
-``oov_token`` = out of vocabulary token
-1. When the ``oov_token`` is specified in the tokenizer, words which are **NOT** present in the learned vocabulary will be replaced by this token. 
-This enables the model to handle new words that appear in test or inference data, while reducing the risk of errors or inaccuracies.
-In a new sentence, 2 unknown words will be represented by the OOV token, preserving information even if the model hasn't seen these words before
-2. If ``oov_token`` not specified any word not in the vocabulary will be ignored and not tokenized
-This may result in the loss of important information during inference or testing.
+
+* ``oov_token`` = out of vocabulary token
+* When the ``oov_token`` is specified in the tokenizer, words which are **NOT** present in the learned vocabulary will be replaced by this token. 
+    * This enables the model to handle new words that appear in test or inference data, while reducing the risk of errors or inaccuracies.
+    * In a new sentence, 2 unknown words will be represented by the OOV token, preserving information even if the model hasn't seen these words before
+* If ``oov_token`` not specified any word not in the vocabulary will be ignored and not tokenized
+    * This may result in the loss of important information during inference or testing.
 
 
 
@@ -90,28 +91,42 @@ This may result in the loss of important information during inference or testing
 
 Question : Classes déséquilibrées, spam par exemple. Vous faites quoi ?
 Answer  : 
-1. train_test_split() avec stratify
-1. Touche plus au jeu de test
+
+1. ``train_test_split()`` avec stratify
+1. On touche plus au jeu de test
 1. Equilibrer les classes du train set (50/50)
 1. Entrainer le modèle avec le train set équilibré
 1. Validation/métriques avec le jeu de test déséquilibré 
 
-. L'équilibre des classes se fait par sous ou sur-échantillonnage. 
-. Sur échantillonnage  : imblearn ou SMOTE (Synthetic Minority Oversampling Technique, synthèse de points)
-. Sous échantillonnage : Tomek Links ou NearMiss
-. Si on veut garder des classes déséquilibrées lors du training on peut faire de la pondération de classe
-. C'est l'inverse de la freq des classes
-. Voir ``class_weight`` de sklearn qui retourne un dictionnaire qu'on passe ensuite à ``model.fit()`` de tensorflow (param class_weight)
-. On peut aussi faire du ``sample_weight`` où chaque échantillon de ``y_train`` recoit une pondération spécifique à sa classe 
-. Voir param ``sample_weight`` de ``model.fit()`` de tensorflow
-. Attention aux metrics : conf matrix, precision, recall,F1 score, area under ROC curve
-. Lire : https://www.analyticsvidhya.com/blog/2020/07/10-techniques-to-deal-with-class-imbalance-in-machine-learning/
+L'équilibrage des classes se fait par sous ou sur-échantillonnage
+* Sur échantillonnage
+    * imblearn 
+    * SMOTE (Synthetic Minority Oversampling Technique, synthèse de points)
+
+<p align="center">
+<img src="../static/md/assets/smote.png" alt="smote" width="577"/>
+</p>
+
+* Sous échantillonnage 
+    * Tomek Links 
+    * NearMiss
+* Si on veut garder des classes déséquilibrées lors du training on peut faire de la pondération de classe
+    * C'est l'inverse de la freq des classes
+    * Voir ``class_weight`` de sklearn qui retourne un dictionnaire qu'on passe ensuite à ``model.fit()`` de tensorflow (param class_weight)
+* On peut aussi faire du ``sample_weight`` 
+    * Chaque échantillon de ``y_train`` recoit une pondération spécifique à sa classe 
+    * Voir param ``sample_weight`` de ``model.fit()`` de tensorflow
+
+* Quand les classes sont déséquilibrées, faire attention aux metrics 
+    * conf matrix, precision, recall,F1 score, area under ROC curve
+* Lire cet [article](https://www.analyticsvidhya.com/blog/2020/07/10-techniques-to-deal-with-class-imbalance-in-machine-learning/)
 
 
 Question : MSE, RMSE, MAE, R², MAPE ?
 Answer  :
 
 **RMSE :** 
+
 * Généralement préférée dans les pb de régression
 * Si outliers, faut peut-être prendre en compte la MAE
 * RMSE (L2 based) est plus sensible aux outliers que MAE (L1 based)
@@ -123,6 +138,7 @@ Answer  :
     * Quand les outliers sont exponentiellement rares (bell curve) RMSE est plus efficace
 
 **MAPE :** 
+
 * Erreur Absolue Moyenne en % de la vraie valeur
 * Exprimée en %, c'est une mesure simple et intuitive de l'accuracy d'un modèle
 * Important de l'utiliser avec prudence quand les valeurs vraies sont proches de zéro.
@@ -132,7 +148,9 @@ Answer  :
 
 
 Question : ANOVA... Ca te dis quoi?
-Answer  : Analyse de la variance. La variation c'est l'information. ANOVA c'est analyser la quantité d'information captée par le modèle. Variance=écart à la moyenne.
+Answer  : 
+
+Analyse de la variance. La variation c'est l'information. ANOVA c'est analyser la quantité d'information captée par le modèle. Variance=écart à la moyenne.
 
 
 
@@ -151,6 +169,7 @@ Answer  :
 
 Question : Data Warehouse vs Databases ?
 Answer  : 
+
 * **Data warehouses** : optimized to have a performance boost on columns (features)
 * **Databases**       : optimized for extracting rows (observations)
 
@@ -159,6 +178,7 @@ Question : What is data tidying?
 Answer  : 
 
 This is the process of transforming raw, messy data into a clean and organized format that is easier to analyze and interpret. This process involves structuring the data in a way that :
+
 * Each variable forms a column
 * Each observation forms a row
 * Each type of observational unit forms a table
@@ -176,6 +196,7 @@ Answer  :
 
 Question : What are the types of categorical data ?
 Answer  : 
+
 **Ordinal Data** & **Nominal Data**
 
 * Ordinal data is a ranking list. It’s ordered, **BUT** the intervals between the ranks aren’t necessarily equal. 
@@ -216,6 +237,7 @@ Answer  :
 
 Question : BOOST-ADABOOST - Boosting ?
 Answer  : 
+
 * Séquentiel
 * Le boosting consiste à entraîner plusieurs modèles de manière séquentielle, chaque modèle cherchant à corriger les erreurs des modèles précédents. 
 * Les modèles sont construits de manière dépendante et on pondère les exemples d'entraînement en fonction des erreurs des modèles précédents. 
@@ -246,7 +268,8 @@ Answer  :
 
 Question : XGBoost benefits drawbacks for predictions
 Answer  :
-### Benefits
+
+#### Benefits
 - **Handles complex and heterogeneous data**: XGBoost works well with diverse features (numerical, categorical) and can model complex non-linear relationships often found in price prediction tasks.
 - **High performance with large datasets**: It is designed to be highly efficient, even with large volumes of data, thanks to parallelization and memory optimization.
 - **Manages missing values and outliers**: XGBoost automatically handles missing data and can incorporate outliers without negatively impacting performance, which is crucial for price prediction scenarios.
@@ -255,7 +278,7 @@ Answer  :
 - **Robust and adaptable**: It performs well across different data distributions and can handle cases where price variance is high, adapting to various relationships between features and target variables.
 
 
-### Potential Drawbacks
+#### Potential Drawbacks
 - **Complex hyperparameter tuning**: To achieve optimal performance, XGBoost often requires careful hyperparameter tuning, which can increase development complexity.
 - **Training time**: While fast, training can be longer on very large datasets compared to simpler algorithms, though the test performance typically makes up for this. 
 
@@ -266,6 +289,7 @@ Question : LOG-REG - Pouvez-vous expliquer les termes "précision" et "accuracy"
 Answer  : 
 
 Métriques utilisées pour évaluer la performance des modèles de classification.
+
 * L'accuracy (exactitude) est une mesure globale de la performance d'un modèle. C'est le pourcentage de prédictions correctes sur le total des prédictions : (TP + TN)/(total de prédictions)
 * Précision : une mesure la qualité des prédictions positives (précision, positive). C'est le pourcentage de prédictions positives correctes par rapport au nombre total de prédictions positives. TP/(TP+FP). La précision est cruciale lorsque les faux positifs ont un coût élevé, comme dans le dépistage des maladies, où un faux positif pourrait entraîner des tests supplémentaires inutiles.
 * L'accuracy donne une idée globale de la performance du modèle, mais peut être trompeuse si les classes sont déséquilibrées. 
@@ -286,6 +310,7 @@ Answer  :
 
 Question : REG-LIN - Forward selection, Backward selection ?
 Answer  : 
+
 * Forward selection  : On ajoute les variables au modèle qui à chaque étape augment le R². On arrête si y a plus variable ou si R² baisse.
 * Backward selection : Elimination. On part avec toutes les variables. On élimine la variable qui a la plus forte probabilité de ne pas être pertinante (p-value). On arrête quand toutes les variables ont une p-value sup à 5%
 
@@ -297,6 +322,7 @@ Answer  : Function that take the observations into a larger dimensional space, i
 
 Question : Objectif de K-Means ?
 Answer  : 
+
 * L'objectif du K-Means est de regrouper des données en K clusters de telle manière que les points à l'intérieur d'un cluster soient similaires entre eux et différents des points d'autres clusters
 * On fait ça en minimisant la variance intra-cluster. 
 * La variance intra-cluster est une mesure de la dispersion des données à l'intérieur de chaque cluster. Elle représente la somme des carrés des distances entre chaque point de données d'un cluster et le centre de ce cluster.
@@ -304,6 +330,7 @@ Answer  :
 
 Question : K-Means - WCSS… Any comment ? 
 Answer  : 
+
 * Within Cluster Squared Sum. 
 * Voir méthode ELBOW (Densité des clusters). 
 * Pour chaque exécution de K-Means, on calcule la WCSS (within cluster squared sum, somme des distances au carré entre chaque point de données et le centroïde de son cluster correspondant). 
@@ -311,27 +338,35 @@ Answer  :
 
 
 Question : REG-LIN - homoscédasticité ? 
-Answer  : On parle d'homoscédasticité lorsque la variance des erreurs stochastiques de la régression est la même pour chaque observation i (de 1 à n observations). 
+Answer  : 
+
+On parle d'homoscédasticité lorsque la variance des erreurs stochastiques de la régression est la même pour chaque observation i (de 1 à n observations). 
 
 
 
 Question : REG-LIN - Quelles sont les 3 hypothèses que l'on fait en régression linéaire
 Answer : 
+
 * Linéarité : évident
 * Indépendance des erreurs : l'erreur sur une observation est indépendante de l'erreur sur une autre. Difficile à prouver à partir d'échantillons. Corrélation vs Causation
 * Homoscédasticité : La distribution des erreurs est indépendante de y. Faut que la distribution des erreurs, que l'écart à la droite, soit constant qqsoit y
 
 
 Question : What is Boto3 the SDK (Software Development Kit) of AWS?
-Answer  : It is a collection of tools and libraries to help you use AWS using code
+Answer  : 
+
+It is a collection of tools and libraries to help you use AWS using code
 
 
 Question : REG-LIN - What is a RDBMS (Relational DataBase Management System)?
-Answer  : A piece of software that lets define, create, maintain, and control access to a database
+Answer  : 
+
+A piece of software that lets define, create, maintain, and control access to a database
 
 
 Question : C'est quoi le machine learning ? 
 Answer  : 
+
 * Machine Learning (ML) = sous-domaine de l'IA 
 * Se concentre sur le développement de techniques permettant aux ordinateurs d'apprendre à partir de données et d'améliorer leurs performances sans être explicitement programmés pour chaque tâche. 
 * Le ML permet aux systèmes informatiques :  
@@ -342,28 +377,37 @@ Answer  :
 
 Question : Expliquez ce qu'est la validation croisée et pourquoi c'est important dans le contexte de l'apprentissage automatique ?
 Answer  : 
+
 * Technique utilisée pour évaluer les performances d'un modèle en divisant les données en sous-ensembles d'apprentissage et de test de manière itérative. 
 * Cela permet d'estimer la capacité de généralisation du modèle sur des données non vues, et d'identifier le surapprentissage. 
 * Les méthodes courantes incluent la validation croisée en **k-fold** et la validation croisée **leave-one-out**.
 
 Question : Neural Network. What is the effect of adding neurons on a layer?
-Answer  : Adding a neuron to a layer makes it possible for the model to create an additional "feature" on a given level of complexity
+Answer  : 
+
+Adding a neuron to a layer makes it possible for the model to create an additional "feature" on a given level of complexity
+
+
+
 
 Question : Différence entre régression et classification en apprentissage automatique ?
 Answer  : 
+
 * La **régression** est utilisée pour prédire une **valeur continue**
 * La **classification** est utilisée pour prédire une classe ou une catégorie discrète.
 
 
 Question : Neural Network. If the model overfits, what can we do to limit overfitting?
 Answer  : 
+
 * We can reduce the number of neurons and hidden layers in the network. 
 * We can also introduce regularization like Ridge (L2) or Lasso (L1)
 
 
 
 Question : Quelle est l'importance de l'analyse exploratoire des données (EDA) dans le processus de modélisation en science des données ?
-Answere : 
+Answer : 
+
 * L'analyse exploratoire des données permet de comprendre la structure, les modèles et les relations présentes dans les données avant de construire des modèles. 
 * Cela inclut l'examen 
     * des distributions
@@ -374,22 +418,33 @@ Answere :
 * Penser à parler aussi des distributions qui sont **skewed** d'un côté ou de l'autre (1.5 IQR vs 3 sigma pour virer les outliers). 
 * Parler aussi de l'importance du déséquilibre dans la target.
 
+
+
+
 Question : Pouvez-vous expliquer ce qu'est l'overfitting et comment le détecter ?
 Answer  : 
+
 * L'overfitting se produit lorsque le modèle s'adapte trop précisément aux données d'entraînement et perd sa capacité de généralisation sur de nouvelles données. 
 * Il peut être détecté en observant une performance élevée sur les données d'entraînement mais une performance médiocre sur les données de test
 * On peut aussi comparer les performances du modèle sur les données d'entraînement et de validation.
 
 Question : With batches of 16 observations, how many times will the parameters of the model be updated before we reach one epoch?  
-Answer  : ``N/16``
+Answer  : 
+
+``N/16``
 
 Question : Quelle est la différence entre la **normalisation** et la **standardisation** des données ?
 Answer  : 
+
 * La **normalisation**   : met à l'échelle les données dans une plage spécifique, souvent entre 0 et 1. 
 * La **standardisation** : transforme les données pour qu'elles aient une moyenne nulle et un écart-type de 1. Penser à la courbe de gauss.
 
+
+
+
 Question : Neural Network. What happens if we use a linear activation function? 
 Answer  : 
+
 * As a hidden layer 
     * Using a linear activation function is **NOT** a good idea. 
     * We loose the capabilities of neural networks to learn complex relation (non linearities). 
@@ -400,12 +455,17 @@ Answer  :
 
 Question : Qu'est-ce qu'une fonction de coût (ou de perte) et comment est-elle utilisée dans l'apprentissage automatique ?
 Answer  : 
+
 * Une fonction de coût mesure l'erreur entre les prédictions d'un modèle et les valeurs réelles de l'ensemble de données. 
 * Elle est utilisée dans le processus d'optimisation pour guider l'ajustement des paramètres du modèle afin de minimiser cette erreur. 
 * Parler de régression => MSE Classification => LogLoss (entropy)
 
+
+
+
 Question : Neural Network. What is the effect of adding hidden layers?
 Answer  : 
+
 * Adding a hidden layer lets the model add one more level of non-linearity by applying one more activation function to the previous output
 * This leads to exponentially complex outputs.
 
@@ -413,12 +473,14 @@ Answer  :
 
 Question : Pouvez-vous expliquer ce qu'est la réduction de la dimensionnalité et pourquoi est-ce important dans l'analyse de données ?
 Answer  : 
-* La PCA consiste à réduire le nombre de variables ou de caractéristiques dans un ensemble de données. 
+
+* La **PCA** consiste à réduire le nombre de variables ou de caractéristiques dans un ensemble de données. 
 * Cela permet de simplifier les modèles, de réduire le temps de calcul et de prévenir le surapprentissage, tout en préservant autant que possible les informations importantes.
 
 
 Question : Neural Network. When you use additional features to feed the model, do you need to use as many neurons and layers? Would adding more neurons and layers be an alternative to using additional features?
 Answer  : 
+
 * Adding new features may let you use less complex architectures
 * the upside is that you know exactly what input features are used which makes the model more interpretable. 
 * On the other hand you may be missing some very useful features that model may have created for you.
@@ -426,12 +488,14 @@ Answer  :
 
 Question :Quelles sont les différences entre l'apprentissage supervisé et l'apprentissage non supervisé ?
 Answer  : 
+
 * L'apprentissage supervisé implique l'utilisation de données étiquetées pour entraîner un modèle à prédire une sortie
 * tandis que l'apprentissage non supervisé explore les données pour découvrir des structures intrinsèques sans étiquettes
 * Parler des cas d'usage du non supervisé. Pas une fin en soi
 
 Question : Neural Network. Is it more useful to add more neurons on the layers near the bottom or near the top?
 Answer  : 
+
 * It is more useful to add neurons towards the bottom because the complexity of the outputs of earlier neurons limit the complexity of the outputs of later neurons
 * It is generally good practice to have more neurons on bottom layers and progressively decrease the number of neurons going up the network.
 
@@ -439,6 +503,7 @@ Answer  :
 
 Question : Quelle est la différence entre la descente de gradient stochastique (SGD) et la descente de gradient classique ?
 Answer  : 
+
 * La descente de gradient stochastique effectue des mises à jour des poids **après chaque exemple** d'entraînement
     * ce qui rend l'optimisation plus rapide mais plus bruitée. 
 * La descente de gradient classique calcule les gradients sur **l'ensemble de données** et met à jour les poids une fois
@@ -450,6 +515,7 @@ Answer  :
 
 Question : Neural Network. Would you say that using neural network models compensates the need for feature engineering?
 Answer  : 
+
 * It does. 
 * The outputs of the neurons in the network may be interpreted as new features that will be used by later neurons to make even more complex features leading to the final prediciton. 
 * In addition, these "features" are build by neurons whose parameters get optimized according to the loss function. 
@@ -460,17 +526,20 @@ Answer  :
 
 Question : Expliquez ce qu'est la régularisation **Lasso** et en quoi elle diffère de la régularisation **Ridge** ?
 Answer  : 
+
 * **Lasso :** La régularisation Lasso ajoute, à la fonction de coût, une pénalité proportionnelle à la *valeur absolue des coefficients du modèle*, ce qui favorise la sélection de caractéristiques importantes et conduit à une certaine sparsité. 
 * **Ridge :** La régularisation Ridge utilise une pénalité proportionnelle au *carré des coefficients*, ce qui réduit la magnitude des coefficients sans les éliminer complètement.
 
 
 Question : If the ``batch size`` is equal to the ``number of observations``, what would the batch gradient descent be equivalent to?
 Answer  : 
+
 * It's called batch gradient descent, or simply gradient descent. 
 * In this scenario, the algorithm computes the gradient of the cost function with respect to the parameters using the entire dataset at each iteration.
 
 Question : C'est quoi la régularisation ?
 Answer  : 
+
 * Une technique pour réduire le surapprentissage (overfitting) en pénalisant les modèles trop complexes. 
 * Consiste à ajouter un terme de pénalité à la fonction de coût lors de l'entraînement. 
 * Ca encourage le modèle à privilégier des solutions plus simples. 
@@ -488,12 +557,14 @@ Answer  :
 
 Question : C'est quoi la back propagation?
 Answer  : 
+
 * Un algorithme pour entraîner les réseaux de neurones. 
 * Il consiste à calculer les gradients des poids du réseau par rapport à une fonction de coût, puis à ajuster ces poids en utilisant un algorithme d'optimisation tel que la descente de gradient, afin de minimiser la perte lors de la phase d'apprentissage. 
 * La rétropropagation permet au réseau de s'ajuster progressivement en fonction des erreurs qu'il commet.
 
 Question : C'est quoi Gradient Descent?
 Answer  : 
+
 * Une méthode d'optimisation. 
 * Minimisation de la dérivée. 
 * Minimisation de la fonction de coût en ML. 
@@ -506,6 +577,7 @@ Answer  :
 
 Question : Pouvez-vous donner plus de détails sur l'algo du gradient descent?
 Answer  :
+
 1. Initialisation (poids, biais)
 2. Itération : calculer le grad par rapport au paramètre à optimiser, prendre l'inverse, avancer d'un pas via learning_rate
 3. Condition d'arrêt (n_iter)
@@ -543,6 +615,7 @@ Dans le contexte de l'algorithme K-Means (non supervisé), la méthode Elbow est
 
 Question : Compromis biais-variance... Ca te parle ?
 Answer  : 
+
 1. Le biais mesure à quel point les prédictions d'un modèle diffèrent des valeurs réelles. 
     * Un modèle avec un biais élevé simplifie trop les données d'entraînement et sous-estime la complexité de la relation entre les features et la target. 
     * Conduit à des performances médiocres sur les données d'entraînement et de test. 
@@ -567,6 +640,7 @@ La **validation croisée** peut être utile pour évaluer comment le compromis b
 
 Question : Batch Gradient Descent, Stochastic Gradient Descent, Mini-Batch Gradient Descent ? 
 Answer  : 
+
 1. **Batch Gradient Descent** (Batch Size = Number of Observations). Full Batch Gradient Descent : In this scenario, the entire dataset is used to compute the gradient of the cost function. The parameters are updated once per epoch (one pass through the entire dataset). This method is computationally expensive because it requires storing the entire dataset in memory and computing the gradients for all samples before updating the parameters. However, it usually leads to very stable updates and can converge to a good solution.
 2. **Stochastic Gradient Descent** (Batch Size = 1) : Here, the gradient is computed and parameters are updated after each individual sample. It's very noisy but can help the model escape local minima more easily and often converges faster, especially with large datasets.
 3. **Mini-Batch Gradient Descent** (1 < Batch Size < Number of Observations) : A compromise between batch gradient descent and stochastic gradient descent. It computes the gradient and updates the parameters using a subset of the dataset (a mini-batch) at each iteration. This strikes a balance between the stability of batch gradient descent and the faster convergence of stochastic gradient descent. The batch size is typically chosen to be a power of 2 for efficient memory usage.

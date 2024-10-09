@@ -46,7 +46,11 @@ Answer   :
 <!-- https://app.jedha.co/course/numpy-linear-algebra-functions-ft/01-numpy-linear-algebra-quiz -->
 
 Question : EDA - Numpy and linear algebra - What is the result of matrix multiplication in NumPy?
-Answer  : A new matrix where each element is the dot product of rows and columns
+Answer  : 
+
+A new matrix where each element is the dot product of rows and columns
+
+
 
 Question : EDA - Numpy and linear algebra - How are eigenvalues and eigenvectors of a matrix in NumPy computed?
 Answer  : 
@@ -64,7 +68,9 @@ eig_val, eig_vec
 
 
 Question : EDA - Numpy and linear algebra - What does the "@" symbol represent in NumPy in linear algebra context?
-Answer  : Matrix multiplication
+Answer  : 
+
+Matrix multiplication
 
 #### Code snippet 
 
@@ -78,7 +84,9 @@ C = A@B
 
 
 Question : EDA - Numpy and linear algebra - What is slicing in NumPy?
-Answer  : A way to access a portion of an array or matrix
+Answer  : 
+
+A way to access a portion of an array or matrix
 
 #### Code snippet 
 
@@ -158,6 +166,7 @@ np.sin()
 
 Question : EDA - Numpy and functions - What does ``np.random.seed(0)`` do in NumPy?
 Answer   : 
+
 * Initializes the random number generator with seed 0, ensuring reproducibility
 * Everybody know that instead you should do `np.random.seed(42)`
 
@@ -199,7 +208,9 @@ reshape()
 
 
 Question : EDA - Manipulate arrays with Numpy - What is a NumPy mask?
-Answer  : An array of boolean values indicating where a condition is met
+Answer  : 
+
+An array of boolean values indicating where a condition is met
 
 #### Code snippet 
 
@@ -228,7 +239,11 @@ print(array)
 <!-- https://app.jedha.co/course/pandas-statistics-ft/01-stats-basics-quiz -->
 
 Question : EDA - STAT101 - What is an example of discrete quantitative data?
-Answer  : Nb people in a room
+Answer  : 
+
+Nb people in a room
+
+
 
 
 Question : EDA - STAT101 - Which measure of central tendency is the most affected by outliers?
@@ -240,13 +255,12 @@ Answer  : Mean
 
 Question : EDA - STAT101 - What does a Z-score measure?
 Answer  : 
-
-A measure of : 
+ 
 * the deviation of a value from the mean 
 * measured in standard deviation
 
-
 Let's go back to the formula... 
+
 * If ``Value`` and ``µ`` are speeds
 * The difference between ``Value`` and ``µ`` is also in km/h 
 * So it is not easy to know if it's significant or not
@@ -259,7 +273,9 @@ Let's go back to the formula...
 
 
 Question : STAT101 - Which sampling method should be avoided due to potential bias?
-Answer  : Convenience Sampling (vs Random Sampling Stratified Sampling  Cluster Sampling)
+Answer  : 
+
+Convenience Sampling (vs Random Sampling Stratified Sampling  Cluster Sampling)
 
 
 
@@ -283,7 +299,9 @@ df_cities = pd.read_csv(k_Current_dir/k.AssetsDir/k.Filename, nrows = 2)
 
 
 Question : EDA - PANDAS - What are the two primary data structures in Pandas?
-Answer  : DataFrames and Series
+Answer  : 
+
+DataFrames and Series
 
 #### Code snippet 
 
@@ -303,7 +321,9 @@ print(dataframe)
 
 
 Question : EDA - PANDAS - In Pandas, how can you handle missing data?
-Answer  : By replacing missing values with mean or median
+Answer  : 
+
+By replacing missing values with mean or median
 
 #### Code snippet 
 
@@ -319,7 +339,9 @@ df["A"].fillna(median, inplace=True)
 
 
 Question : EDA - PANDAS - What does the "merge" function do in Pandas?
-Answer  : It combines data from two different DataFrames
+Answer  : 
+
+It combines data from two different DataFrames
 
 #### Code snippet 
 
@@ -351,7 +373,9 @@ your_datetime = pd.to_datetime(df['dates'], format='%Y-%m-%d')
 
 
 Question : EDA - PANDAS datetime and strings - What is the purpose of the .dt accessor in Pandas?
-Answer  : To access datetime properties and methods on Series
+Answer  : 
+
+To access datetime properties and methods on Series
 
 #### Code snippet 
 
@@ -374,7 +398,9 @@ datetime_object.year
 
 
 Question : EDA - PANDAS datetime and strings - What does the Timedelta type represent in Pandas?
-Answer  : The difference between two datetime values
+Answer  : 
+
+The difference between two datetime values
 
 #### Code snippet 
 
@@ -409,19 +435,29 @@ print(new_dates_series)
 <!--  https://app.jedha.co/course/introduction-data-visualization-ft/01-introduction-to-data-visualization-quiz -->
 
 Question : EDA - Data Visualization - What is the primary purpose of data visualization?
-Answer  : To make complex data easy to understand
+Answer  : 
+
+To make complex data easy to understand
 
 Question : EDA - Data Visualization - Which of the following is a key principle in creating effective data visualizations?
-Answer  : Keeping a consistent style and scaling
+Answer  : 
+
+Keeping a consistent style and scaling
 
 Question : EDA - Data Visualization - How does color affect data visualization?
-Answer  : Color can help highlight key information
+Answer  : 
+
+Color can help highlight key information
 
 Question : EDA - Data Visualization - What does a good data visualization aim to achieve? 
-Answer  : Convey complex information in an easy-to-understand format
+Answer  : 
+
+Convey complex information in an easy-to-understand format
 
 Question : EDA - Data Visualization - What is an important aspect to consider when choosing a color scale for your visualization?
-Answer  : How the colors can accurately represent and differentiate the data
+Answer  : 
+
+How the colors can accurately represent and differentiate the data
 
 
 
@@ -429,19 +465,29 @@ Answer  : How the colors can accurately represent and differentiate the data
 <!-- https://app.jedha.co/course/introduction-data-visualization-ft/different-charts-plotly-express-quiz -->
 
 Question : EDA - Different charts and plotly express - What is Plotly Express primarily used for?
-Answer  : Generating a variety of static and interactive charts
+Answer  : 
+
+Generating a variety of static and interactive charts
 
 Question : EDA - Different charts and plotly express - How do you display a chart in a Jupyter notebook using Plotly Express?
-Answer  : Using the ``fig.show()`` method after creating the chart
+Answer  : 
+
+Using the ``fig.show()`` method after creating the chart
 
 Question : EDA - Different charts and plotly express - What type of data visualization can be created with Plotly Express?
-Answer  : A wide range of chart types, including line, bar, scatter, and more
+Answer  : 
+
+A wide range of chart types, including line, bar, scatter, and more
 
 Question : EDA - Different charts and plotly express - Is it possible to customize the appearance of charts in Plotly Express?
-Answer  : Yes, including aspects like color, layout, and annotations
+Answer  : 
+
+Yes, including aspects like color, layout, and annotations
 
 Question : EDA - Different charts and plotly express - What is a primary advantage of using Plotly Express for data visualization?
-Answer  : It offers a simple syntax for quickly creating a variety of charts
+Answer  : 
+
+It offers a simple syntax for quickly creating a variety of charts
 
 
 
@@ -449,12 +495,19 @@ Answer  : It offers a simple syntax for quickly creating a variety of charts
 <!-- https://app.jedha.co/course/interactive-graphs-ft/quiz-fs-m03-v1 -->
 
 Question : EDA - Interactive Graphs - What is pandas and its purpose?
-Answer   : It's a python library that enables you to conduct exploratory data analysis, analyse variables' distributions, check for missing values etc.
+Answer   : 
+
+It's a python library that enables you to conduct exploratory data analysis, analyse variables' distributions, check for missing values etc.
 
 Question : EDA - Interactive Graphs - What are the two main object types from pandas?
-Answer   : pandas.Series and pandas.DataFrame
+Answer   : 
+
+``pandas.Series`` and ``pandas.DataFrame``
+
+
 
 Question : EDA - Interactive Graphs - What method would you use if you had to quickly compute usual descriptive statistics on the DataFrame "df" taking into account both numerical and non-numerical features?
+
 Answer   :
 
 #### Code snippet 
@@ -466,7 +519,9 @@ df.describe()
 
 
 Question : EDA - Interactive Graphs - What is numpy, and what's its purpose?
-Answer   : It's a python library that let's you compute mathematical operations in a quick and easy manner
+Answer   : 
+
+It's a python library that let's you compute mathematical operations in a quick and easy manner
 
 
 
@@ -502,6 +557,7 @@ numpy.matrix
 
 Question : EDA - Interactive Graphs - What is the seaborn method you would use to plot the distribution of a variable?
 Answer   : 
+
 `displot()` but it is deprecated. Use this instead.
 
 #### Code snippet 
@@ -525,13 +581,19 @@ import matplotlib.pyplot as plt
 fig, ax = plt.subplots(nrow=3,ncols=3)
 ```
 
-Answer   : It displays 9 figures in the same output, organized on 3 rows and 3 columns
+Answer   : 
+
+It displays 9 figures in the same output, organized on 3 rows and 3 columns
+
+
+
 
 
 
 
 Question : EDA - Interactive Graphs - What is the module that lets you make easy interactive graph in plotly and which one is the more complicated version of the module?
 Answer   :
+
 * easy plotly.express 
 * hard plotly.graph_objects
 
@@ -539,7 +601,9 @@ Answer   :
 
 
 Question : EDA - Interactive Graphs - What is the plotly method that lets you visualize your data points as dots in a two-dimensional space?
-Answer   : `px.scatter()`
+Answer   : 
+
+`px.scatter()`
 
 
 
