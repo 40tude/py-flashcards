@@ -1,9 +1,8 @@
 # Locally :
 #   you must define the session key before to run/debug the app
 #       ./secrets.ps1
-#       ls env:FLASH*                 # to double check
-#   python py-flashcards.py or F5
-#   flask --app py-flashcards run
+#       ls env:FLASH*                         # to double check
+#   python py-flashcards.py or strike F5
 
 import os
 import re
@@ -145,7 +144,7 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
 
 
 # ----------------------------------------------------------------------
-# la fonction create_app() est le point d'entrée qui configure l'application Flask avant de la lancer
+# create_app() function is the entry point whic configure the Flask app before it runs
 def create_app() -> Flask:
 
     logging.basicConfig(level=logging.INFO)
@@ -155,13 +154,12 @@ def create_app() -> Flask:
     # If you run the app locally you must run ./secrets.ps1 first (see above)
     # In production on Heroku FLASHCARDS_SECRET_KEY must have been set manually (see readme.md)
     # Without session key, Flask does not allow the app to set or access the session dictionary
-
     app.secret_key = os.environ.get("FLASHCARDS_SECRET_KEY")
 
     with app.app_context():
         init_db()  # Initialise la base de données quand l'application est créée
 
-    # Route must be defined inside the create_app otherwise app is not yet defined
+    # Route must be defined inside create_app() otherwise "app" is not yet defined
     # ----------------------------------------------------------------------
     # Flask routes
     @app.route("/")
@@ -205,11 +203,8 @@ def create_app() -> Flask:
 
 
 # ----------------------------------------------------------------------
-# Application startup
 if __name__ == "__main__":
 
     app = create_app()
     app.logger.info("main()")
-    # init_db()  # Initialize or create the database if it doesn't exist
-    app.debug = True
-    app.run()
+    app.run(debug=True)

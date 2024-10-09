@@ -37,8 +37,10 @@ $env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
         * conda install gunicorn -y
         * pip list --format=freeze > requirements.txt
 * create file Procfile
-    * Pay attention to :  py-flashcards:app
-    * name of the Python file + ":" + app
+    * Pay attention to :  py-flashcards:create_app()
+    * name of the Python file + ":" + entry_point()
+    * in py-flashcards.py take a look at create_app()
+        * Gunicorn uses the create_app() function to obtain the Flask application instance, and starts the WSGI server
 * create file runtime.txt
 * From VSCode commit to github
 * From the VSCode integrated terminal 
