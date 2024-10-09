@@ -1,1 +1,1 @@
-web: gunicorn py-flashcards:create_app --workers=3
+web: gunicorn py-flashcards:create_app

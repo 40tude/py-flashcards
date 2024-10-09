@@ -144,7 +144,7 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
 
 
 # ----------------------------------------------------------------------
-# create_app() function is the entry point whic configure the Flask app before it runs
+# create_app() function is the entry point which configure the Flask app before it runs
 def create_app() -> Flask:
 
     logging.basicConfig(level=logging.INFO)
