@@ -61,7 +61,8 @@ $env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
 * Open a terminal in VSCode and run ``./secrets.ps1`` once
     * You can type ``ls env:FLASH*`` to double check
 * Modify files etc.
-* Commit on github from VSCode    
+* Optional - Delete ``flashcards.db`` to make sure it is rebuilt 
+* Optional - Commit on github from VSCode    
 * Strike F5 while ``py-flashcards.py`` is open
 
 ## To deploy on Heroku

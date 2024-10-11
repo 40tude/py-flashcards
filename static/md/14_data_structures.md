@@ -38,13 +38,16 @@ Question : What is an **ArrayList**, what are the use cases, can you implement a
 
 Answer   : 
 
-An **ArrayList** is a dynamic array-based data structure that allows elements to be stored in contiguous memory locations, with the capacity to automatically resize as elements are added or removed. Unlike fixed-size arrays, an ArrayList can grow and shrink dynamically, which makes it useful for scenarios where the number of elements is not known in advance. Python's built-in list already functions like an ArrayList.
+* An **ArrayList** is a dynamic array-based data structure that allows elements to be stored in **contiguous memory locations**, with the capacity to automatically resize as elements are added or removed. 
+* Unlike fixed-size arrays, an ArrayList can grow and shrink dynamically, which makes it useful for scenarios where the number of elements is not known in advance. Python's built-in list already functions like an ArrayList.
+* Like fixed-size arrays, an ArrayList offers index based addressing (``bob = MyArrayList[42]``)
+* Unlike **Linked Lists**, an ArrayList uses a contiguous memory area making copy(), paste(), read(), write()... more efficient. 
 
 #### Key Features of an ArrayList
 1. Dynamic Sizing: It can grow or shrink in size as needed.
-1. Indexing: Provides constant time (O(1)) access to elements by index, similar to arrays.
+1. Indexing: Provides constant time (**O(1)**) access to elements by index, similar to arrays.
 1. Amortized Growth: When the internal array is full, the ArrayList typically resizes itself by allocating a new, larger array and copying the elements over.
-1. Insertion: Inserting at the end is efficient, but inserting in the middle or at the beginning can be slow (O(n)) because elements need to be shifted.
+1. Insertion: Inserting at the end is efficient, but inserting in the middle or at the beginning can be slow (**O(n)**) because elements need to be shifted.
 
 #### Use Cases
 * When you need dynamic resizing.
@@ -74,7 +77,8 @@ class ArrayList:
     def append(self, element):
         """Adds a new element to the end of the list."""
         if self.size == self.capacity:
-            self.__resize(2 * self.capacity)  # Double the capacity when full
+            # Read this : https://stackoverflow.com/questions/5232198/how-does-the-capacity-of-stdvector-grow-automatically-what-is-the-rate
+            self.__resize(2 * self.capacity)  
         self.data[self.size] = element
         self.size += 1
 
@@ -119,10 +123,10 @@ print("ArrayList after removing element at index 1:", arr_list)
 
 
 
-Question : Can you show me how to implement a **linked list** in Python ?
+Question : Can you show me how to implement a **Linked List** in Python ?
 Answer   : 
 
-* A linked list is a data structure where elements (nodes) are stored in a linear sequence, but each element points to the next one in the list. 
+* A **Linked List** is a data structure where elements (nodes) are stored in a linear sequence, but each element points to the next one in the list. 
 * Each node consists of two parts: 
     1. the data 
     1. a reference (or pointer) to the next node. 
@@ -218,7 +222,7 @@ Answer   :
 
 * A **HashTable** (also known as a hash map or dictionary) is a data structure that stores key-value pairs. 
 * It allows for fast access, insertion, and deletion of elements by using a hash function to convert keys into indices, where the values are stored in an underlying array. 
-* The key feature of a hashtable is its ability to perform these operations in constant time,O(1) on average, although collisions can make the worst-case time complexity O(n).
+* The key feature of a hashtable is its ability to perform these operations in constant time, **O(1)** on average, although collisions can make the worst-case time complexity **O(n)**.
 
 #### Key Components of a HashTable
 1. **Hash Function:** A function that takes a key and returns an index (array position). A good hash function should distribute keys uniformly across the array.
@@ -353,7 +357,7 @@ Answer   :
 * Imagine a vertical stack of plates. One person places the last washed plate on top of the stack, while another person removes the top plate to dry it.
 
 #### Use Cases
-* Undo functionality in text editors or software (most recent action is undone * first).
+* Undo functionality in text editors or software (most recent action is undone first).
 * Expression evaluation (postfix, prefix notations).
 * Backtracking algorithms like depth-first search (DFS).
 * Browser history (the most recently visited page is stored at the top).
@@ -416,10 +420,13 @@ Question : What is a **Queue**, what are the use cases, can you implement a Queu
 
 Answer   : 
 
-A **Queue** is a linear data structure that follows the **First In First Out (FIFO)** principle, where the first element inserted is the first one to be removed.
+* A **Queue** is a linear data structure that follows the **First In First Out (FIFO)** principle
+* The first element inserted is the first one to be removed.
+* Imagine a horizontal line of people waiting outside a movie theater. The person at the head of the line will be the first to enter the cinema.
+
 
 #### Use Cases
-* Job scheduling in operating systems (jobs are processed in the order they * arrive).
+* Job scheduling in operating systems (jobs are processed in the order they arrive).
 * Breadth-first search (BFS) in graph traversal.
 * Printer task scheduling (tasks are handled in the order they are submitted).
 * Real-time systems (e.g., customer support queues).
@@ -546,8 +553,8 @@ else:
 * The process continues until the element is found or the search space becomes empty.
 
 #### Time Complexity
-* Best case: O(1) (when the middle element is the target)
-* Worst case: O(log n) (when the element is not found, or at the boundaries)
+* Best case: **O(1)** (when the middle element is the target)
+* Worst case: **O(log n)** (when the element is not found, or at the boundaries)
 
 
 
@@ -572,9 +579,9 @@ A **Binary Search Tree (BST)** is a data structure that stores elements (typical
 
 
 #### Use Cases
-1. Searching: A BST allows for efficient searching, with an average time complexity of O(log n) if the tree is **balanced**.
-2. Inserting and Deleting: Insertions and deletions also have an average time complexity of O(log n) in a **balanced** BST.
-3. Sorted Data Access: BSTs maintain data in a sorted manner, so **in-order** traversal of the tree provides the elements in ascending order.
+1. Searching: A BST allows for efficient searching, with an average time complexity of **O(log n)** if the tree is **balanced**.
+2. Inserting and Deleting: Insertions and deletions also have an average time complexity of **O(log n)** in a **balanced** BST.
+3. Sorted Data Access: BSTs maintain data in a sorted manner, so **in order traversal** of the tree provides the elements in ascending order.
 4. Range Queries: BSTs are useful in solving range queries, where we need to find all keys within a certain range.
 5. Data Storage: It’s used in databases, file systems, and memory allocation, where quick search, insertion, and deletion operations are required.
 
@@ -669,7 +676,7 @@ print("Search 7:", bst.search(7) is not None)  # Outputs: True
 print("Search 15:", bst.search(15) is not None)  # Outputs: False
 ```
 
-One can extend this implementation by adding functions for deletion, balancing, and more advanced operations!
+One can extend this implementation by adding functions for ``deletion()``, ``balancing()``...
 
 
 
@@ -761,10 +768,12 @@ print("Postorder Traversal:", bst.postorder_traversal()) # Outputs: [3, 7, 5, 20
 
 ```
 
+
 #### Summary
-* Inorder Traversal: Left subtree → Node → Right subtree.
-* Preorder Traversal: Node → Left subtree → Right subtree.
-* Postorder Traversal: Left subtree → Right subtree → Node.
+
+* **Inorder** traversal: Left subtree → Node → Right subtree
+* **Preorder** traversal: Node → Left subtree → Right subtree
+* **Postorder** traversal: Left subtree → Right subtree → Node
 
 
 
@@ -952,37 +961,38 @@ else:
 Question : Récursivité... ça vous parle ?
 Answer   : 
 
-* Ca consiste appeler une fonction depuis la fonction elle-même. 
-* Utile dans les problèmes qui peuvent être divisés en sous-problèmes similaires. 
+* Cela consiste appeler une fonction depuis la fonction elle-même. 
+* Utile dans les problèmes qui peuvent être divisés en sous-problèmes à **plus petite échelle**
+* **ATTENTION** pour intérressante quelle soit d'un point de vue intellectuel ou esthétique, une implémentation récursive n'est pas toujours la plus efficace 
 
 #### Quand utiliser la récursivité ?
-- Le problème peut être décomposé en sous-problèmes similaires ou plus petits.
-- Il existe une condition d'arrêt claire (une base de cas) qui met fin à la récursion.
-- Le problème a une structure répétitive, souvent avec des relations entre les éléments voisins (par exemple, des arbres, des listes, des fractales, etc.).
+- Il existe une condition d'arrêt claire (un cas de base) qui met fin à la récursion.
+- Le problème peut être décomposé en sous-problèmes identiques mais à plus petite échelle (pensez aux fractales).
 
 
-
-#### Recette de cuisine
+#### Recette de cuisine à suivre
 
 1. **Identifier** la condition d'arrêt
-    * Pour éviter une récursion infinie. 
+    * C'est la première chose à coder dans la fonction récursive
+    * Evite une récursion infinie. 
     * C’est l’étape qui détermine quand la fonction doit arrêter de s'appeler.
-    * Souvent un cas simple ou trivial du problème
+    * Souvent un cas simple ou trivial du problème initial
 
 2. **Décomposer** le problème
-    * Divisez le problème parties plus petites, similaires à l'original. 
-    * La fonction s'appelera avec des arguments plus simples ou plus réduits.
+    * Diviser le problème en problème à **plus petite échelle**, similaires à l'original. 
+    * La fonction s'appelle avec des arguments plus simples ou plus réduits.
 
 3. **Combiner** les résultats
-    * Si besoin, combiner les résultats des appels récursifs pour produire la solution finale.
+    * Optionnel. Combiner les résultats des appels récursifs pour produire le résultat final.
 
 #### Exemples simples de récursion
 
-1. Factorielle
-- Cas de base  : `n = 0`, la factorielle de 0 est 1
-- Cas récursif : `factorielle(n) = n * factorielle(n - 1)`
+##### Factorielle
 
-#### Code snippet 
+* Cas de base  : `n = 0`, la factorielle de 0 est 1
+* Cas récursif : `factorielle(n) = n * factorielle(n - 1)`
+
+###### Code snippet 
 
 ```python
 def factorielle(n):
@@ -990,14 +1000,15 @@ def factorielle(n):
         return 1
     else:
         return n * factorielle(n - 1)  # Cas récursif
+
 ```
 
+##### Somme des éléments d'une liste
 
-2. Somme des éléments d'une liste
-- Cas de base : Si la liste est vide, la somme est 0.
-- Cas récursif : La somme d’une liste est le premier élément plus la somme des éléments restants
+* Cas de base  : Si la liste est vide, la somme est 0.
+* Cas récursif : La somme d’une liste c'est la valeur du premier élément plus la somme des éléments restants
 
-#### Code snippet 
+###### Code snippet 
 
 ```python
 def somme(liste):
@@ -1005,17 +1016,24 @@ def somme(liste):
         return 0
     else:
         return liste[0] + somme(liste[1:])  # Cas récursif
+
 ```
 
-3. Suite de Fibonacci
+##### Suite de Fibonacci
 
-Pour rappel, la suite de Fibonacci est définie par :
-- `F(0) = 0`
-- `F(1) = 1`
-- Pour `n > 1`, `F(n) = F(n-1) + F(n-2)`
+La suite de Fibonacci est définie par :
 
-- Cas de base : `F(0) = 0` et `F(1) = 1`.
-- Cas récursif : `F(n) = F(n-1) + F(n-2)`.
+* `F(0) = 0`
+* `F(1) = 1`
+* Si `n > 1` alors `F(n) = F(n-1) + F(n-2)`
+
+On a donc
+
+* Cas de base : `F(0) = 0` et `F(1) = 1`.
+* Cas récursif : `F(n) = F(n-1) + F(n-2)`.
+
+
+###### Code snippet 
 
 ```python
 def fibonacci(n):
@@ -1025,10 +1043,12 @@ def fibonacci(n):
         return 1
     else:
         return fibonacci(n-1) + fibonacci(n-2)  # Appel récursif
+
 ```
 
 #### Bonnes pratiques
-- **Vérifier le cas de base :** Pour éviter une récursion infinie.
-- **Limiter la profondeur :** Pour préserver la stack
-- **Memoization** : Le caching des résultats intermédiaires peut être plus efficace que la recursivité.
+
+* **Vérifier le cas de base** : Pour éviter une récursion infinie.
+* **Limiter la profondeur** : Pour préserver la stack.
+* **Memoization** : La mise en cache des résultats intermédiaires peut être plus efficace que la recursivité.
 
