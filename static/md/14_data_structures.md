@@ -786,7 +786,7 @@ print("Postorder Traversal:", bst.postorder_traversal()) # Outputs: [3, 7, 5, 20
 
 
 
-Question : In the context of BST how do you explain DFS, can you show how to implement it in Python ? 
+Question : In the context of BST how do you explain **DFS**, can you show how to implement it in Python ? 
 
 Answer   : 
 
@@ -845,7 +845,7 @@ dfs_inorder(root)  # Output: 20 30 40 50 60 70 80
 
 
 
-Question : In the context of BST how do you explain BFS, can you show how to implement it in Python ? 
+Question : In the context of BST how do you explain **BFS**, can you show how to implement it in Python ? 
 
 Answer   : 
 
@@ -915,7 +915,7 @@ bfs(root)  # Output: 50 30 70 20 40 60 80
 
 
 
-Question : Show how to implement a recursive binary search in Python?
+Question : Show how to implement a **recursive binary search** in Python?
 Answer   : 
 
 #### Code snippet 
@@ -960,7 +960,7 @@ else:
 
 
 
-Question : Récursivité... ça vous parle ?
+Question : **Récursivité**... ça vous parle ?
 Answer   : 
 
 * Cela consiste appeler une fonction depuis la fonction elle-même. 
@@ -1054,3 +1054,138 @@ def fibonacci(n):
 * **Limiter la profondeur** : Pour préserver la stack.
 * **Memoization** : La mise en cache des résultats intermédiaires peut être plus efficace que la recursivité.
 
+
+
+
+
+Question : **P vs NP**... What can you say about it ? 
+Answer   : 
+
+#### What is P?
+**P** stands for "Polynomial time." It refers to problems that we can solve **efficiently** using a computer. When we say a problem is in P, it means that we can find a solution in a reasonable amount of time (specifically, in time that grows like a polynomial function of the size of the input).
+
+For example, consider a simple sorting algorithm like **merge sort**, which has a time complexity of O($n \log(n)$). This is a polynomial time algorithm, which means as the input size increases, the time it takes to sort grows in a manageable way.
+
+##### Note
+* In the specific case of merge sort the $\log()$ is $\log_2()$ but with other problems this might **not** be the case. 
+* Here $\log()$ should be understood as a "generic" version of $\log()$. 
+
+
+##### Code snippet 
+
+```python
+arr = [5, 2, 9, 1, 5, 6]
+sorted_arr = sorted(arr)  # Merge sort in the background (P problem)
+print(sorted_arr)
+```
+
+#### What is NP?
+**NP** stands for "Nondeterministic Polynomial time." It refers to problems where it’s **hard to find** a solution, but if someone gives you a solution, you can **verify** it quickly (in polynomial time).
+
+Think about credit cards. The code is hard to break but if you get the code you can quickly check that it is correct.
+
+Another classic NP problem is the **Traveling Salesman Problem (TSP)**. Given a list of cities and distances between them, you need to find the shortest route that visits all cities exactly once and returns to the starting city. There are no efficient known algorithms to solve this problem for large numbers of cities.
+
+However, if someone gives you a potential solution (a specific route), you can quickly check if it's valid and what the total distance is.
+
+##### Code snippet 
+
+```python
+# Given a possible solution to TSP
+route = ['A', 'B', 'C', 'D', 'A']
+distances = {('A', 'B'): 10, ('B', 'C'): 20, ('C', 'D'): 15, ('D', 'A'): 10}
+
+# Verifying the distance of this route (quick to verify)
+def calculate_distance(route):
+    total_distance = 0
+    for i in range(len(route) - 1):
+        total_distance += distances[(route[i], route[i+1])]
+    return total_distance
+
+print(calculate_distance(route))  # Easy to verify the route distance
+```
+Here, checking the route is quick (polynomial time), but finding the best route is extremely hard for large sets of cities.
+
+#### The 1M$ question
+The big unsolved question in computer science is: **Are P and NP the same?** In simpler terms, can all NP problems (which are hard to solve but easy to verify) actually be solved efficiently like P problems?
+
+If we prove that **P = NP**, it would mean that for every hard problem we can verify quickly, there is also a fast way to solve it from scratch. This would revolutionize fields like cryptography, optimization, and more.
+
+On the other hand, if **P ≠ NP**, it means that some problems are inherently hard to solve, and there’s no shortcut to finding solutions, even though checking them is easy.
+
+#### Example of a P Problem (Efficient Solution)
+Finding the shortest path in a graph using **Dijkstra’s algorithm** is a P problem because we can solve it efficiently.
+
+
+##### Code snippet 
+
+```python
+import heapq
+
+def dijkstra(graph, start):
+    queue = [(0, start)]
+    distances = {node: float('inf') for node in graph}
+    distances[start] = 0
+    
+    while queue:
+        current_distance, current_node = heapq.heappop(queue)
+        
+        for neighbor, weight in graph[current_node]:
+            distance = current_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(queue, (distance, neighbor))
+    
+    return distances
+
+graph = {
+    'A': [('B', 1), ('C', 4)],
+    'B': [('A', 1), ('C', 2), ('D', 5)],
+    'C': [('A', 4), ('B', 2), ('D', 1)],
+    'D': [('B', 5), ('C', 1)]
+}
+
+print(dijkstra(graph, 'A'))  # P problem: can be solved efficiently
+```
+
+#### Example of an NP Problem (Hard to Solve)
+Let’s simulate the **Traveling Salesman Problem** (TSP), which is NP-hard. Here, we’re trying all possible permutations of routes (which is very inefficient).
+
+##### Code snippet 
+
+```python
+import itertools
+
+cities = ['A', 'B', 'C', 'D']
+distances = {
+    ('A', 'B'): 10, ('A', 'C'): 20, ('A', 'D'): 15,
+    ('B', 'C'): 25, ('B', 'D'): 30,
+    ('C', 'D'): 35
+}
+
+def calculate_route_distance(route):
+    total = 0
+    for i in range(len(route) - 1):
+        total += distances.get((route[i], route[i+1]), distances.get((route[i+1], route[i]), float('inf')))
+    return total
+
+# Trying all possible permutations (brute force)
+def tsp(cities):
+    shortest_route = None
+    min_distance = float('inf')
+    
+    for perm in itertools.permutations(cities):
+        route_distance = calculate_route_distance(perm)
+        if route_distance < min_distance:
+            min_distance = route_distance
+            shortest_route = perm
+    
+    return shortest_route, min_distance
+
+print(tsp(cities))  # NP problem: inefficient solution for large input
+```
+
+#### Summary
+* **P** : Problems that can be solved efficiently (like sorting or finding the shortest path) in Python.
+* **NP** : Problems where finding a solution is hard, but verifying it is easy (like TSP).
+* The question of whether **P = NP** is still open. 
