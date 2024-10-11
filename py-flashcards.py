@@ -195,12 +195,25 @@ def create_app() -> Flask:
 # ----------------------------------------------------------------------
 if __name__ == "__main__":
 
-    # TODO : it seems that locally the application starts twice...
-    # Fix it
-    # When used locally, make sure the database is rebuilt
-    # if os.path.exists(k_DB_Path):
-    #     os.remove(k_DB_Path)
-    # print(f"******************************")
+    # DONE : it seems that locally, in debug mode the application starts twice...
+    # Uncomment the print() below to see what happen
+    # print(f"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+
+    # In debug mode, Flask uses an automatic reloader called Werkzeug.
+    # This reloader automatically restarts the application whenever it detects a change in the source code.
+    # This way, modifications are taken into account without having to restart the application manually.
+    # This reloader creates two processes:
+    #   - The first process starts the Flask server, then launches the reloader.
+    #   - The reloader then restarts the application in a second process to enable hot reloading of the code.
+    # This double startup results in the double display of print(f “XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”)
+
+    # In debug mode, we want to delete the database the very first time
+    # That is, when WERKZEUG_RUN_MAIN is still “”.
+
+    if os.environ.get("WERKZEUG_RUN_MAIN") == None:
+        if os.path.exists(k_DB_Path):
+            os.remove(k_DB_Path)
+
     app = create_app()
     app.logger.info("main()")
     app.run(debug=True)
