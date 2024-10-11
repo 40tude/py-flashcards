@@ -925,8 +925,10 @@ def binary_search_recursive(arr, target, left, right):
     # Base case: if the search space is invalid
     if left > right:
         return -1  # Target not found
-
-    mid = left + (right - left) // 2  # Avoid overflow compared to (left + right) // 2
+    
+    # Avoid overflow compared to (left + right) // 2 
+    # (// is integer division)
+    mid = left + (right - left) // 2  
 
     # Check if the target is present at mid
     if arr[mid] == target:
@@ -1037,12 +1039,12 @@ On a donc
 
 ```python
 def fibonacci(n):
-    if n == 0:  # Cas de base 1
+    if n == 0:  # Cas de base 1/2
         return 0
-    elif n == 1:  # Cas de base 2
+    elif n == 1:  # Cas de base 2/2
         return 1
     else:
-        return fibonacci(n-1) + fibonacci(n-2)  # Appel récursif
+        return fibonacci(n-1) + fibonacci(n-2)  # Cas récursif
 
 ```
 
