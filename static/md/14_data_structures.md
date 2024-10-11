@@ -499,7 +499,7 @@ Answer   :
 * It works by repeatedly dividing the search interval in half. 
 * If the value of the search key is less than the item in the middle of the interval, the search continues on the left half
 * otherwise, it continues on the right half. 
-* This method eliminates half of the remaining elements each time, resulting in a time complexity of **O(log n)**.
+* This method eliminates half of the remaining elements each time, resulting in a time complexity of **O($\log_2(n)$)**.
 
 #### Use Cases of Binary Search
 1. Finding elements in a sorted array: Binary search is ideal when the list is already sorted, as it significantly reduces search time compared to linear search.
@@ -554,7 +554,7 @@ else:
 
 #### Time Complexity
 * Best case: **O(1)** (when the middle element is the target)
-* Worst case: **O(log n)** (when the element is not found, or at the boundaries)
+* Worst case: **O($\log_2(n)$)** (when the element is not found, or at the boundaries)
 
 
 
@@ -579,8 +579,8 @@ A **Binary Search Tree (BST)** is a data structure that stores elements (typical
 
 
 #### Use Cases
-1. Searching: A BST allows for efficient searching, with an average time complexity of **O(log n)** if the tree is **balanced**.
-2. Inserting and Deleting: Insertions and deletions also have an average time complexity of **O(log n)** in a **balanced** BST.
+1. Searching: A BST allows for efficient searching, with an average time complexity of **O($\log_2(n)$)** if the tree is **balanced**.
+2. Inserting and Deleting: Insertions and deletions also have an average time complexity of **O($\log_2(n)$)** in a **balanced** BST.
 3. Sorted Data Access: BSTs maintain data in a sorted manner, so **in order traversal** of the tree provides the elements in ascending order.
 4. Range Queries: BSTs are useful in solving range queries, where we need to find all keys within a certain range.
 5. Data Storage: It’s used in databases, file systems, and memory allocation, where quick search, insertion, and deletion operations are required.
@@ -965,7 +965,7 @@ Answer   :
 
 * Cela consiste appeler une fonction depuis la fonction elle-même. 
 * Utile dans les problèmes qui peuvent être divisés en sous-problèmes à **plus petite échelle**
-* **ATTENTION** pour intérressante quelle soit d'un point de vue intellectuel ou esthétique, une implémentation récursive n'est pas toujours la plus efficace 
+* **ATTENTION**. Pour intérressante quelle soit d'un point de vue intellectuel ou esthétique, une implémentation récursive n'est pas toujours la plus efficace 
 
 #### Quand utiliser la récursivité ?
 - Il existe une condition d'arrêt claire (un cas de base) qui met fin à la récursion.
