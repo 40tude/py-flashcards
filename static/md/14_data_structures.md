@@ -510,9 +510,9 @@ Answer   :
 #### How binary search works
 1. Start with the entire list and find the middle element.
 2. Compare the middle element with the target value:
-   - If the middle element is equal to the target, return its position.
-   - If the middle element is greater than the target, repeat the search in the left half of the list.
-   - If the middle element is less than the target, repeat the search in the right half of the list.
+    * If the middle element is equal to the target, return its position.
+    * If the middle element is greater than the target, repeat the search in the left half of the list.
+    * If the middle element is less than the target, repeat the search in the right half of the list.
 3. Repeat the process until the target is found or the search interval is empty.
 
 
@@ -968,8 +968,8 @@ Answer   :
 * **ATTENTION**. Pour intérressante quelle soit d'un point de vue intellectuel ou esthétique, une implémentation récursive n'est pas toujours la plus efficace 
 
 #### Quand utiliser la récursivité ?
-- Il existe une condition d'arrêt claire (un cas de base) qui met fin à la récursion.
-- Le problème peut être décomposé en sous-problèmes identiques mais à plus petite échelle (pensez aux fractales).
+* Il existe une condition d'arrêt claire (un cas de base) qui met fin à la récursion.
+* Le problème peut être décomposé en sous-problèmes identiques mais à plus petite échelle (pensez aux fractales).
 
 
 #### Recette de cuisine à suivre
