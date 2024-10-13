@@ -99,8 +99,9 @@ Answer  :
 1. Validation/métriques avec le jeu de test déséquilibré 
 
 L'équilibrage des classes se fait par sous ou sur-échantillonnage
+
 * Sur échantillonnage
-    * imblearn 
+    * RandomOverSampler from ``imblearn.over_sampling``  
     * SMOTE (Synthetic Minority Oversampling Technique, synthèse de points)
 
 <p align="center">
@@ -116,10 +117,15 @@ L'équilibrage des classes se fait par sous ou sur-échantillonnage
 * On peut aussi faire du ``sample_weight`` 
     * Chaque échantillon de ``y_train`` recoit une pondération spécifique à sa classe 
     * Voir param ``sample_weight`` de ``model.fit()`` de tensorflow
-
 * Quand les classes sont déséquilibrées, faire attention aux metrics 
     * conf matrix, precision, recall,F1 score, area under ROC curve
 * Lire cet [article](https://www.analyticsvidhya.com/blog/2020/07/10-techniques-to-deal-with-class-imbalance-in-machine-learning/)
+
+
+
+
+
+
 
 
 Question : MSE, RMSE, MAE, R², MAPE ?

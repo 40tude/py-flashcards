@@ -33,6 +33,11 @@ Answer   :
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : What is an **ArrayList**, what are the use cases, can you implement an ArrayList from scratch in Python? 
 
@@ -43,7 +48,7 @@ Answer   :
 * Like fixed-size arrays, an ArrayList offers index based addressing (``bob = MyArrayList[42]``)
 * Unlike **Linked Lists**, an ArrayList uses a contiguous memory area making copy(), paste(), read(), write()... more efficient. 
 
-#### Key Features of an ArrayList
+#### Key Features
 1. Dynamic Sizing: It can grow or shrink in size as needed.
 1. Indexing: Provides constant time (**O(1)**) access to elements by index, similar to arrays.
 1. Amortized Growth: When the internal array is full, the ArrayList typically resizes itself by allocating a new, larger array and copying the elements over.
@@ -122,6 +127,11 @@ print("ArrayList after removing element at index 1:", arr_list)
 ```
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : Can you show me how to implement a **Linked List** in Python ?
 Answer   : 
@@ -216,6 +226,13 @@ llist.print_list()  # Output: 5 -> 10 -> 30 -> None
 ```
 
 
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
 Question : Can you show me how to implement a **HashTable** in Python ?
 
 Answer   : 
@@ -224,7 +241,7 @@ Answer   :
 * It allows for fast access, insertion, and deletion of elements by using a hash function to convert keys into indices, where the values are stored in an underlying array. 
 * The key feature of a hashtable is its ability to perform these operations in constant time, **O(1)** on average, although collisions can make the worst-case time complexity **O(n)**.
 
-#### Key Components of a HashTable
+#### Key Components 
 1. **Hash Function:** A function that takes a key and returns an index (array position). A good hash function should distribute keys uniformly across the array.
 1. **Collision Handling:** When two keys hash to the same index, a collision occurs. Common methods to handle collisions are:
     * Chaining: Use linked lists at each array index to store multiple key-value pairs.
@@ -347,6 +364,11 @@ ht.display()
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : What is a **Stack**, what are the use cases, can you implement a Stack in Python?
 
@@ -415,6 +437,11 @@ print(stack.is_empty())  # Output: False
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : What is a **Queue**, what are the use cases, can you implement a Queue in Python?
 
@@ -490,6 +517,11 @@ print(queue.is_empty())  # Output: False
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : What is a **binary search**? What are the use cases? Can you show how to implement it in Python?
 
@@ -570,6 +602,11 @@ else:
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : What is a **Binary Search Tree**? What are the use cases? Can you show how to implement it in Python?
 
@@ -683,6 +720,11 @@ One can extend this implementation by adding functions for ``deletion()``, ``bal
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : If a BST class already has an ``inorder_traversal()`` method coded that way, how would you code ``preorder_traversal()`` and ``postorder_traversal()`` method?
 
@@ -785,6 +827,11 @@ print("Postorder Traversal:", bst.postorder_traversal()) # Outputs: [3, 7, 5, 20
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : In the context of BST how do you explain **DFS**, can you show how to implement it in Python ? 
 
@@ -844,6 +891,11 @@ dfs_inorder(root)  # Output: 20 30 40 50 60 70 80
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : In the context of BST how do you explain **BFS**, can you show how to implement it in Python ? 
 
@@ -914,6 +966,11 @@ bfs(root)  # Output: 50 30 70 20 40 60 80
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : Show how to implement a **recursive binary search** in Python?
 Answer   : 
@@ -959,6 +1016,11 @@ else:
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : **Récursivité**... ça vous parle ?
 Answer   : 
@@ -1057,6 +1119,11 @@ def fibonacci(n):
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : **P vs NP**... What can you say about it ? 
 Answer   : 
@@ -1189,3 +1256,125 @@ print(tsp(cities))  # NP problem: inefficient solution for large input
 * **P** : Problems that can be solved efficiently (like sorting or finding the shortest path) in Python.
 * **NP** : Problems where finding a solution is hard, but verifying it is easy (like TSP).
 * The question of whether **P = NP** is still open. 
+
+
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : What is a **Trie** data structure, what are the use cases, can you implement an Trie from scratch in Python? 
+
+
+Answer   : 
+
+A **Trie** (prefix tree) is a specialized tree data structure used to store a dynamic set or associative array where the keys are usually strings. It allows for fast retrieval of words or prefixes, making it useful for tasks like autocomplete and spell checking.
+
+##### Structure
+- Each node in a Trie represents a character of the word.
+- The root node is typically empty, and all subsequent nodes are linked to one another through edges.
+- Each path down the tree corresponds to a prefix or word formed by concatenating the characters along the path.
+- A boolean flag (e.g., `is_end_of_word`) is often used at the node level to mark the end of a valid word.
+
+<p align="center">
+<img src="../static/md/assets/trie.png" alt="trie" width="577"/>
+</p>
+
+Source : [Wikipedia](https://en.wikipedia.org/wiki/Trie)
+
+
+
+##### Key Features
+- **Space-efficient for common prefixes**: Instead of storing duplicate prefixes for words, they share common ancestors.
+- **Time complexity**: For insertions and lookups, the time complexity is proportional to the length of the word being inserted or searched, i.e., O(m), where m is the length of the word.
+
+##### Use Cases
+1. **Autocomplete**: Given a prefix, quickly find all words in the dictionary starting with that prefix.
+2. **Spell checking**: Efficiently look up if a word exists in a dictionary.
+3. **IP routing (Longest prefix matching)**: Used in routers for finding the longest matching prefix.
+4. **Word Games**: Useful in games like Scrabble or Boggle where words are formed by combining letters.
+
+
+
+##### Code snippet 
+
+```python
+class TrieNode:
+    def __init__(self):
+        self.children = {}  # Dictionary to store child nodes
+        self.is_end_of_word = False  # Flag to mark the end of a word
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word):
+        """
+        Insert a word into the trie.
+        """
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()  # Create a new node if the character doesn't exist
+            node = node.children[char]
+        node.is_end_of_word = True  # Mark the end of the word
+
+    def search(self, word):
+        """
+        Search if a word exists in the trie.
+        """
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.is_end_of_word  # Return True only if it's a complete word
+
+    def starts_with(self, prefix):
+        """
+        Check if any word in the trie starts with the given prefix.
+        """
+        node = self.root
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True  # If we can navigate through the entire prefix, return True
+
+
+# Usage example:
+trie = Trie()
+
+# Insert words into the trie
+trie.insert("apple")
+trie.insert("app")
+trie.insert("bat")
+trie.insert("ball")
+
+# Search for words
+print(trie.search("app"))      # True (word exists)
+print(trie.search("appl"))     # False (not a complete word)
+print(trie.search("apple"))    # True (word exists)
+
+# Check for prefixes
+print(trie.starts_with("app")) # True (prefix exists)
+print(trie.starts_with("bat")) # True (prefix exists)
+print(trie.starts_with("cat")) # False (no word starts with this prefix)
+```
+
+##### Key Methods
+- **`insert(word)`**: Inserts a word into the trie.
+- **`search(word)`**: Returns `True` if the word is found in the trie, and `False` otherwise.
+- **`starts_with(prefix)`**: Returns `True` if there is any word in the trie that starts with the given prefix.
+
+##### Time Complexity
+- **Insert**: O(m), where m is the length of the word.
+- **Search**: O(m), where m is the length of the word.
+- **Prefix Search**: O(m), where m is the length of the prefix.
+
