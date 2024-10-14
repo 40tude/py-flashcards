@@ -39,7 +39,7 @@ Answer   :
 ############################################################ 
 -->
 
-Question : What is an **ArrayList**, what are the use cases, can you implement an ArrayList from scratch in Python? 
+Question : Data Structures - What is an **ArrayList**, what are the use cases, can you implement an ArrayList from scratch in Python? 
 
 Answer   : 
 
@@ -133,7 +133,7 @@ print("ArrayList after removing element at index 1:", arr_list)
 ############################################################ 
 -->
 
-Question : Can you show me how to implement a **Linked List** in Python ?
+Question : Data Structures - Can you show me how to implement a **Linked List** in Python ?
 Answer   : 
 
 * A **Linked List** is a data structure where elements (nodes) are stored in a linear sequence, but each element points to the next one in the list. 
@@ -233,7 +233,7 @@ llist.print_list()  # Output: 5 -> 10 -> 30 -> None
 ############################################################ 
 -->
 
-Question : Can you show me how to implement a **HashTable** in Python ?
+Question : Data Structures - Can you show me how to implement a **HashTable** in Python ?
 
 Answer   : 
 
@@ -370,7 +370,7 @@ ht.display()
 ############################################################ 
 -->
 
-Question : What is a **Stack**, what are the use cases, can you implement a Stack in Python?
+Question : Data Structures - What is a **Stack**, what are the use cases, can you implement a Stack in Python?
 
 Answer   : 
 
@@ -443,7 +443,7 @@ print(stack.is_empty())  # Output: False
 ############################################################ 
 -->
 
-Question : What is a **Queue**, what are the use cases, can you implement a Queue in Python?
+Question : Data Structures - What is a **Queue**, what are the use cases, can you implement a Queue in Python?
 
 Answer   : 
 
@@ -523,7 +523,7 @@ print(queue.is_empty())  # Output: False
 ############################################################ 
 -->
 
-Question : What is a **binary search**? What are the use cases? Can you show how to implement it in Python?
+Question : Data Structures - What is a **binary search**? What are the use cases? Can you show how to implement it in Python?
 
 Answer   : 
 
@@ -608,7 +608,7 @@ else:
 ############################################################ 
 -->
 
-Question : What is a **Binary Search Tree**? What are the use cases? Can you show how to implement it in Python?
+Question : Data Structures - What is a **Binary Search Tree**? What are the use cases? Can you show how to implement it in Python?
 
 Answer   : 
 
@@ -726,7 +726,7 @@ One can extend this implementation by adding functions for ``deletion()``, ``bal
 ############################################################ 
 -->
 
-Question : If a BST class already has an ``inorder_traversal()`` method coded that way, how would you code ``preorder_traversal()`` and ``postorder_traversal()`` method?
+Question : Data Structures - If a BST class already has an ``inorder_traversal()`` method coded that way, how would you code ``preorder_traversal()`` and ``postorder_traversal()`` method?
 
 
 ```python
@@ -833,7 +833,7 @@ print("Postorder Traversal:", bst.postorder_traversal()) # Outputs: [3, 7, 5, 20
 ############################################################ 
 -->
 
-Question : In the context of BST how do you explain **DFS**, can you show how to implement it in Python ? 
+Question : Data Structures - In the context of BST how do you explain **DFS**, can you show how to implement it in Python ? 
 
 Answer   : 
 
@@ -897,7 +897,7 @@ dfs_inorder(root)  # Output: 20 30 40 50 60 70 80
 ############################################################ 
 -->
 
-Question : In the context of BST how do you explain **BFS**, can you show how to implement it in Python ? 
+Question : Data Structures - In the context of BST how do you explain **BFS**, can you show how to implement it in Python ? 
 
 Answer   : 
 
@@ -972,7 +972,7 @@ bfs(root)  # Output: 50 30 70 20 40 60 80
 ############################################################ 
 -->
 
-Question : Show how to implement a **recursive binary search** in Python?
+Question : Data Structures - Show how to implement a **recursive binary search** in Python?
 Answer   : 
 
 #### Code snippet 
@@ -1022,7 +1022,7 @@ else:
 ############################################################ 
 -->
 
-Question : **Récursivité**... ça vous parle ?
+Question : Data Structures - **Récursivité**... ça vous parle ?
 Answer   : 
 
 * Cela consiste appeler une fonction depuis la fonction elle-même. 
@@ -1125,7 +1125,7 @@ def fibonacci(n):
 ############################################################ 
 -->
 
-Question : **P vs NP**... What can you say about it ? 
+Question : Data Structures - **P vs NP**... What can you say about it ? 
 Answer   : 
 
 #### What is P?
@@ -1268,7 +1268,7 @@ print(tsp(cities))  # NP problem: inefficient solution for large input
 ############################################################ 
 -->
 
-Question : What is a **Trie** data structure, what are the use cases, can you implement an Trie from scratch in Python? 
+Question : Data Structures - What is a **Trie** data structure, what are the use cases, can you implement an Trie from scratch in Python? 
 
 
 Answer   : 
@@ -1378,3 +1378,74 @@ print(trie.starts_with("cat")) # False (no word starts with this prefix)
 - **Search**: O(m), where m is the length of the word.
 - **Prefix Search**: O(m), where m is the length of the prefix.
 
+
+
+
+
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Data Structures - How would you reverse a linked list ? 
+
+Answer : 
+
+##### Code snippet 
+
+```python
+
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None
+  
+class LinkedList: 
+    def __init__(self): 
+        self.head = None
+  
+    def prepend(self, new_data): 
+        new_node = Node(new_data) 
+        new_node.next = self.head 
+        self.head = new_node 
+    
+    # 3 pointers : prev, current, next
+    # Move to the "right" the 3 pointers
+    #       current.next = previous 
+    #       previous = current
+    #       current = current.next (but we need to make a copy of current.next in next pointer first)
+    def reverse(self): 
+        prev = None
+        current = self.head 
+        while(current is not None): 
+            next = current.next     # make a copy to prepare step 3
+            current.next = prev     # step 1
+            prev = current          # step 2
+            current = next          # step 3
+        self.head = prev 
+  
+    def print_list(self):
+        current = self.head
+        while current:  
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")  
+
+llist = LinkedList() 
+llist.prepend(10) 
+llist.prepend(20) 
+llist.prepend(30) 
+llist.prepend(42) 
+  
+llist.print_list() 
+llist.reverse() 
+llist.print_list()
+```
+
+* Time Complexity : O(n) 
+* Space Complexity : O(n) (next is created in each loop) 

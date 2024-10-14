@@ -66,16 +66,11 @@ Answer   :
 
 
 <!-- 
-
 ############################################################
-## Divers
+## 
 ############################################################ 
-
 -->
-
-
-
-Question : NLP - What is the purpose of oov_token in ``tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=k_num_words, oov_token="_UNKNOWN_")``
+Question : No category yet - What is the purpose of oov_token in ``tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=k_num_words, oov_token="_UNKNOWN_")``
 Answer  : 
 
 * ``oov_token`` = out of vocabulary token
@@ -88,8 +83,12 @@ Answer  :
 
 
 
-
-Question : Classes déséquilibrées, spam par exemple. Vous faites quoi ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Classes déséquilibrées, spam par exemple. Vous faites quoi ?
 Answer  : 
 
 1. ``train_test_split()`` avec stratify
@@ -127,8 +126,12 @@ L'équilibrage des classes se fait par sous ou sur-échantillonnage
 
 
 
-
-Question : MSE, RMSE, MAE, R², MAPE ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - MSE, RMSE, MAE, R², MAPE ?
 Answer  :
 
 **RMSE :** 
@@ -152,15 +155,23 @@ Answer  :
 * MAPE élevé : erreurs importantes dans les prédictions
 
 
-
-Question : ANOVA... Ca te dis quoi?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - ANOVA... Ca te dis quoi?
 Answer  : 
 
 Analyse de la variance. La variation c'est l'information. ANOVA c'est analyser la quantité d'information captée par le modèle. Variance=écart à la moyenne.
 
 
-
-Question : Silhouette, un commentaire? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Silhouette, un commentaire? 
 Answer  : 
 
 * Le coefficient de silhouette évalue la cohésion et la séparation des clusters. 
@@ -172,15 +183,24 @@ Answer  :
 * On choisit k tel que s soit maximal (voir aussi analyse courbe WCSS, Elbow). 
 * Le score de silhouette est calculé pour chaque point de données en mesurant la similarité avec son propre cluster par rapport aux clusters voisins les plus proches.
 
-
-Question : Data Warehouse vs Databases ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Data Warehouse vs Databases ?
 Answer  : 
 
 * **Data warehouses** : optimized to have a performance boost on columns (features)
 * **Databases**       : optimized for extracting rows (observations)
 
 
-Question : What is data tidying?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What is data tidying?
 Answer  : 
 
 This is the process of transforming raw, messy data into a clean and organized format that is easier to analyze and interpret. This process involves structuring the data in a way that :
@@ -189,8 +209,12 @@ This is the process of transforming raw, messy data into a clean and organized f
 * Each observation forms a row
 * Each type of observational unit forms a table
 
-
-Question : What is Spark SQL ? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What is Spark SQL ? 
 Answer  : 
 
 * It brings native support for SQL to Spark. 
@@ -199,8 +223,12 @@ Answer  :
 * Unifying these abstractions makes it easy for developers to intermix SQL commands querying external data with complex analytics, all within in a single application.
 
 
-
-Question : What are the types of categorical data ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What are the types of categorical data ?
 Answer  : 
 
 **Ordinal Data** & **Nominal Data**
@@ -209,8 +237,12 @@ Answer  :
 * Nominal data is like choosing your favorite ice cream flavor. There’s no logical order to the choices. Whether it’s “Vanilla,” “Chocolate,” or “Strawberry,” one isn’t inherently better or worse than the others. 
 
 
-
-Question : D'où provient le terme recall ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - D'où provient le terme recall ?
 Answer  : 
 
 * Le terme "recall" en machine learning vient du domaine de la récupération d'information (Information Retrieval). 
@@ -218,16 +250,24 @@ Answer  :
 * En d'autres termes, le "recall" mesure le pourcentage de vrais positifs parmi tous les éléments pertinents. Il est utilisé pour évaluer la performance des modèles de classification, en particulier dans les situations où il est crucial de ne pas manquer des éléments pertinents (par exemple, dans la détection de maladies, où il est important de ne pas manquer de cas positifs). 
 
 
-
-Question : RND-FOREST - Boostrapping ?  
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Boostrapping ?  
 Answer  : 
 
 * On crée plusieurs sous-ensembles de données en échantillonnant de manière aléatoire avec remplacement à partir de l'ensemble de données d'origine. 
 * Chaque sous-ensemble peut donc contenir des exemples répétés et ne pas inclure certains exemples de l'ensemble d'origine.
 
 
-
-Question : RND-FOREST - Bagging ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Bagging ?
 Answer  : 
 
 * Parallèle (indépendance)
@@ -240,8 +280,12 @@ Answer  :
 
 
 
-
-Question : BOOST-ADABOOST - Boosting ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Boosting ?
 Answer  : 
 
 * Séquentiel
@@ -255,8 +299,12 @@ Answer  :
 
 
 
-
-Question : XGBoost ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - XGBoost ?
 Answer  :
 
 * Extreme Grandient Boosting
@@ -271,8 +319,12 @@ Answer  :
 * Sum of the n predictions (each tree predict a residual)
 
 
-
-Question : XGBoost benefits drawbacks for predictions
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - XGBoost benefits drawbacks for predictions
 Answer  :
 
 #### Benefits
@@ -290,8 +342,12 @@ Answer  :
 
 
 
-
-Question : LOG-REG - Pouvez-vous expliquer les termes "précision" et "accuracy"
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous expliquer les termes "précision" et "accuracy"
 Answer  : 
 
 Métriques utilisées pour évaluer la performance des modèles de classification.
@@ -301,8 +357,12 @@ Métriques utilisées pour évaluer la performance des modèles de classificatio
 * L'accuracy donne une idée globale de la performance du modèle, mais peut être trompeuse si les classes sont déséquilibrées. 
 
 
-
-Question : LOG-REG - C'est quoi le F1 score, que signifie-t-il, quand l'utiliser?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - C'est quoi le F1 score, que signifie-t-il, quand l'utiliser?
 Answer  : 
 
 * Moyenne harmonique du recall et de la précision. 
@@ -313,20 +373,33 @@ Answer  :
 * Si faible => soit le modèle a une faible précision, soit un faible rappel, soit les deux. Le modèle ne performe pas bien et nécessite des ajustements.
 
 
-
-Question : REG-LIN - Forward selection, Backward selection ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Forward selection, Backward selection ?
 Answer  : 
 
 * Forward selection  : On ajoute les variables au modèle qui à chaque étape augment le R². On arrête si y a plus variable ou si R² baisse.
 * Backward selection : Elimination. On part avec toutes les variables. On élimine la variable qui a la plus forte probabilité de ne pas être pertinante (p-value). On arrête quand toutes les variables ont une p-value sup à 5%
 
 
-Question : SVM - What is a kernel? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What is a kernel? 
 Answer  : Function that take the observations into a larger dimensional space, in which we hope that the geometric properties of the observations will be linearly separable
 
 
-
-Question : Objectif de K-Means ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Objectif de K-Means ?
 Answer  : 
 
 * L'objectif du K-Means est de regrouper des données en K clusters de telle manière que les points à l'intérieur d'un cluster soient similaires entre eux et différents des points d'autres clusters
@@ -334,7 +407,12 @@ Answer  :
 * La variance intra-cluster est une mesure de la dispersion des données à l'intérieur de chaque cluster. Elle représente la somme des carrés des distances entre chaque point de données d'un cluster et le centre de ce cluster.
 
 
-Question : K-Means - WCSS… Any comment ? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - WCSS… Any comment ? 
 Answer  : 
 
 * Within Cluster Squared Sum. 
@@ -343,14 +421,23 @@ Answer  :
 * C'est un paramètre global sur l'ensemble des clusters. C'est la somme des sommes des carré
 
 
-Question : REG-LIN - homoscédasticité ? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - homoscédasticité ? 
 Answer  : 
 
 On parle d'homoscédasticité lorsque la variance des erreurs stochastiques de la régression est la même pour chaque observation i (de 1 à n observations). 
 
 
-
-Question : REG-LIN - Quelles sont les 3 hypothèses que l'on fait en régression linéaire
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelles sont les 3 hypothèses que l'on fait en régression linéaire
 Answer : 
 
 * Linéarité : évident
@@ -358,19 +445,34 @@ Answer :
 * Homoscédasticité : La distribution des erreurs est indépendante de y. Faut que la distribution des erreurs, que l'écart à la droite, soit constant qqsoit y
 
 
-Question : What is Boto3 the SDK (Software Development Kit) of AWS?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What is Boto3 the SDK (Software Development Kit) of AWS?
 Answer  : 
 
 It is a collection of tools and libraries to help you use AWS using code
 
 
-Question : REG-LIN - What is a RDBMS (Relational DataBase Management System)?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What is a RDBMS (Relational DataBase Management System)?
 Answer  : 
 
 A piece of software that lets define, create, maintain, and control access to a database
 
 
-Question : C'est quoi le machine learning ? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - C'est quoi le machine learning ? 
 Answer  : 
 
 * Machine Learning (ML) = sous-domaine de l'IA 
@@ -381,37 +483,62 @@ Answer  :
 	1. sans intervention humaine directe pour spécifier explicitement les règles.
 
 
-Question : Expliquez ce qu'est la validation croisée et pourquoi c'est important dans le contexte de l'apprentissage automatique ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Expliquez ce qu'est la validation croisée et pourquoi c'est important dans le contexte de l'apprentissage automatique ?
 Answer  : 
 
 * Technique utilisée pour évaluer les performances d'un modèle en divisant les données en sous-ensembles d'apprentissage et de test de manière itérative. 
 * Cela permet d'estimer la capacité de généralisation du modèle sur des données non vues, et d'identifier le surapprentissage. 
 * Les méthodes courantes incluent la validation croisée en **k-fold** et la validation croisée **leave-one-out**.
 
-Question : Neural Network. What is the effect of adding neurons on a layer?
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. What is the effect of adding neurons on a layer?
 Answer  : 
 
 Adding a neuron to a layer makes it possible for the model to create an additional "feature" on a given level of complexity
 
 
 
-
-Question : Différence entre régression et classification en apprentissage automatique ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Différence entre régression et classification en apprentissage automatique ?
 Answer  : 
 
 * La **régression** est utilisée pour prédire une **valeur continue**
 * La **classification** est utilisée pour prédire une classe ou une catégorie discrète.
 
 
-Question : Neural Network. If the model overfits, what can we do to limit overfitting?
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. If the model overfits, what can we do to limit overfitting?
 Answer  : 
 
 * We can reduce the number of neurons and hidden layers in the network. 
 * We can also introduce regularization like Ridge (L2) or Lasso (L1)
 
 
-
-Question : Quelle est l'importance de l'analyse exploratoire des données (EDA) dans le processus de modélisation en science des données ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelle est l'importance de l'analyse exploratoire des données (EDA) dans le processus de modélisation en science des données ?
 Answer : 
 
 * L'analyse exploratoire des données permet de comprendre la structure, les modèles et les relations présentes dans les données avant de construire des modèles. 
@@ -426,20 +553,38 @@ Answer :
 
 
 
-
-Question : Pouvez-vous expliquer ce qu'est l'overfitting et comment le détecter ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous expliquer ce qu'est l'overfitting et comment le détecter ?
 Answer  : 
 
 * L'overfitting se produit lorsque le modèle s'adapte trop précisément aux données d'entraînement et perd sa capacité de généralisation sur de nouvelles données. 
 * Il peut être détecté en observant une performance élevée sur les données d'entraînement mais une performance médiocre sur les données de test
 * On peut aussi comparer les performances du modèle sur les données d'entraînement et de validation.
 
-Question : With batches of 16 observations, how many times will the parameters of the model be updated before we reach one epoch?  
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - With batches of 16 observations, how many times will the parameters of the model be updated before we reach one epoch?  
 Answer  : 
 
 ``N/16``
 
-Question : Quelle est la différence entre la **normalisation** et la **standardisation** des données ?
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelle est la différence entre la **normalisation** et la **standardisation** des données ?
 Answer  : 
 
 * La **normalisation**   : met à l'échelle les données dans une plage spécifique, souvent entre 0 et 1. 
@@ -447,8 +592,12 @@ Answer  :
 
 
 
-
-Question : Neural Network. What happens if we use a linear activation function? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. What happens if we use a linear activation function? 
 Answer  : 
 
 * As a hidden layer 
@@ -458,8 +607,12 @@ Answer  :
     * A linear activation function can be used in regression problems
 
 
-
-Question : Qu'est-ce qu'une fonction de coût (ou de perte) et comment est-elle utilisée dans l'apprentissage automatique ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Qu'est-ce qu'une fonction de coût (ou de perte) et comment est-elle utilisée dans l'apprentissage automatique ?
 Answer  : 
 
 * Une fonction de coût mesure l'erreur entre les prédictions d'un modèle et les valeurs réelles de l'ensemble de données. 
@@ -468,23 +621,36 @@ Answer  :
 
 
 
-
-Question : Neural Network. What is the effect of adding hidden layers?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. What is the effect of adding hidden layers?
 Answer  : 
 
 * Adding a hidden layer lets the model add one more level of non-linearity by applying one more activation function to the previous output
 * This leads to exponentially complex outputs.
 
 
-
-Question : Pouvez-vous expliquer ce qu'est la réduction de la dimensionnalité et pourquoi est-ce important dans l'analyse de données ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous expliquer ce qu'est la réduction de la dimensionnalité et pourquoi est-ce important dans l'analyse de données ?
 Answer  : 
 
 * La **PCA** consiste à réduire le nombre de variables ou de caractéristiques dans un ensemble de données. 
 * Cela permet de simplifier les modèles, de réduire le temps de calcul et de prévenir le surapprentissage, tout en préservant autant que possible les informations importantes.
 
 
-Question : Neural Network. When you use additional features to feed the model, do you need to use as many neurons and layers? Would adding more neurons and layers be an alternative to using additional features?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. When you use additional features to feed the model, do you need to use as many neurons and layers? Would adding more neurons and layers be an alternative to using additional features?
 Answer  : 
 
 * Adding new features may let you use less complex architectures
@@ -492,22 +658,39 @@ Answer  :
 * On the other hand you may be missing some very useful features that model may have created for you.
 
 
-Question :Quelles sont les différences entre l'apprentissage supervisé et l'apprentissage non supervisé ?
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelles sont les différences entre l'apprentissage supervisé et l'apprentissage non supervisé ?
 Answer  : 
 
 * L'apprentissage supervisé implique l'utilisation de données étiquetées pour entraîner un modèle à prédire une sortie
 * tandis que l'apprentissage non supervisé explore les données pour découvrir des structures intrinsèques sans étiquettes
 * Parler des cas d'usage du non supervisé. Pas une fin en soi
 
-Question : Neural Network. Is it more useful to add more neurons on the layers near the bottom or near the top?
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. Is it more useful to add more neurons on the layers near the bottom or near the top?
 Answer  : 
 
 * It is more useful to add neurons towards the bottom because the complexity of the outputs of earlier neurons limit the complexity of the outputs of later neurons
 * It is generally good practice to have more neurons on bottom layers and progressively decrease the number of neurons going up the network.
 
 
-
-Question : Quelle est la différence entre la descente de gradient stochastique (SGD) et la descente de gradient classique ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelle est la différence entre la descente de gradient stochastique (SGD) et la descente de gradient classique ?
 Answer  : 
 
 * La descente de gradient stochastique effectue des mises à jour des poids **après chaque exemple** d'entraînement
@@ -518,8 +701,12 @@ Answer  :
     * Parler du fait que ça peut nous permettre de sortir d'un minimum local.
 
 
-
-Question : Neural Network. Would you say that using neural network models compensates the need for feature engineering?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Neural Network. Would you say that using neural network models compensates the need for feature engineering?
 Answer  : 
 
 * It does. 
@@ -529,21 +716,36 @@ Answer  :
 * The major **downside** is that it all happens in what may be qualified as a "black box" model.  
 
 
-
-Question : Expliquez ce qu'est la régularisation **Lasso** et en quoi elle diffère de la régularisation **Ridge** ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Expliquez ce qu'est la régularisation **Lasso** et en quoi elle diffère de la régularisation **Ridge** ?
 Answer  : 
 
 * **Lasso :** La régularisation Lasso ajoute, à la fonction de coût, une pénalité proportionnelle à la *valeur absolue des coefficients du modèle*, ce qui favorise la sélection de caractéristiques importantes et conduit à une certaine sparsité. 
 * **Ridge :** La régularisation Ridge utilise une pénalité proportionnelle au *carré des coefficients*, ce qui réduit la magnitude des coefficients sans les éliminer complètement.
 
 
-Question : If the ``batch size`` is equal to the ``number of observations``, what would the batch gradient descent be equivalent to?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - If the ``batch size`` is equal to the ``number of observations``, what would the batch gradient descent be equivalent to?
 Answer  : 
 
 * It's called batch gradient descent, or simply gradient descent. 
 * In this scenario, the algorithm computes the gradient of the cost function with respect to the parameters using the entire dataset at each iteration.
 
-Question : C'est quoi la régularisation ?
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - C'est quoi la régularisation ?
 Answer  : 
 
 * Une technique pour réduire le surapprentissage (overfitting) en pénalisant les modèles trop complexes. 
@@ -552,7 +754,12 @@ Answer  :
 * La régularisation aide à améliorer la généralisation du modèle en contrôlant sa complexité et en réduisant le risque de surapprentissage.
 
 
-Question : What is the effect of the batch size on the training of the model? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - What is the effect of the batch size on the training of the model? 
 Answer  : 
 
 * **Computational Efficiency :** Larger batch sizes result in faster training as more samples are processed in parallel.
@@ -560,15 +767,25 @@ Answer  :
 * **Generalization :** Smaller batch sizes can help the model generalize better as they introduce more randomness in the updates, which can prevent the model from overfitting.
 
 
-
-Question : C'est quoi la back propagation?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - C'est quoi la back propagation?
 Answer  : 
 
 * Un algorithme pour entraîner les réseaux de neurones. 
 * Il consiste à calculer les gradients des poids du réseau par rapport à une fonction de coût, puis à ajuster ces poids en utilisant un algorithme d'optimisation tel que la descente de gradient, afin de minimiser la perte lors de la phase d'apprentissage. 
 * La rétropropagation permet au réseau de s'ajuster progressivement en fonction des erreurs qu'il commet.
 
-Question : C'est quoi Gradient Descent?
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - C'est quoi Gradient Descent?
 Answer  : 
 
 * Une méthode d'optimisation. 
@@ -580,8 +797,12 @@ Answer  :
 * On trouve alors les valeurs optimales (poids, biais) qui minimisent la loss function. 
 
 
-
-Question : Pouvez-vous donner plus de détails sur l'algo du gradient descent?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous donner plus de détails sur l'algo du gradient descent?
 Answer  :
 
 1. Initialisation (poids, biais)
@@ -594,8 +815,12 @@ Answer  :
     * Si trop petit on avance pas
 
 
-
-Question : Elbow method, any comment?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Elbow method, any comment?
 Answer  : 
 
 Dans le contexte de l'algorithme K-Means (non supervisé), la méthode Elbow est utilisée pour déterminer le nombre optimal de clusters à utiliser. 
@@ -618,8 +843,12 @@ Dans le contexte de l'algorithme K-Means (non supervisé), la méthode Elbow est
         * Il peut être utile alors d'utiliser d'autres méthodes de validation des clusters (Silhouette).
 
 
-
-Question : Compromis biais-variance... Ca te parle ?
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Compromis biais-variance... Ca te parle ?
 Answer  : 
 
 1. Le biais mesure à quel point les prédictions d'un modèle diffèrent des valeurs réelles. 
@@ -643,8 +872,12 @@ Answer  :
 La **validation croisée** peut être utile pour évaluer comment le compromis biais-variance affecte les performances du modèle. En utilisant la validation croisée, on peut ajuster les hyperparamètres du modèle pour trouver le meilleur compromis entre biais et variance.
 
 
-
-Question : Batch Gradient Descent, Stochastic Gradient Descent, Mini-Batch Gradient Descent ? 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Batch Gradient Descent, Stochastic Gradient Descent, Mini-Batch Gradient Descent ? 
 Answer  : 
 
 1. **Batch Gradient Descent** (Batch Size = Number of Observations). Full Batch Gradient Descent : In this scenario, the entire dataset is used to compute the gradient of the cost function. The parameters are updated once per epoch (one pass through the entire dataset). This method is computationally expensive because it requires storing the entire dataset in memory and computing the gradients for all samples before updating the parameters. However, it usually leads to very stable updates and can converge to a good solution.
