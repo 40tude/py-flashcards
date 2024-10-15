@@ -383,7 +383,7 @@ Answer  :
 Question : No category yet - Forward selection, Backward selection ?
 Answer  : 
 
-* Forward selection  : On ajoute les variables au modèle qui à chaque étape augment le R². On arrête si y a plus variable ou si R² baisse.
+* Forward selection  : On ajoute les variables au modèle qui à chaque étape augmente le R². On arrête si y a plus variable ou si R² baisse.
 * Backward selection : Elimination. On part avec toutes les variables. On élimine la variable qui a la plus forte probabilité de ne pas être pertinante (p-value). On arrête quand toutes les variables ont une p-value sup à 5%
 
 
@@ -498,15 +498,6 @@ Answer  :
 * Les méthodes courantes incluent la validation croisée en **k-fold** et la validation croisée **leave-one-out**.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. What is the effect of adding neurons on a layer?
-Answer  : 
-
-Adding a neuron to a layer makes it possible for the model to create an additional "feature" on a given level of complexity
 
 
 
@@ -523,16 +514,6 @@ Answer  :
 
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. If the model overfits, what can we do to limit overfitting?
-Answer  : 
-
-* We can reduce the number of neurons and hidden layers in the network. 
-* We can also introduce regularization like Ridge (L2) or Lasso (L1)
 
 
 <!-- 
@@ -569,15 +550,6 @@ Answer  :
 
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - With batches of 16 observations, how many times will the parameters of the model be updated before we reach one epoch?  
-Answer  : 
-
-``N/16``
 
 
 
@@ -594,19 +566,6 @@ Answer  :
 
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. What happens if we use a linear activation function? 
-Answer  : 
-
-* As a hidden layer 
-    * Using a linear activation function is **NOT** a good idea. 
-    * We loose the capabilities of neural networks to learn complex relation (non linearities). 
-* As an output layer 
-    * A linear activation function can be used in regression problems
 
 
 <!-- 
@@ -623,16 +582,6 @@ Answer  :
 
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. What is the effect of adding hidden layers?
-Answer  : 
-
-* Adding a hidden layer lets the model add one more level of non-linearity by applying one more activation function to the previous output
-* This leads to exponentially complex outputs.
 
 
 <!-- 
@@ -647,17 +596,6 @@ Answer  :
 * Cela permet de simplifier les modèles, de réduire le temps de calcul et de prévenir le surapprentissage, tout en préservant autant que possible les informations importantes.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. When you use additional features to feed the model, do you need to use as many neurons and layers? Would adding more neurons and layers be an alternative to using additional features?
-Answer  : 
-
-* Adding new features may let you use less complex architectures
-* the upside is that you know exactly what input features are used which makes the model more interpretable. 
-* On the other hand you may be missing some very useful features that model may have created for you.
 
 
 
@@ -675,47 +613,10 @@ Answer  :
 
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. Is it more useful to add more neurons on the layers near the bottom or near the top?
-Answer  : 
-
-* It is more useful to add neurons towards the bottom because the complexity of the outputs of earlier neurons limit the complexity of the outputs of later neurons
-* It is generally good practice to have more neurons on bottom layers and progressively decrease the number of neurons going up the network.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Quelle est la différence entre la descente de gradient stochastique (SGD) et la descente de gradient classique ?
-Answer  : 
-
-* La descente de gradient stochastique effectue des mises à jour des poids **après chaque exemple** d'entraînement
-    * ce qui rend l'optimisation plus rapide mais plus bruitée. 
-* La descente de gradient classique calcule les gradients sur **l'ensemble de données** et met à jour les poids une fois
-    * ce qui est plus lent mais moins bruité. 
-* Garder en tête que si le calcul de grad C est 100 fois plus rapide sur n' points alors on peut se permettre d'avoir une "route" 20 fois moins directe. 
-    * Parler du fait que ça peut nous permettre de sortir d'un minimum local.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Neural Network. Would you say that using neural network models compensates the need for feature engineering?
-Answer  : 
-
-* It does. 
-* The outputs of the neurons in the network may be interpreted as new features that will be used by later neurons to make even more complex features leading to the final prediciton. 
-* In addition, these "features" are build by neurons whose parameters get optimized according to the loss function. 
-* So it creates features that are linked to the target variable without having to be explicitely coded. 
-* The major **downside** is that it all happens in what may be qualified as a "black box" model.  
 
 
 <!-- 
@@ -730,16 +631,6 @@ Answer  :
 * **Ridge :** La régularisation Ridge utilise une pénalité proportionnelle au *carré des coefficients*, ce qui réduit la magnitude des coefficients sans les éliminer complètement.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - If the ``batch size`` is equal to the ``number of observations``, what would the batch gradient descent be equivalent to?
-Answer  : 
-
-* It's called batch gradient descent, or simply gradient descent. 
-* In this scenario, the algorithm computes the gradient of the cost function with respect to the parameters using the entire dataset at each iteration.
 
 
 <!-- 
@@ -756,65 +647,11 @@ Answer  :
 * La régularisation aide à améliorer la généralisation du modèle en contrôlant sa complexité et en réduisant le risque de surapprentissage.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - What is the effect of the batch size on the training of the model? 
-Answer  : 
-
-* **Computational Efficiency :** Larger batch sizes result in faster training as more samples are processed in parallel.
-* **Stability :** Larger batch sizes provide a more stable estimate of the gradient, which can lead to smoother convergence. They might get stuck in local minima more easily.
-* **Generalization :** Smaller batch sizes can help the model generalize better as they introduce more randomness in the updates, which can prevent the model from overfitting.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - C'est quoi la back propagation?
-Answer  : 
-
-* Un algorithme pour entraîner les réseaux de neurones. 
-* Il consiste à calculer les gradients des poids du réseau par rapport à une fonction de coût, puis à ajuster ces poids en utilisant un algorithme d'optimisation tel que la descente de gradient, afin de minimiser la perte lors de la phase d'apprentissage. 
-* La rétropropagation permet au réseau de s'ajuster progressivement en fonction des erreurs qu'il commet.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - C'est quoi Gradient Descent?
-Answer  : 
 
-* Une méthode d'optimisation. 
-* Minimisation de la dérivée. 
-* Minimisation de la fonction de coût en ML. 
-* On ne minimise pas toujours la MSE. 
-    * MSE légitime en régression linéaire. 
-    * En classification on utilisera log loss AKA cross entropy. 
-* On trouve alors les valeurs optimales (poids, biais) qui minimisent la loss function. 
-
-
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Pouvez-vous donner plus de détails sur l'algo du gradient descent?
-Answer  :
-
-1. Initialisation (poids, biais)
-2. Itération : calculer le grad par rapport au paramètre à optimiser, prendre l'inverse, avancer d'un pas via learning_rate
-3. Condition d'arrêt (n_iter)
-* La formule : beta(t+1) = beta (t) - gamma * Grad( C )
-* Influence de gamma
-    * Taille du saut d'un beta au suivant
-    * Exploding gradient si trop grand
-    * Si trop petit on avance pas
 
 
 <!-- 
@@ -874,14 +711,3 @@ Answer  :
 La **validation croisée** peut être utile pour évaluer comment le compromis biais-variance affecte les performances du modèle. En utilisant la validation croisée, on peut ajuster les hyperparamètres du modèle pour trouver le meilleur compromis entre biais et variance.
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Batch Gradient Descent, Stochastic Gradient Descent, Mini-Batch Gradient Descent ? 
-Answer  : 
-
-1. **Batch Gradient Descent** (Batch Size = Number of Observations). Full Batch Gradient Descent : In this scenario, the entire dataset is used to compute the gradient of the cost function. The parameters are updated once per epoch (one pass through the entire dataset). This method is computationally expensive because it requires storing the entire dataset in memory and computing the gradients for all samples before updating the parameters. However, it usually leads to very stable updates and can converge to a good solution.
-2. **Stochastic Gradient Descent** (Batch Size = 1) : Here, the gradient is computed and parameters are updated after each individual sample. It's very noisy but can help the model escape local minima more easily and often converges faster, especially with large datasets.
-3. **Mini-Batch Gradient Descent** (1 < Batch Size < Number of Observations) : A compromise between batch gradient descent and stochastic gradient descent. It computes the gradient and updates the parameters using a subset of the dataset (a mini-batch) at each iteration. This strikes a balance between the stability of batch gradient descent and the faster convergence of stochastic gradient descent. The batch size is typically chosen to be a power of 2 for efficient memory usage.
