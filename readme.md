@@ -19,7 +19,7 @@ You should have all the files already. The lines below explain how the project w
 * create a secrets.ps1 similar to
 
 ```
-$env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
+$env:FLASHCARDS_SECRET_KEY = "blablabla"
 ```
 * create .gitignore
     * at least, add a line with : secrets.ps1
@@ -52,7 +52,7 @@ $env:FLASHCARDS_SECRET_KEY = "<blablabla...>"
     * git remote add heroku https://git.heroku.com/py-flashcards.git
     * git push heroku main
     * heroku config:set FLASK_ENV=production
-    * heroku config:set FLASHCARDS_SECRET_KEY=<blablabla> 
+    * heroku config:set FLASHCARDS_SECRET_KEY=blablabla 
     * heroku open
     * This should work
 

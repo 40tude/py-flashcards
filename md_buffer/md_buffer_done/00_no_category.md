@@ -4,7 +4,7 @@
 	
 	
 	
-Relire toutes les question et ajouter "- **" à la fin si elle est importante
+Relire toutes les question et ajouter "<je sais pas pquoi encore>" à la fin si elle est importante
 	• Se limiter OBLIGATOIREMENT à 20% des questions
 	
 Faire le quiz 
@@ -328,17 +328,19 @@ Question : No category yet - XGBoost benefits drawbacks for predictions
 Answer  :
 
 #### Benefits
-- **Handles complex and heterogeneous data**: XGBoost works well with diverse features (numerical, categorical) and can model complex non-linear relationships often found in price prediction tasks.
-- **High performance with large datasets**: It is designed to be highly efficient, even with large volumes of data, thanks to parallelization and memory optimization.
-- **Manages missing values and outliers**: XGBoost automatically handles missing data and can incorporate outliers without negatively impacting performance, which is crucial for price prediction scenarios.
-- **Prevents overfitting**: With regularization techniques, depth control, and learning rate adjustments, XGBoost helps reduce overfitting, making it suitable for price models with high complexity.
-- **Feature importance and interpretability**: XGBoost provides insights into feature importance, helping identify key factors that influence price predictions, which is valuable for decision-making.
-- **Robust and adaptable**: It performs well across different data distributions and can handle cases where price variance is high, adapting to various relationships between features and target variables.
+
+* **Handles complex and heterogeneous data**: XGBoost works well with diverse features (numerical, categorical) and can model complex non-linear relationships often found in price prediction tasks.
+* **High performance with large datasets**: It is designed to be highly efficient, even with large volumes of data, thanks to parallelization and memory optimization.
+* **Manages missing values and outliers**: XGBoost automatically handles missing data and can incorporate outliers without negatively impacting performance, which is crucial for price prediction scenarios.
+* **Prevents overfitting**: With regularization techniques, depth control, and learning rate adjustments, XGBoost helps reduce overfitting, making it suitable for price models with high complexity.
+* **Feature importance and interpretability**: XGBoost provides insights into feature importance, helping identify key factors that influence price predictions, which is valuable for decision-making.
+* **Robust and adaptable**: It performs well across different data distributions and can handle cases where price variance is high, adapting to various relationships between features and target variables.
 
 
 #### Potential Drawbacks
-- **Complex hyperparameter tuning**: To achieve optimal performance, XGBoost often requires careful hyperparameter tuning, which can increase development complexity.
-- **Training time**: While fast, training can be longer on very large datasets compared to simpler algorithms, though the test performance typically makes up for this. 
+
+* **Complex hyperparameter tuning**: To achieve optimal performance, XGBoost often requires careful hyperparameter tuning, which can increase development complexity.
+* **Training time**: While fast, training can be longer on very large datasets compared to simpler algorithms, though the test performance typically makes up for this. 
 
 
 

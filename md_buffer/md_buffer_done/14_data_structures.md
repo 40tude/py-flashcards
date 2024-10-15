@@ -1022,10 +1022,10 @@ else:
 ############################################################ 
 -->
 
-Question : Data Structures - **Récursivité**... ça vous parle ?
+Question : Data Structures - La **récursivité**... ça vous parle ?
 Answer   : 
 
-* Cela consiste appeler une fonction depuis la fonction elle-même. 
+* Cela consiste à appeler une fonction depuis la fonction elle-même. 
 * Utile dans les problèmes qui peuvent être divisés en sous-problèmes à **plus petite échelle**
 * **ATTENTION**. Pour intérressante quelle soit d'un point de vue intellectuel ou esthétique, une implémentation récursive n'est pas toujours la plus efficace 
 
@@ -1125,15 +1125,17 @@ def fibonacci(n):
 ############################################################ 
 -->
 
-Question : Data Structures - **P vs NP**... What can you say about it ? 
+Question : Data Structures - What is **P vs NP** ? What can you say about it ? 
 Answer   : 
 
 #### What is P?
+
 **P** stands for "Polynomial time." It refers to problems that we can solve **efficiently** using a computer. When we say a problem is in P, it means that we can find a solution in a reasonable amount of time (specifically, in time that grows like a polynomial function of the size of the input).
 
 For example, consider a simple sorting algorithm like **merge sort**, which has a time complexity of O($n \log(n)$). This is a polynomial time algorithm, which means as the input size increases, the time it takes to sort grows in a manageable way.
 
 ##### Note
+
 * In the specific case of merge sort the $\log()$ is $\log_2()$ but with other problems this might **not** be the case. 
 * Here $\log()$ should be understood as a "generic" version of $\log()$. 
 
@@ -1147,6 +1149,7 @@ print(sorted_arr)
 ```
 
 #### What is NP?
+
 **NP** stands for "Nondeterministic Polynomial time." It refers to problems where it’s **hard to find** a solution, but if someone gives you a solution, you can **verify** it quickly (in polynomial time).
 
 Think about credit cards. The code is hard to break but if you get the code you can quickly check that it is correct.
@@ -1290,8 +1293,9 @@ Source : [Wikipedia](https://en.wikipedia.org/wiki/Trie)
 
 
 ##### Key Features
-- **Space-efficient for common prefixes**: Instead of storing duplicate prefixes for words, they share common ancestors.
-- **Time complexity**: For insertions and lookups, the time complexity is proportional to the length of the word being inserted or searched, i.e., O(m), where m is the length of the word.
+
+* **Space-efficient for common prefixes**: Instead of storing duplicate prefixes for words, they share common ancestors.
+* **Time complexity**: For insertions and lookups, the time complexity is proportional to the length of the word being inserted or searched, i.e., O(m), where m is the length of the word.
 
 ##### Use Cases
 1. **Autocomplete**: Given a prefix, quickly find all words in the dictionary starting with that prefix.
@@ -1369,14 +1373,16 @@ print(trie.starts_with("cat")) # False (no word starts with this prefix)
 ```
 
 ##### Key Methods
-- **`insert(word)`**: Inserts a word into the trie.
-- **`search(word)`**: Returns `True` if the word is found in the trie, and `False` otherwise.
-- **`starts_with(prefix)`**: Returns `True` if there is any word in the trie that starts with the given prefix.
+
+* **`insert(word)`**: Inserts a word into the trie.
+* **`search(word)`**: Returns `True` if the word is found in the trie, and `False` otherwise.
+* **`starts_with(prefix)`**: Returns `True` if there is any word in the trie that starts with the given prefix.
 
 ##### Time Complexity
-- **Insert**: O(m), where m is the length of the word.
-- **Search**: O(m), where m is the length of the word.
-- **Prefix Search**: O(m), where m is the length of the prefix.
+
+* **Insert**: O(m), where m is the length of the word.
+* **Search**: O(m), where m is the length of the word.
+* **Prefix Search**: O(m), where m is the length of the prefix.
 
 
 

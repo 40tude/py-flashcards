@@ -383,7 +383,7 @@ Answer  : Independent and Identically Distributed
 Question : MODEL-EVAL - What is the evaluation metric commonly used for classification problems?
 Answer  : Accuracy
 
-Question : MODEL-EVAL - What does the bias of a model represent? - **
+Question : MODEL-EVAL - What does the bias of a model represent? 
 Answer  : The deviation of the model's prediction from the true mean of the target variable
 
 Question : MODEL-EVAL - How do we call the validation method consisting in splitting the data between a training and test set?
