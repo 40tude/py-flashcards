@@ -209,18 +209,6 @@ This is the process of transforming raw, messy data into a clean and organized f
 * Each observation forms a row
 * Each type of observational unit forms a table
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - What is Spark SQL ? 
-Answer  : 
-
-* It brings native support for SQL to Spark. 
-* It streamlines the process of querying data stored both in RDDs (resilient distributed datset, Spark’s distributed datasets) and in external sources. 
-* Spark SQL blurs the lines between RDDs and relational tables. 
-* Unifying these abstractions makes it easy for developers to intermix SQL commands querying external data with complex analytics, all within in a single application.
 
 
 <!-- 
@@ -380,6 +368,23 @@ Answer  :
 ## 
 ############################################################ 
 -->
+Question : No category yet - Le F1 score est une moyenne harmonique. Pourquoi ?
+Answer  : 
+
+* Penser à la moyenne "harmonieuse"
+* Elle est maximale quand les valeurs sont identiques
+* F1 : on cherche le compromis Recall & Precision 
+
+<p align="center">
+<img src="../static/md/assets/harmonic.png" alt="harmonic" width="577"/>
+</p>
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 Question : No category yet - Forward selection, Backward selection ?
 Answer  : 
 
@@ -516,23 +521,6 @@ Answer  :
 
 
 
-<!-- 
-############################################################
-## 
-############################################################ 
--->
-Question : No category yet - Quelle est l'importance de l'analyse exploratoire des données (EDA) dans le processus de modélisation en science des données ?
-Answer : 
-
-* L'analyse exploratoire des données permet de comprendre la structure, les modèles et les relations présentes dans les données avant de construire des modèles. 
-* Cela inclut l'examen 
-    * des distributions
-    * des corrélations
-    * des valeurs manquantes
-    * des outliers
-* C'est ce qui guide les décisions sur le nettoyage des données et le choix des modèles. 
-* Penser à parler aussi des distributions qui sont **skewed** d'un côté ou de l'autre (1.5 IQR vs 3 sigma pour virer les outliers). 
-* Parler aussi de l'importance du déséquilibre dans la target.
 
 
 

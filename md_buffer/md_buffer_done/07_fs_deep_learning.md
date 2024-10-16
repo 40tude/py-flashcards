@@ -463,6 +463,67 @@ Answer   : To add non-linearity to the network's behavior
 ## 
 ############################################################ 
 -->
+Question : Deep Learning - Neural networks - Comment interprété-vous le bais associé à un neurone particulier d'un réseau ?
+Answer  : 
+
+#### Métaphore du biais
+* Prenons le cas d'un **thermostat**
+* Les **poids** peuvent être vus comme la "température extérieure" (les entrées) qui influence le réglage de la température intérieure
+* Le **biais** c'est le réglage manuel du thermostat pour ajuster la température intérieure notre convenance et ce, indépendamment des conditions extérieures. 
+* Le biais permet donc de fixer une température de base **avant** même que la température extérieure n'entre en jeu
+
+#### Qu'est-ce que le biais ?
+Le biais est une valeur supplémentaire ajoutée dans le calcul des sorties des neurones. Formellement, dans un réseau de neurones, la sortie d'un neurone est calculée à partir de la somme pondérée des entrées, à laquelle on ajoute le biais, avant d'appliquer la fonction d'activation.
+
+Si $x_1, x_2, \dots, x_n$ sont les entrées, et $w_1, w_2, \dots, w_n$ les poids correspondants, alors la sortie d'un neurone (avant d'appliquer la fonction d'activation) est :
+
+$$
+z = w_1 x_1 + w_2 x_2 + \dots + w_n x_n + b
+$$
+
+où $b$ est le **biais**.
+
+La fonction d'activation (par exemple, ReLU, Sigmoid, etc.) est ensuite appliquée à cette somme pour obtenir la sortie finale du neurone.
+
+#### À quoi sert le biais ?
+Le biais permet de **décaler** ou de **déplacer** la fonction d'activation de manière à ce qu'elle ne soit pas forcément centrée sur zéro. Il introduit une flexibilité supplémentaire dans le réseau et permet au modèle d'apprendre des schémas plus complexes.
+
+- **Sans biais**, un neurone avec une entrée nulle produirait toujours une sortie nulle (car $ z = 0 $). Cela rendrait difficile l'apprentissage de certaines fonctions où l'activation ne doit pas être strictement alignée avec l'origine. Pensez au cas où étudie la taille des adultes. La taille ne peut pas être nulle.
+- **Avec biais**, même si les entrées sont nulles, la sortie peut être différente de zéro (grâce à $b$), ce qui permet d'introduire plus de diversité dans les résultats possibles.
+
+#### Interprétation du biais
+
+* Le biais peut être interprété comme un paramètre d'ajustement indépendant des entrées. 
+* Il permet de contrôler le point à partir duquel un neurone "s'active".
+* En d'autres mot, le biais ajuste le seuil à partir duquel la fonction d'activation commence à produire des résultats non nuls.
+
+##### Exemple 
+* Si un réseau de neurones doit apprendre à classer des images de chats et de chiens
+* Certains neurones pourraient être spécialisés dans la détection de certaines caractéristiques (par exemple, des oreilles pointues). 
+* Le biais permet à ces neurones de s'activer ou non, en fonction de la présence ou de l'absence de certaines caractéristiques dans l'image.
+
+#### Fonction du biais dans l'apprentissage
+
+Le biais est un paramètre **appris** par le réseau, tout comme les poids des connexions. Pendant l'entraînement du modèle via la rétropropagation, le biais est ajusté pour minimiser l'erreur globale du réseau.
+
+- **Impact sur les fonctions d'activation** : Pour des fonctions d'activation comme la Sigmoid ou Tanh, le biais ajuste le point autour duquel la fonction commence à "switcher" entre deux états (par exemple, entre une activation faible et forte). Pour ReLU, le biais décale le point à partir duquel le neurone devient actif (passe de 0 à une valeur positive).
+
+#### Exemple simplifié
+Imaginons un neurone avec deux entrées $x_1$ et $x_2$, des poids $w_1$ et $w_2$, et un biais $b$. La somme pondérée est donc :
+
+$$
+z = w_1 x_1 + w_2 x_2 + b
+$$
+
+Si les poids sont proches de zéro, mais que le biais $b$ est grand, le neurone peut toujours produire une sortie élevée même si les entrées $x_1$ et $x_2$ sont petites. Cela permet au réseau d'apprendre à ajuster l'activation du neurone indépendamment des entrées directes.
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 Question : Deep Learning - Neural networks - Would you say that using neural network models compensates the need for feature engineering?
 Answer  : 
 
@@ -563,6 +624,44 @@ Answer  :
 <img src="../static/md/assets/activation.png" alt="activation" width="577"/>
 </p>
 
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : Deep Learning - Neural networks - Avantages et inconvénients de la fonction d'activation ReLU?
+Answer  : 
+
+### Avantages de la fonction ReLU (Rectified Linear Unit) :
+1. **Simplicité** :
+   - ReLU est facile à calculer et ne nécessite pas de calculs exponentiels comme certaines autres fonctions d'activation (par exemple, Sigmoid ou Tanh).
+   - Sa formule est simple : $ f(x) = max(0, x) $, où les valeurs négatives sont mises à zéro et les positives sont conservées.
+
+2. **Résolution du problème du vanishing gradient** :
+   - Contrairement aux fonctions Sigmoid et Tanh, ReLU permet de mieux éviter le problème du "gradient qui disparaît". En effet, les fonctions d'activation comme Sigmoid et Tanh ont des sorties comprises entre -1 et 1, ce qui signifie que leurs dérivées sont très petites dans une large gamme de valeurs. Lorsque ces petits gradients sont multipliés dans des couches profondes, le résultat est encore plus petit, ce qui empêche les premières couches du réseau de mettre à jour efficacement leurs poids. Le réseau devient alors lent à apprendre, voire incapable d’apprendre, car ces couches "ne ressentent" plus l'effet des erreurs. 
+   - Bref, ReLU aide à la propagation efficace du gradient à travers les couches lors de l'entraînement.
+
+3. **Sparsité des activations** :
+   - ReLU introduit une forme de **sparsité** dans les réseaux de neurones, car elle met à zéro toutes les valeurs négatives. 
+   - Cela conduit à des réseaux de neurones plus efficaces, car seules certaines unités sont activées.
+
+4. **Convergence plus rapide** :
+   - ReLU permet à de nombreux modèles d'apprendre plus rapidement car elle accélère la convergence par rapport aux autres fonctions d'activation.
+
+### Inconvénients de la fonction ReLU :
+1. **Problème de neurones morts (Dead Neurons)** :
+   - Un des inconvénients majeurs est que si un neurone reçoit constamment des valeurs négatives ou nulles à cause de la fonction ReLU, il peut "mourir" et ne plus contribuer au réseau. 
+   - Cela peut entraîner des neurones inactifs qui ne se mettent jamais à jour.
+
+2. **Pas de borne supérieure** :
+   - La fonction ReLU n'a pas de limite supérieure pour les valeurs positives. 
+   - Cela peut entraîner des activations très élevées qui déstabilisent l'entraînement si elles ne sont pas bien régulées, par exemple en utilisant des techniques de **normalisation** [0, 1].
+
+3. **Problème avec les valeurs négatives** :
+   - ReLU ne traite pas bien les valeurs négatives (toutes mises à zéro)
+   - Ca qui signifie que les neurones peuvent perdre certaines informations si la fonction est appliquée trop strictement. Des variantes type **Leaky ReLU** ou **Parametric ReLU (PReLU)** existent. Elles permettent à une petite portion des valeurs négatives de "passer", ce qui aide à éviter le problème des neurones morts.
 
 
 

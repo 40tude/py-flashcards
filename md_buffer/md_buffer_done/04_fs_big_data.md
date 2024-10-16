@@ -166,6 +166,20 @@ Answer  :
 Lazy evaluation can be difficult to debug + Debugging distributed systems is hard + Debugging mixed languages is hard
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : BIG-DATA - Introduction to Spark - What is Spark SQL ? 
+Answer  : 
+
+* It brings native support for SQL to Spark. 
+* It streamlines the process of querying data stored both in RDDs (resilient distributed datset, Spark’s distributed datasets) and in external sources. 
+* Spark SQL blurs the lines between RDDs and relational tables. 
+* Unifying these abstractions makes it easy for developers to intermix SQL commands querying external data with complex analytics, all within in a single application.
+
+
 
 
 

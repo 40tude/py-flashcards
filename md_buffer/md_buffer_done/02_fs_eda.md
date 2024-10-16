@@ -121,6 +121,27 @@ sous_matrice_2 = [ligne[1] for ligne in matrice]       # [2, 5, 8]
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : EDA - Numpy and linear algebra - Quelle est l'importance de l'analyse exploratoire des données (EDA) dans le processus de modélisation en science des données ?
+Answer : 
+
+* L'analyse exploratoire des données permet de comprendre la structure, les modèles et les relations présentes dans les données avant de construire des modèles. 
+* Cela inclut l'examen 
+    * des distributions
+    * des corrélations
+    * des valeurs manquantes
+    * des outliers
+* C'est ce qui guide les décisions sur le nettoyage des données et le choix des modèles. 
+* Penser à parler aussi des distributions qui sont **skewed** d'un côté ou de l'autre (1.5 IQR vs 3 sigma pour virer les outliers). 
+* Parler aussi de l'importance du déséquilibre dans la target.
+
+
+
+
 
 
 
