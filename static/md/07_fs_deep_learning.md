@@ -185,7 +185,7 @@ Answer  :
 ## 
 ############################################################ 
 -->
-Question : Deep Learning - Gradient Descent - With batches of 16 observations, how many times will the parameters of the model be updated before we reach one epoch?  
+Question : Deep Learning - Gradient Descent - You have a dataset of size N and batches of 16 observations. How many times will the parameters of the model be updated before we reach one epoch?  
 Answer  : 
 
 ``N/16``
@@ -679,29 +679,57 @@ Answer  :
 Question : Deep Learning - Neural networks with TensorFlow - What is the purpose of the Dense layer in a neural network?
 Answer   : To create a fully connected neuron layer
 
-Question : Deep Learning - Neural networks with TensorFlow - Which layer is used to normalize the output of the preceding layer in a neural network?
-Answer   : BatchNormalization layer
+Question : Deep Learning - Neural networks with TensorFlow - Quelle couche est utilisée pour normaliser les sorties de la couche précedente?
+Answer   : 
+
+``BatchNormalization`` layer (mean = 0, standard deviation = 1)
+
+Lorsqu'on applique la normalisation par batch, chaque sortie d'une couche précédente est normalisée indépendamment. Cette normalisation permet de réajuster les activations (ou sorties) pour qu'elles aient une moyenne de 0 et une écart-type de 1, au sein de chaque mini-batch d’entraînement. L’objectif de ce processus est de réduire la variance dans les activations, ce qui permet d’accélérer l'apprentissage en rendant les gradients plus stables.
+
+Pour chaque nouveau mini-batch, les paramètres de normalisation sont recalculés en fonction des activations issues de ce mini-batch spécifique. Cela signifie que la normalisation s'adapte en permanence pendant l’entraînement, ce qui permet au modèle d’apprendre plus efficacement, même si les distributions de données varient.
+
+Pendant l’entraînement, BN se base sur les statistiques (moyenne et variance) calculées pour chaque batch. Cependant, lors de la phase d’inférence (prédiction), la couche BN ne fonctionne plus de la même manière. À ce stade, elle utilise des moyennes mobiles et des écarts-types calculés durant l’entraînement, afin de s'adapter aux nouvelles données.
+
+Cela garantit que le modèle utilise des statistiques globales, ajustées pour l'ensemble des données d'entraînement, plutôt que des statistiques sur des mini-batches spécifiques, afin d’assurer une prédiction cohérente et fiable.
+
+Avantages de Batch Normalization
+* **Amélioration de la stabilité du réseau** : en normalisant les entrées de chaque couche, BN réduit le problème de disparition ou d'explosion du gradient, souvent rencontré dans les réseaux profonds.
+* **Accélération de l’apprentissage** : grâce à la normalisation, le modèle converge plus rapidement, ce qui permet d'utiliser des taux d'apprentissage plus élevés.
+Régularisation implicite : BN a également un effet de régularisation, réduisant parfois le besoin d’autres techniques comme le dropout.
+
+
 
 Question : Deep Learning - Neural networks with TensorFlow - What is the purpose of the Dropout layer in a neural network?
 Answer   : To prevent overfitting
 
-Question : Deep Learning - Neural networks with TensorFlow - Which of the following is an activation function used in neural networks?
-Answer   : BatchNormalization, Regularization, Dense, ReLU -> ReLU
+Question : Deep Learning - Neural networks with TensorFlow - Which of the following :
+
+* BatchNormalization
+* Regularization
+* Dense
+* ReLUis 
+
+an activation function used in neural networks?
+
+Answer   : ReLU
+
+
+
 
 Question : Deep Learning - Neural networks with TensorFlow - What is the purpose of regularization in neural networks?
 Answer   : To prevent overfitting
 
-Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for most regression problems?
-Answer   : MeanSquaredError
+Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for most **regression** problems?
+Answer   : ``MeanSquaredError``
 
-Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for binary classification problems?
-Answer   : BinaryCrossentropy
+Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for **binary classification** problems?
+Answer   : ``BinaryCrossentropy``
 
-Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for multi-class classification problems where the target variable is in dummy form?
-Answer   : CategoricalCrossentropy
+Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for **multi-class classification** problems where the target variable is in **dummy** form?
+Answer   : ``CategoricalCrossentropy``
 
-Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for multi-class classification problems where the target variable is in index form?
-Answer   : SparseCategoricalCrossentropy
+Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for **multi-class classification** problems where the target variable is in **index** form?
+Answer   : ``SparseCategoricalCrossentropy``
 
 Question : Deep Learning - Neural networks with TensorFlow - What is the name of the adaptive optimizer that increases or decreases the learning rate based on the gradient value?
 Answer   : Adam

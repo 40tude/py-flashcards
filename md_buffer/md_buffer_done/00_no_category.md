@@ -580,7 +580,7 @@ Answer  :
 Question : No category yet - Pouvez-vous expliquer ce qu'est la réduction de la dimensionnalité et pourquoi est-ce important dans l'analyse de données ?
 Answer  : 
 
-* La **PCA** consiste à réduire le nombre de variables ou de caractéristiques dans un ensemble de données. 
+* La **PCA** (princiapl component analysis, analyse en composantes principales) consiste à réduire le nombre de variables ou de caractéristiques dans un ensemble de données. 
 * Cela permet de simplifier les modèles, de réduire le temps de calcul et de prévenir le surapprentissage, tout en préservant autant que possible les informations importantes.
 
 
@@ -698,4 +698,63 @@ Answer  :
 
 La **validation croisée** peut être utile pour évaluer comment le compromis biais-variance affecte les performances du modèle. En utilisant la validation croisée, on peut ajuster les hyperparamètres du modèle pour trouver le meilleur compromis entre biais et variance.
 
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Connaissez-vous la différence en Corrélation et Causalité ? Pouvez-vous citer quelques critères à vérifier ?
+Answer  : 
+
+1. Temporalité : La cause doit précéder l'effet dans le temps.
+1. Force de l'association : Une forte association entre une cause potentielle et un effet observé renforce l'idée que la relation pourrait être causale plutôt que simplement corrélée.
+1. Plausibilité biologique : Il doit exister une explication scientifique ou un mécanisme pour relier les variables.
+1. Relation dose-réponse : Une augmentation de l'exposition doit conduire à une augmentation de l'effet (si la relation est causale).
+1. Expérimentation : Des expériences contrôlées, comme des essais randomisés, permettent de tester la causalité.
+1. Réversibilité : Si la cause est supprimée, l'effet devrait également disparaître ou diminuer.
+1. Consistance : Les résultats doivent être reproduits dans différentes études ou contextes.
+1. Spécificité : Un effet spécifique doit être attribué à une cause spécifique.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Dans le cas du Machine Learning et du Deep Learning êtes vous d'accord pour dire qu'on laisse le modèle trouver des corrélations et pas des relations de cause à effet?
+Answer  : 
+
+**Réponse courte :** Oui car un réseau de neurones peut prédire avec qu'il pleuvra demain si les nuages sont présents, mais cela ne signifie pas qu'il comprend que les nuages **causent** la pluie.
+
+Quoiqu'il en soit, oui oui, je suis d'accord. En ML/DL, les modèles se concentrent sur l'identification de **corrélations** plutôt que sur l'établissement de **relations causales**.
+
+1. **Objectif des modèles ML/DL** : 
+   Les algorithmes d'apprentissage supervisé, non supervisé ou par renforcement apprennent à partir des données pour trouver des motifs, des régularités et des corrélations entre les variables d'entrée (features) et les sorties (labels ou classes). Ces corrélations permettent au modèle de faire des prédictions, par exemple, dans la reconnaissance d'images ou la classification de textes. Ces algorithmes ne sont pas conçus pour établir un lien de cause à effet entre les variables.
+
+2. **Corrélations vs Causalité** :
+   - **Corrélation** : Les modèles ML/DL détectent des relations statistiques. Ils peuvent trouver des associations entre les données, même si ces associations sont dues au hasard ou à des variables non observées.
+   - **Causalité** : Déterminer la causalité nécessite non seulement d'identifier des relations statistiques, mais aussi d'établir un mécanisme expliquant **comment** et **pourquoi** une variable A affecte une variable B. Cela demande généralement une intervention expérimentale (comme les essais contrôlés randomisés), ou des techniques statistiques spécifiques aux modèles causaux.
+
+3. **Pourquoi le DL ne traite pas la causalité directement** :
+   - Les réseaux neuronaux (qui sont au cœur du *deep learning*) sont souvent des boîtes noires, c'est-à-dire qu'il est difficile de comprendre **comment** ils arrivent à leurs conclusions. Ils ne sont pas conçus pour interpréter ou expliquer les relations causales. Leur objectif est plutôt de minimiser les erreurs de prédiction à partir des corrélations dans les données d'entraînement.
+   - Par exemple, un réseau de neurones peut prédire avec précision qu'il pleuvra demain si les nuages sont présents, mais cela ne signifie pas qu'il comprend que les nuages **causent** la pluie.
+
+4. **Modèles de causalité en ML** :
+   Bien que les modèles standards ML/DL ne cherchent pas directement à établir la causalité, il existe des sous-domaines spécialisés du machine learning, comme le **causal inference** ou les **modèles causaux** (e.g., les graphiques de causalité basés sur les travaux de Judea Pearl), qui visent à analyser et à comprendre les relations causales en plus des corrélations.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Etes vous d'accord (ou pas) pour dire qu'une IA peut conseiller (il y a x% de chance que l'image soit celle d'un chat) mais qu'elle ne peut pas expliquer (l'image est un chat car...)
+
+Answer  : 
+Oui, oui. Un modèle (ML/DL) peut donner des recommandations ou des prédictions basées sur des corrélations, comme « Il y a 85 % de chances que cette image soit celle d'un chat ». Elle se base sur les motifs dans les données qu’elle a appris pendant l'entraînement.
+
+Cependant, elle ne peut pas expliquer le raisonnement derrière cette prédiction de manière causale. Elle ne dit pas « C'est un chat parce qu'il a des oreilles pointues, des moustaches, etc. ». Même si elle détecte ces caractéristiques, elle ne comprend pas **pourquoi** ces éléments définissent un chat. C'est dû à la nature des algorithmes de deep learning, qui se contentent d'optimiser les prédictions sans modéliser explicitement les liens de cause à effet.
+
+C’est un défi de l’IA. Voir les recherches sur l’IA explicable (XAI, Explainable AI).
 

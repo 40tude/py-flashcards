@@ -589,7 +589,7 @@ Question : Data Collection - SQL reminder - What is a relational database?
 Answer  : A database consisting of 2-dimensional tables
 
 Question : Data Collection - SQL reminder - What is a DBMS?
-Answer  : Database Management System
+Answer  : Database Management System. Examples of cloud DBMS include Amazon RedShift, Google BigQuery, Microsoft SQL Database, IBM Db2, Oracle Database, MongoDB, MariaDB, Azure Synapse Analytics...
 
 Question : Data Collection - SQL reminder - What does a schema represent in a database?
 Answer  : The structure of the database

@@ -96,7 +96,7 @@ Scala
 Question : BIG-DATA - Introduction to Spark - Transformations vs Actions
 Answer  : 
 
-Une transformation retourne un RDD ou un DataFrame (mais de manière paresseuse), tandis qu'une action ne retourne pas un RDD (respectivement un DataFrame), mais force l'exécution des transformations pour produire un résultat final.
+Une transformation retourne un RDD (Resilient Distributed Dataset) ou un DataFrame (mais de manière paresseuse), tandis qu'une action ne retourne pas un RDD (respectivement un DataFrame), mais force l'exécution des transformations pour produire un résultat final.
 Exemple de transformations : map(), filter(), flatMap(), union()
 Exemple d'actions          : collect(), count(), saveAsTextFile(), reduce(), show()
 
@@ -175,7 +175,7 @@ Question : BIG-DATA - Introduction to Spark - What is Spark SQL ?
 Answer  : 
 
 * It brings native support for SQL to Spark. 
-* It streamlines the process of querying data stored both in RDDs (resilient distributed datset, Spark’s distributed datasets) and in external sources. 
+* It streamlines the process of querying data stored both in RDDs ((Resilient Distributed Dataset) , Spark’s distributed datasets) and in external sources. 
 * Spark SQL blurs the lines between RDDs and relational tables. 
 * Unifying these abstractions makes it easy for developers to intermix SQL commands querying external data with complex analytics, all within in a single application.
 
@@ -188,20 +188,20 @@ Answer  :
 
 <!-- https://app.jedha.co/course/distributed-computing-rdd-ft/03-intro-to-pyspark-quiz -->
 
-Question : BIG-DATA - Introduction to Spark - What is the primary access point to the Spark framework that allows you to use RDDs?
+Question : BIG-DATA - Introduction to Spark - What is the primary access point to the Spark framework that allows you to use RDDs (Resilient Distributed Dataset) ?
 Answer  : 
 
 Spark Context
 
 
-Question : BIG-DATA - Introduction to PySpark -  What is an RDD in Spark?
+Question : BIG-DATA - Introduction to PySpark -  What is an RDD (Resilient Distributed Dataset) in Spark?
 Answer  : 
 
 Un RDD est l'abstraction de base de Spark. Il représente une collection distribuée d'objets immutables, répartie à travers les nœuds d'un cluster.  
 
 
 
-Question : BIG-DATA - Introduction to Spark - Which method is used to create an RDD by parallelizing an existing collection?
+Question : BIG-DATA - Introduction to Spark - Which method is used to create an RDD (Resilient Distributed Dataset) by parallelizing an existing collection?
 Answer  : 
 
 `sc.parallelize(...)`
@@ -215,7 +215,7 @@ Spark executes all applied transformations when an action is called
 
 
 
-Question : BIG-DATA - Introduction to Spark - Which action is used to retrieve the first few elements of an RDD?
+Question : BIG-DATA - Introduction to Spark - Which action is used to retrieve the first few elements of an RDD (Resilient Distributed Dataset) ?
 Answer  : 
 
 `.take(num)`
@@ -272,7 +272,7 @@ Question : BIG-DATA - Introduction to PySpark - What is the primary access point
 Answer  : Spark Context
 
 
-Question : BIG-DATA - Introduction to PySpark - What is an RDD in Apache Spark?
+Question : BIG-DATA - Introduction to PySpark - What is an RDD (Resilient Distributed Dataset) in Apache Spark?
 Answer  : A collection of objects
 
 
@@ -285,7 +285,7 @@ Answer  :
 Question : BIG-DATA - Introduction to PySpark - What is the purpose of lazy evaluation in Spark?
 Answer  : Spark executes all applied transformations when an action is called
 
-Question : BIG-DATA - Introduction to PySpark - Which action is used to retrieve the first few elements of an RDD?
+Question : BIG-DATA - Introduction to PySpark - Which action is used to retrieve the first few elements of an RDD (Resilient Distributed Dataset) ?
 Answer  : 
 
 ``.take(num)``
@@ -440,7 +440,7 @@ Question : BIG-DATA - Introduction to Data Warehousing - What is a key differenc
 Answer  : Data Warehouses are optimized for column-based analysis.
 
 Question : BIG-DATA - Introduction to Data Warehousing - What is Redshift?
-Answer  : A cloud-based data warehousing solution provided by AWS. Cluster (AWS RDS is SQL databes)
+Answer  : A cloud-based data warehousing solution provided by AWS. Cluster (AWS RDS is SQL database)
 
 Question : BIG-DATA - Introduction to Data Warehousing - How can you write data to Redshift from a PySpark DataFrame?
 Answer  : Using the ``df.write.jdbc()`` method with the Redshift URL and table name.

@@ -1,3 +1,12 @@
+<!-- 
+TODO :
+* DONE - Add an EDA code snippet .md file
+* Add sample code in 04_fs_big_data.md
+* Create an SQL code snippet .md file
+* Create an sns code snippet .md file
+* Create a matplotlib code snippet .md file
+-->
+
 ### ATTENTION
 * Heroku does not allow "_" in project name
 * Use "-" to name your project instead
@@ -63,6 +72,10 @@ $env:FLASHCARDS_SECRET_KEY = "blablabla"
 * Modify files etc.
 * Optional - Commit on github from VSCode    
 * Strike F5 while ``py-flashcards.py`` is open
+    * If the app complains
+        1. Stop the app (CTRL+C)
+        1. The Python Debug Console should be opened
+        1. Run ``./secrets.ps1`` once in the Python Debug Console
 
 ## To deploy on Heroku
 * Modify files etc.
