@@ -1,5 +1,11 @@
 <!-- 
 TODO :
+* Testing ?
+    * pytest with Flask
+    * I don't know how to set it up
+* Add CI/CD for automatic testing once testing is working
+* Display the total number of cards somewhere
+* Create a roote where 
 * DONE - Add an EDA code snippet .md file
 * Add sample code in 04_fs_big_data.md
 * Create an SQL code snippet .md file

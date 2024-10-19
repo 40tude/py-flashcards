@@ -146,8 +146,9 @@ Answer  :
 1. Initialisation (poids, biais)
 2. Itération : calculer le grad par rapport au paramètre à optimiser, prendre l'inverse, avancer d'un pas via learning_rate
 3. Condition d'arrêt (n_iter)
+
 * La formule : beta(t+1) = beta (t) - gamma * Grad( C )
-* Influence de gamma
+* Influence de gamma :
     * Taille du saut d'un beta au suivant
     * Exploding gradient si trop grand
     * Si trop petit on avance pas
@@ -159,11 +160,13 @@ Answer  :
 ############################################################ 
 -->
 Question : Deep Learning - Gradient Descent - Comment choisir gamma et le nb d'itérations?
+
 Answer  :
-    • On trace la fonction de coût en fonction des itérations
-    • C doit baisser sur le train set
-    • Si C baisse puis augmente => exploding gradient
-    • Sur le val set C va baisser puis augmenter => on trouve alors le bon nb d'itérations (overfiting)
+
+* On trace la fonction de coût en fonction des itérations
+* C doit baisser sur le train set
+* Si C baisse puis augmente => exploding gradient
+* Sur le val set C va baisser puis augmenter => on trouve alors le bon nb d'itérations (overfiting)
 
 
 <!-- 
@@ -223,7 +226,6 @@ Imaginons qu'on a un dataset de 10 000 exemples, un batch size de 100, et qu'on 
 
 - Chaque epoch consistera à traiter 100 batches (10 000 / 100)
 - Le modèle verra chaque exemple 20 fois (1 fois par epoch sur 20 epochs), et après chaque batch, il mettra à jour les poids
-
 
 Le processus est donc :
 
@@ -463,7 +465,7 @@ Answer   : To add non-linearity to the network's behavior
 ## 
 ############################################################ 
 -->
-Question : Deep Learning - Neural networks - Comment interprété-vous le bais associé à un neurone particulier d'un réseau ?
+Question : Deep Learning - Neural networks - Comment interprétez-vous le bais associé à un neurone particulier d'un réseau ?
 Answer  : 
 
 #### Métaphore du biais
@@ -684,17 +686,21 @@ Answer   :
 
 ``BatchNormalization`` layer (mean = 0, standard deviation = 1)
 
-Lorsqu'on applique la normalisation par batch, chaque sortie d'une couche précédente est normalisée indépendamment. Cette normalisation permet de réajuster les activations (ou sorties) pour qu'elles aient une moyenne de 0 et une écart-type de 1, au sein de chaque mini-batch d’entraînement. L’objectif de ce processus est de réduire la variance dans les activations, ce qui permet d’accélérer l'apprentissage en rendant les gradients plus stables.
+On met une couche de BN (et de dropout) entre chaque couche cachée. On peut mettre une couche BN tout de suite aprsè l'entrée. Dans ce cas, pas besoin de normaliser les données.
+
+Lorsqu'on applique la normalisation par batch, chaque sortie d'une couche précédente est normalisée indépendamment. Cette normalisation permet de réajuster les activations (ou sorties) pour qu'elles aient une moyenne de 0 et une écart-type de 1, au sein de chaque mini-batch **d’entraînement**. L’objectif de ce processus est de réduire la variance dans les activations, ce qui permet d’accélérer l'apprentissage en rendant les gradients plus stables.
 
 Pour chaque nouveau mini-batch, les paramètres de normalisation sont recalculés en fonction des activations issues de ce mini-batch spécifique. Cela signifie que la normalisation s'adapte en permanence pendant l’entraînement, ce qui permet au modèle d’apprendre plus efficacement, même si les distributions de données varient.
 
-Pendant l’entraînement, BN se base sur les statistiques (moyenne et variance) calculées pour chaque batch. Cependant, lors de la phase d’inférence (prédiction), la couche BN ne fonctionne plus de la même manière. À ce stade, elle utilise des moyennes mobiles et des écarts-types calculés durant l’entraînement, afin de s'adapter aux nouvelles données.
+Pendant l’entraînement, BN se base sur les statistiques (moyenne et variance) calculées pour chaque batch. Cependant, lors de la phase d’**inférence** (prédiction), la couche BN ne fonctionne plus de la même manière. À ce stade, elle utilise des moyennes mobiles et des écarts-types calculés durant l’entraînement, afin de s'adapter aux nouvelles données.
 
 Cela garantit que le modèle utilise des statistiques globales, ajustées pour l'ensemble des données d'entraînement, plutôt que des statistiques sur des mini-batches spécifiques, afin d’assurer une prédiction cohérente et fiable.
 
 Avantages de Batch Normalization
+
 * **Amélioration de la stabilité du réseau** : en normalisant les entrées de chaque couche, BN réduit le problème de disparition ou d'explosion du gradient, souvent rencontré dans les réseaux profonds.
-* **Accélération de l’apprentissage** : grâce à la normalisation, le modèle converge plus rapidement, ce qui permet d'utiliser des taux d'apprentissage plus élevés.
+* **Accélération de l’apprentissage** : grâce à la normalisation, le modèle converge plus rapidement, ce qui permet d'utiliser des learning rate plus grands (et de réduire finalement le wall time, le temps d'apprentissage total indiqué par l'horloge au mur)
+
 Régularisation implicite : BN a également un effet de régularisation, réduisant parfois le besoin d’autres techniques comme le dropout.
 
 
@@ -707,9 +713,9 @@ Question : Deep Learning - Neural networks with TensorFlow - Which of the follow
 * BatchNormalization
 * Regularization
 * Dense
-* ReLUis 
+* ReLU 
 
-an activation function used in neural networks?
+is an activation function used in neural networks?
 
 Answer   : ReLU
 
@@ -720,19 +726,268 @@ Question : Deep Learning - Neural networks with TensorFlow - What is the purpose
 Answer   : To prevent overfitting
 
 Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for most **regression** problems?
-Answer   : ``MeanSquaredError``
+Answer   : 
+
+``MeanSquaredError``
+
+#### Code snippet 
+
+```python
+optimizer= tf.keras.optimizers.Adam()
+
+model.compile(optimizer=optimizer,
+              loss=tf.keras.losses.MeanSquaredError(),
+              metrics=[tf.keras.metrics.MeanAbsoluteError()])
+
+```
+
+
+
 
 Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for **binary classification** problems?
-Answer   : ``BinaryCrossentropy``
+Answer   : 
+
+``BinaryCrossentropy``
+
+#### Code snippet 
+
+```python
+from tensorflow.keras.losses     import BinaryCrossentropy
+from tensorflow.keras.metrics    import BinaryAccuracy
+from tensorflow.keras.optimizers import Adam
+
+model.compile(
+    optimizer = Adam(0.01),
+    loss      = BinaryCrossentropy(),
+    metrics   = [BinaryAccuracy()]         # This is a list
+)              
+
+
+```
+
+
 
 Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for **multi-class classification** problems where the target variable is in **dummy** form?
-Answer   : ``CategoricalCrossentropy``
+
+Answer   : 
+
+``CategoricalCrossentropy``
+
+#### Code snippet 
+
+```python
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate = 0.001),
+    loss = tf.keras.losses.CategoricalCrossentropy(),
+    metrics = [tf.keras.metrics.CategoricalAccuracy()])
+
+```
+
+
+
 
 Question : Deep Learning - Neural networks with TensorFlow - Which loss function is ideal for **multi-class classification** problems where the target variable is in **index** form?
-Answer   : ``SparseCategoricalCrossentropy``
+Answer   : 
+
+``SparseCategoricalCrossentropy``
+
+#### Code snippet 
+
+```python
+optimizer = tf.keras.optimizers.Adam(learning_rate=3e-5, epsilon=1e-08)
+loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+metrics = tf.keras.metrics.SparseCategoricalAccuracy('accuracy')
+
+model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
+
+history = model.fit(
+    train_dataset, 
+    epochs=k_epochs, 
+    validation_data=test_dataset,
+    callbacks=[early_stopping, reduce_lr, tensorboard]
+)
+
+
+```
+
+
 
 Question : Deep Learning - Neural networks with TensorFlow - What is the name of the adaptive optimizer that increases or decreases the learning rate based on the gradient value?
 Answer   : Adam
+
+
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+
+Question : Deep Learning - Neural networks with TensorFlow - L'éxécution de la ligne de code ``model.summary()`` génère la sortie ci-dessous. Pouvez-vous l'expliquer en détail et retrouver le nombre d'entrées du réseau ?
+
+
+```bash
+Model: "sequential_13"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense_74 (Dense)            (None, 8)                 24        
+                                                                 
+ batch_normalization_16 (Ba  (None, 8)                 32        
+ tchNormalization)                                               
+                                                                 
+ dense_75 (Dense)            (None, 4)                 36        
+                                                                 
+ dense_76 (Dense)            (None, 1)                 5         
+                                                                 
+=================================================================
+Total params: 97 (388.00 Byte)
+Trainable params: 81 (324.00 Byte)
+Non-trainable params: 16 (64.00 Byte)
+_________________________________________________________________
+
+```
+
+Answer   : 
+* Réseau de neurones avec 4 couches
+* Couche 1 
+    * Nb paramètres = 24
+    * 24 = 8 biais + 8 x Nb_Input
+    * Donc Nb_Input = 2
+* Couche 2 
+    * C'est une couche de normalisation (``BatchNormalization``)
+    * On part de 8 on arrive à 8 
+    * 8 neurones de normalisation 
+    * Nb paramètres = 8 * 4 = 32   
+    * Il y a 8 * 2 paramètres pour le training et 8 * 2 paramètres pour les inférences
+    * Les 2 correspondent au facteur d'échelle ($\gamma$) et ainsi qu'à l'offset ($\beta$) à utiliser pour ramener les valeurs des différents batchs dans la gamme [0, 1]
+* Couche 3 
+    * On part de 8 on arrive à 4 
+    * Nb paramètres = 4 * 8 poids + 4 biais  = 36
+* Couche 4 
+    * On part de 4 on arrive à 1 
+    * Nb paramètres = 4 * 1 poids + 1 biais = 5
+* Nombre total de paramètres 97 (24+32+36+5)
+* Il y a 16 paramètres non entrainables. Les 16 paramètres de normalisation utilisé en inférence
+* Il y a 81 paramètres entrainables (97 - 16)
+
+#### Rappel
+* Pendant l'entraînement, la couche de normalisation apprend les paramètres ($\gamma$ et $\beta$), ce qui explique pourquoi il y a 8 * 2 = 16 paramètres entraînables. 8 facteurs d'échelle (pour les 8 neurones de la couche) et 8 offsets.
+* Lors de des inférences, la couche de normalisation utilise la moyenne et la variance globale calculées sur l'ensemble des lots pendant l'entraînement, plutôt que sur le batch actuel. Ces statistiques (moyenne et variance globales) sont précalculées et non modifiables pendant les inférences. C'est pourquoi Keras les considère comme paramètres non entraînables. Cela donne 8 * 2 = 16 paramètres non entraînables (8 pour la moyenne, 8 pour la variance).
+
+#### À propos du None qu'on voit dans la colonne Output Shape
+* None fait référence à la dimension du batch size lors de l'entraînement ou de l'inférence du modèle 
+* La taille du lot n'est pas encore spécifiée à ce stade du modèle
+* Pour les tenseurs on aura : 
+    * nb lignes   = batch size 
+    * nb colonnes = nb de neurones
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+
+Question : Deep Learning - Neural networks with TensorFlow - L'éxécution de la ligne de code ``model.summary()`` génère la sortie ci-dessous. Comment dessineriez-vous la situation ?
+
+
+```bash
+Model: "sequential_13"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense_74 (Dense)            (None, 8)                 24        
+                                                                 
+ batch_normalization_16 (Ba  (None, 8)                 32        
+ tchNormalization)                                               
+                                                                 
+ dense_75 (Dense)            (None, 4)                 36        
+                                                                 
+ dense_76 (Dense)            (None, 1)                 5         
+                                                                 
+=================================================================
+Total params: 97 (388.00 Byte)
+Trainable params: 81 (324.00 Byte)
+Non-trainable params: 16 (64.00 Byte)
+_________________________________________________________________
+
+```
+
+Answer   : 
+
+* Couche 1 
+    * Nb paramètres = 24
+    * 24 = 8 biais + 8 x Nb_Input
+    * Donc Nb_Input = 2
+
+<p align="center">
+<img src="../static/md/assets/neural_network_01.png" alt="attention" width="577"/>
+</p>
+
+* L'entrée du modèle est dans le fond et la sortie à l'avant
+* Tous les neurones d'une couche sont connectés à tous les neurones de la couche précédente (dense)
+* On ne tient pas compte du Batch_Size qui est à None dans le model.summary()
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+
+Question : Deep Learning - Neural networks with TensorFlow - L'éxécution de la ligne de code ``model.summary()`` génère la sortie ci-dessous. Je vous annonce que ``batch_size = 4``. Comment dessineriez-vous la situation ?
+
+
+```bash
+Model: "sequential_13"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense_74 (Dense)            (None, 8)                 24        
+                                                                 
+ batch_normalization_16 (Ba  (None, 8)                 32        
+ tchNormalization)                                               
+                                                                 
+ dense_75 (Dense)            (None, 4)                 36        
+                                                                 
+ dense_76 (Dense)            (None, 1)                 5         
+                                                                 
+=================================================================
+Total params: 97 (388.00 Byte)
+Trainable params: 81 (324.00 Byte)
+Non-trainable params: 16 (64.00 Byte)
+_________________________________________________________________
+
+```
+
+Answer   : 
+
+* Couche 1 
+    * Nb paramètres = 24
+    * 24 = 8 biais + 8 x Nb_Input
+    * Donc Nb_Input = 2
+
+<p align="center">
+<img src="../static/md/assets/neural_network_02.png" alt="attention" width="577"/>
+</p>
+
+* L'entrée du modèle est dans le fond et la sortie à l'avant
+* Dans le model_summary(), dans la colonne Output Shape, None sera remplacé par Batch_Size (4 ici)
+* On traite Batch_Size éléments en parallèle
+* Par couche, chaque tenseur possède Batch_Size lignes et Nb_Neurons colonnes
+    * Ils sont représenté par les matrices de couleurs
+    * On retrouve les tailles : 4x2, 4x8, 4x8, 4x4 et 4x1
+
 
 
 

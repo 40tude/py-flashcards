@@ -758,3 +758,111 @@ Cependant, elle ne peut pas expliquer le raisonnement derrière cette prédictio
 
 C’est un défi de l’IA. Voir les recherches sur l’IA explicable (XAI, Explainable AI).
 
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Entre moyenne et médiane. Laquelle des deux est le plus impacté par les outliers? Peux tu illustrer avec un exemple ?
+
+Answer   : 
+
+* La moyenne est plus impactée par les outliers que la médiane.
+* Si je suis au bar, que Bill Gates arrive et qu'on calcule la moyenne des salaires... "On sent bien" que cette dernière va être relativement haute. Et ce même si un de mes collègues nous rejoint. 
+* Si on calcule alors la médiane de nos 3 salaires, "on sent bien" que cette dernière va se rapprocher de mon collègue et moi.
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Comment gères-tu le problème de surapprentissage (overfitting) dans un modèle de machine learning ?
+
+Answer   : 
+
+* Régularisation (L1/L2) pour réduire l'effet de la complexité du modèle
+* Validation croisée (cross-validation) pour s'assurer que le modèle généralise bien
+* Pruning (réduction de la taille du modèle)
+* Utiliser des techniques comme dropout dans les réseaux de neurones
+* Collecter plus de données ou réduire le nombre de variables d'entrée (feature selection, PCA)
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Comment choisir entre une régression linéaire et un modèle plus complexe comme les forêts aléatoires (Random Forest) ?
+
+Answer   : 
+
+Ca va dépendre de la nature des données
+* **Régression linéaire :** utile si la relation entre les variables d'entrée et de sortie est linéaire ou quasi-linéaire. Modèle simple, facile à interpréter et rapide à entraîner.
+* **Forêt aléatoire :** utile lorsque les relations sont plus complexes et non linéaires. Moins sensible aux variables bruitées et outliers. Plus difficile à interpréter. Préférable quand la performance prime sur l'interprétabilité.
+
+Ne pas oublier de mentioner que Scikit-Learn est construit de telle sorte qu'il est très facile de mettre en oeuvre plusieurs modèles avec le même code. Autrement dit, il ne faut pas hésiter à faire des tests et à comparer les résultats des différents modèles. Il faudra alors faire un choix sur LA métrique à laquelle il faudra accorder le plus d'importance.
+
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelles sont les étapes typiques d'un projet de machine learning ?
+
+Answer   : 
+
+1. Collecte des données : 
+1. Prétraitement des données : Nettoyage, gestion des valeurs manquantes, et transformation des données (normalisation, encodage des catégories).
+1. Séparation des données : Séparer les données en ensembles d'entraînement, de validation et de test.
+1. Choix du modèle : Sélectionner un ou plusieurs algorithmes de machine learning adapté au problème.
+1. Entraînement du modèle : 
+1. Évaluation du modèle : Utiliser les données de validation/test pour évaluer sa performance (précision, rappel, AUC, etc.).
+1. Optimisation : Ajuster les hyperparamètres, utiliser des techniques comme la régularisation pour améliorer les résultats.
+1. Déploiement : Mettre le modèle en production
+1. Monitoring du modèle : Métriques du modèle + drift dans les données (Evidently AI)
+1. CI/CD pour le machine learning : Penser à automatisation le roll-back en cas d’échec d’un déploiement
+
+**Philosophie :**
+
+* Mettre en oeuvre toute la chaîne autour d'un BaseLine Model rapidement. Il sera toujours temps de faire évoluer le modèle ensuite.
+* Pour le modèle. Ne pas réinventer la roue. Voir ce qui a été fait, ce qui marche et comment sont obtenus les meilleurs résultats. Transfer Learning
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Comment gères-tu les biais dans les données et comment t’assures-tu de l’équité dans les modèles ?
+
+Answer   : 
+
+1. Analyse des biais dans les données en amont : identifier les déséquilibres dans les classes, les caractéristiques démographiques, ou autres facteurs.
+1. Utilisation de techniques comme la re-sampling (over-sampling/under-sampling) ou la pondération pour traiter les déséquilibres.
+1. Audits de modèles réguliers pour surveiller les performances du modèle sur des sous-groupes sensibles.
+1. L'application de métriques d'équité comme l'indice de parité de traitement ou la parité démographique.
+1. Des approches pour corriger ces biais après le déploiement, telles que algorithmes de post-processing pour ajuster les décisions du modèle.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quelle est ton approche pour mettre à l'échelle un modèle de machine learning en production ?
+
+Answer   : 
+
+* Optimisation des performances : réduire la latence du modèle via la quantification des modèles (réduire la précision des poids), ou distillation de modèle pour créer des versions plus légères.
+* Utilisation de frameworks distribués comme Spark MLlib ou TensorFlow Distributed pour gérer des volumes de données importants.
+* Déploiement sur des environnements distribués ou dans le cloud (Kubernetes, AWS SageMaker, Google AI Platform) et utilisation de systèmes de streaming pour traiter des données en temps réel.
+* Stratégies de mise en cache, de gestion de clusters, et d'utilisation de pipelines CI/CD pour le déploiement continu.
+* Méthodologies pour surveiller et ajuster les modèles après leur mise en production.

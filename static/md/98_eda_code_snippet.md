@@ -123,7 +123,7 @@ df = pd.DataFrame({
 print("Table avant : \n", df.head(), "\n")
 Zoubida = SimpleImputer(strategy="constant", fill_value=42)
 Marcel_ndarray = Zoubida.fit_transform(df)
-# ! fit_transform() retroune un ndarray et PAS un DataFrame
+# ! fit_transform() retourne un ndarray et PAS un DataFrame
 print("Table après : \n", Marcel_ndarray, "\n")
 
 # On recréé un dataframe
@@ -335,7 +335,7 @@ print("Table après : \n", df.head(), "\n")
 ############################################################ 
 -->
 
-Question : EDA Code Snippet - Créer une colonne qui contient des catégories  
+Question : EDA Code Snippet - Créer une colonne qui contient des catégories - cut 
 Answer  : 
 
 #### Code snippet 
@@ -405,7 +405,7 @@ print("Serie A après\n", result, "\n")
 ```
 
 ## `transform()`
-* **`transform()`** est spécifiquement conçue pour effectuer des opérations sur des groupes de données.
+* `transform()` est spécifiquement conçue pour effectuer des opérations sur des groupes de données.
 * La fonction de transformation doit renvoyer une série de la même longueur que l'entrée, et elle est appliquée à chaque groupe de données.
 * Utile pour effectuer des opérations de groupe (par exemple, remplacer les valeurs manquantes par la moyenne du groupe).
 
