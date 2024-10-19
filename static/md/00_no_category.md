@@ -433,10 +433,26 @@ Answer  :
 ## 
 ############################################################ 
 -->
-Question : No category yet - homoscédasticité ? 
+Question : No category yet - Homoscédasticité. Ca te dit quoi ? 
 Answer  : 
 
-On parle d'homoscédasticité lorsque la variance des erreurs stochastiques de la régression est la même pour chaque observation i (de 1 à n observations). 
+* L'**homoscédasticité** fait référence à l'hypothèse selon laquelle la variance (et donc l'écart type) des erreurs est constante à travers toutes les valeurs prédictives. 
+
+* Dit autrement :  les erreurs (ou résidus) autour de la ligne de régression doivent avoir une dispersion similaire, quelle que soit la valeur de la variable indépendante ($x$ de $y=f(x)$).
+
+* C'est l'une des hypothèses que l'on fait quand on fait de la régression linéaire
+    1. linéarité
+    1. indépendance des erreurs
+    1. normalité des erreurs
+
+* Pour vérifier l'homoscédasticité on peut :
+    * Tracer les résidus en fonction des valeurs prédites ou des variables explicatives. En présence d'homoscédasticité, les résidus devraient se répartir de manière aléatoire autour de zéro avec une dispersion constante. Si la variance augmente ou diminue avec les valeurs prédictives (comme une forme d'entonnoir), cela indique de l'hétéroscédasticité.
+    * Test de **Breusch-Pagan** ou test de **White** 
+
+* En cas d'hétéroscédasticité
+    * Une transformation logarithmique ou racine carrée des variables peut parfois stabiliser la variance.
+    * Modèle de régression pondérée : Les observations peuvent être pondérées en fonction de la variance des erreurs.
+    * Régression robuste qui ajuste les erreurs standard de manière à rendre les résultats plus fiables en présence d'hétéroscédasticité. 
 
 
 <!-- 

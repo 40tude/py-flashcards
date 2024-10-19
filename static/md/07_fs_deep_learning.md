@@ -202,7 +202,7 @@ Answer  :
 -->
 
 
-Question : Deep Learning - Gradient Descent - Peux tu me faire un point sur Batch size et Epochs 
+Question : Deep Learning - Gradient Descent - Peux tu me faire un point sur **Batch Size** et **Epochs** 
 Answer   : 
 
 #### 1. **Batch Size**

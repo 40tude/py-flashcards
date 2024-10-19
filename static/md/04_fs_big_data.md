@@ -96,9 +96,14 @@ Scala
 Question : BIG-DATA - Introduction to Spark - Transformations vs Actions
 Answer  : 
 
-Une transformation retourne un RDD (Resilient Distributed Dataset) ou un DataFrame (mais de manière paresseuse), tandis qu'une action ne retourne pas un RDD (respectivement un DataFrame), mais force l'exécution des transformations pour produire un résultat final.
-Exemple de transformations : map(), filter(), flatMap(), union()
-Exemple d'actions          : collect(), count(), saveAsTextFile(), reduce(), show()
+* Une **transformation** retourne un RDD (Resilient Distributed Dataset) ou un DataFrame (mais de manière paresseuse)
+* Une **action** ne retourne pas un RDD (respectivement un DataFrame), mais force l'exécution des transformations pour produire un résultat final.
+
+Exemples : 
+* De transformations : map(), filter(), flatMap(), union()
+* D'actions          : collect(), count(), saveAsTextFile(), reduce(), show()
+
+
 
 Question : BIG-DATA - Introduction to Spark - Spark DataFrame vs Pandas DataFrame ?
 Answer : 

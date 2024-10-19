@@ -274,7 +274,7 @@ class MyCustomImputer(BaseEstimator, TransformerMixin):
 
 <!-- 
 ############################################################
-## Questions qui ne proviennent pas des quizz
+## 
 ############################################################ 
 -->
 
@@ -287,6 +287,11 @@ Answer  :
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
 
 Question : PYTHON - Pourquoi voudriez-vous implémenter la méthode ``__call__()`` dans la classe d'un de vos modèles?
 Answer  : 
@@ -297,5 +302,147 @@ If the model class has a ``__call__()`` method then we can call it as a function
 
 ```python
 print("model output:", my_model(data))
+```
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : PYTHON - Pouvez-vous nommer certaines des exceptions les plus courantes ?
+Answer  : 
+
+
+| **Exception**              | **Description**                                                                            |
+|----------------------------|--------------------------------------------------------------------------------------------|
+| `ArithmeticError`          | Classe de base pour les erreurs liées aux calculs arithmétiques.                            |
+| `AssertionError`           | Levée lorsqu'une instruction `assert` échoue.                                               |
+| `AttributeError`           | Levée lorsqu'un attribut de classe ou d'objet est inaccessible.                             |
+| `EOFError`                 | Levée lorsqu'une fonction de lecture rencontre la fin du fichier sans avoir lu de données.  |
+| `Exception`                | Classe de base pour la plupart des exceptions définies par l'utilisateur et intégrées.      |
+| `FileExistsError`          | Levée lorsqu'une opération tente de créer un fichier ou un répertoire qui existe déjà.      |
+| `FileNotFoundError`        | Levée lorsqu'un fichier ou répertoire spécifié est introuvable.                             |
+| `FloatingPointError`       | Levée lorsqu'une erreur de calcul en virgule flottante se produit.                          |
+| `IndexError`               | Levée lorsqu'un indice de séquence est hors des limites.                                    |
+| `KeyboardInterrupt`        | Levée lorsqu'une interruption est demandée (par exemple en appuyant sur Ctrl+C).            |
+| `KeyError`                 | Levée lorsqu'une clé est introuvable dans un dictionnaire.                                  |
+| `LookupError`              | Classe de base pour les erreurs d'accès à une séquence ou un dictionnaire.                  |
+| `NameError`                | Levée lorsqu'un nom local ou global n'est pas trouvé.                                       |
+| `NotImplementedError`      | Levée pour indiquer qu'une fonction ou méthode n'est pas implémentée.                       |
+| `OSError`                  | Classe de base pour les erreurs du système d'exploitation.                                  |
+| `OverflowError`            | Levée lorsqu'une opération arithmétique dépasse les limites de représentation.              |
+| `PermissionError`          | Levée lorsqu'une opération échoue en raison de permissions inadéquates.                     |
+| `RuntimeError`             | Levée lorsqu'une erreur générique d'exécution se produit.                                   |
+| `StopIteration`            | Levée pour indiquer la fin d'une itération.                                                 |
+| `SyntaxError`              | Levée lorsqu'une erreur de syntaxe est détectée.                                            |
+| `SystemError`              | Levée lorsqu'une erreur interne de Python se produit.                                       |
+| `SystemExit`               | Levée par `sys.exit()` pour demander l'arrêt du programme.                                  |
+| `TypeError`                | Levée lorsqu'une opération ou fonction est appliquée à un objet de type inapproprié.        |
+| `UnboundLocalError`        | Sous-classe de `NameError`, levée lorsqu'une variable locale est utilisée sans être liée.   |
+| `ValueError`               | Levée lorsqu'une opération reçoit un argument de type correct mais de valeur inappropriée.  |
+| `ZeroDivisionError`        | Levée lorsqu'une division ou un modulo est effectué avec un diviseur égal à zéro.           |
+
+<!-- 
+| `IndentationError`         | Sous-classe de `SyntaxError`, levée lorsqu'un problème d'indentation est rencontré.         |
+| `ImportError`              | Levée lorsqu'une tentative d'importation échoue.                                            |
+| `BaseException`            | Classe de base pour toutes les exceptions en Python.                                        |
+| `GeneratorExit`            | Levée pour terminer un générateur.                                                         |
+| `StopAsyncIteration`       | Levée pour indiquer la fin d'une itération asynchrone.                                      |
+| `BufferError`              | Levée lorsqu'une opération sur un tampon ne peut pas être effectuée.                        |
+| `ModuleNotFoundError`      | Sous-classe de `ImportError` levée lorsque le module spécifié est introuvable.              |
+| `MemoryError`              | Levée lorsque Python manque de mémoire.                                                     |
+| `BlockingIOError`          | Levée lorsqu'une opération d'entrée/sortie est bloquée.                                     |
+| `ChildProcessError`        | Levée lorsqu'une opération relative à un processus enfant échoue.                           |
+| `ConnectionError`          | Classe de base pour les erreurs liées aux connexions.                                       |
+| `BrokenPipeError`          | Levée lorsqu'une connexion de pipe ou de socket est rompue.                                 |
+| `ConnectionAbortedError`   | Levée lorsqu'une connexion est interrompue de manière inattendue.                           |
+| `ConnectionRefusedError`   | Levée lorsqu'une connexion est refusée par l'hôte.                                          |
+| `ConnectionResetError`     | Levée lorsqu'une connexion est réinitialisée par l'hôte.                                    |
+| `InterruptedError`         | Levée lorsqu'une fonction système est interrompue par un signal d'interruption.             |
+| `IsADirectoryError`        | Levée lorsqu'une opération sur un fichier attend un fichier mais trouve un répertoire.      |
+| `NotADirectoryError`       | Levée lorsqu'une opération attend un répertoire mais trouve un fichier.                     |
+| `ProcessLookupError`       | Levée lorsqu'un processus spécifié est introuvable.                                         |
+| `TimeoutError`             | Levée lorsqu'une opération système dépasse le temps imparti.                                |
+| `ReferenceError`           | Levée lorsqu'une référence faible à un objet inaccessible est utilisée.                     |
+| `RecursionError`           | Levée lorsqu'une récursion dépasse la profondeur maximale autorisée.                        |
+| `TabError`                 | Levée lorsqu'un mélange de tabulations et d'espaces est utilisé pour l'indentation.         |
+| `UnicodeError`             | Classe de base pour les erreurs liées à l'encodage ou au décodage Unicode.                 |
+| `UnicodeDecodeError`       | Levée lorsqu'une chaîne Unicode ne peut pas être décodée.                                   |
+| `UnicodeEncodeError`       | Levée lorsqu'une chaîne Unicode ne peut pas être encodée.                                   |
+| `UnicodeTranslateError`    | Levée lorsqu'une erreur de traduction Unicode se produit.                                   |
+| `Warning`                  | Classe de base pour les avertissements (non fatals).                                        |
+| `DeprecationWarning`       | Avertissement lorsqu'une fonctionnalité est obsolète.                                       |
+| `FutureWarning`            | Avertissement pour indiquer un changement prévu dans le futur.                              |
+| `UserWarning`              | Avertissement générique émis par les utilisateurs.                                          |
+| `SyntaxWarning`            | Avertissement relatif à des problèmes syntaxiques mineurs.                                  |
+| `RuntimeWarning`           | Avertissement concernant des événements d'exécution suspectés mais non fatals.             |
+ -->
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : PYTHON - Pouvez-vous nommer certaines des exceptions les plus courantes ?
+Answer  : 
+
+#### Code snippet 
+
+```python
+from pathlib import Path
+
+def lire_fichier(chemin_fichier):
+    fichier = Path(chemin_fichier)
+    try:
+        with fichier.open('r') as f:
+            contenu = f.read()
+    except FileNotFoundError:
+        print(f"Erreur : Le fichier '{chemin_fichier}' n'existe pas.")
+    except PermissionError:
+        print(f"Erreur : Permission refusée pour accéder au fichier '{chemin_fichier}'.")
+    else:
+        print("Contenu du fichier :")
+        print(contenu)
+    finally:
+        # Ce bloc est toujours exécuté, qu'une exception soit levée ou non
+        print("Fin de l'opération de lecture.")
+
+lire_fichier('chemin/inexistant.txt')
+
+```
+
+
+#### Code snippet 
+
+```python
+from pathlib import Path
+
+def ecrire_dans_fichier(chemin_fichier, texte):
+    fichier = Path(chemin_fichier)
+    try:
+        with fichier.open('w') as f:
+            f.write(texte)
+    except PermissionError:
+        print(f"Erreur : Impossible d'écrire dans le fichier '{chemin_fichier}'.")
+    else:
+        print(f"Le texte a été écrit dans '{chemin_fichier}'.")
+    finally:
+        # Ce bloc est toujours exécuté, qu'une exception soit levée ou non
+        print("Fin de l'opération d'écriture.")
+
+ecrire_dans_fichier('fichier_output.txt', 'Zoubida for ever.')
+
 ```
 
