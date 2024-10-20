@@ -994,6 +994,46 @@ Answer   :
 
 
 
+<!-- 
+############################################################
+## Questions issues des quizz
+############################################################ 
+-->
+
+
+<!-- https://app.jedha.co/course/convolutional-neural-network-ft/01-understand-cnn-quiz -->
+
+Question : Deep Learning - Understand CNN - What is the main advantage of using convolutional neural networks (CNNs) for image analysis?
+Answer   : They can take advantage of the spatial structure and hierarchical organization of images.
+
+Question : Deep Learning - Understand CNN - Why is it inefficient to use fully connected neural networks on images?
+Answer   : Fully connected neurons require a different parameter for each pixel in the image.
+
+Question : Deep Learning - Understand CNN - What does the kernel size represent in a convolutional layer?
+Answer   : The size of the patterns that the neuron can detect in an image.
+
+Question : Deep Learning - Understand CNN - What does the stride represent in a convolutional layer?
+Answer   : The distance the convolutional filter moves across the input image.
+
+Question : Deep Learning - Understand CNN - What is the purpose of padding in a convolutional layer? 
+Answer   : 
+
+1. To detect information located near the border of the input image.
+1. To prevent the spatial dimension of the output from shrinking.
+
+Question : Deep Learning - Understand CNN - What is the main purpose of pooling layers in convolutional neural networks?
+Answer   : To summarize the information flowing through the network.
+
+Question : Deep Learning - Understand CNN - Which aggregation function is commonly used in MaxPooling?
+Answer   : Max
+
+Question : Deep Learning - Understand CNN - What does building deeper convolutional networks help with?
+Answer   : Taking advantage of the hierarchical structure of images.
+
+
+
+
+
 
 
 

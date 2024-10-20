@@ -10,7 +10,7 @@ from pathlib import Path
 from markdown import markdown
 from werkzeug.wrappers import Response
 from typing import List, Dict, Tuple, Optional
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, request, redirect, url_for
 
 # ----------------------------------------------------------------------
 k_DB_Path = "./flashcards.db"
@@ -79,13 +79,14 @@ def create_db() -> None:
         cursor = conn.cursor()
         cursor.execute(
             """
-        CREATE TABLE IF NOT EXISTS flashcards (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            question_html TEXT NOT NULL,
-            answer_html TEXT NOT NULL
-        )
+            CREATE TABLE IF NOT EXISTS flashcards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                question_html TEXT NOT NULL,
+                answer_html TEXT NOT NULL
+            )
         """
         )
+
         qa_pairs = load_qa_files(k_QAFolder)  # Parse markdown and convert to HTML before storing
         for qa in qa_pairs:
             cursor.execute(
@@ -96,6 +97,40 @@ def create_db() -> None:
 
 
 # ----------------------------------------------------------------------
+def create_fts() -> None:
+    with sqlite3.connect(k_DB_Path) as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            CREATE VIRTUAL TABLE IF NOT EXISTS flashcards_fts
+            USING fts5(id, question_html, answer_html);
+        """
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO flashcards_fts(id, question_html, answer_html)
+            SELECT id, question_html, answer_html FROM flashcards;
+        """
+        )
+
+        conn.commit()
+
+
+# ----------------------------------------------------------------------
+def get_count() -> int:
+    with sqlite3.connect(k_DB_Path) as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT COUNT(*) FROM flashcards ;
+            """
+        )
+        count = cursor.fetchone()[0]
+        return count
+
+
+# ----------------------------------------------------------------------
 # SQLite database setup
 def init_db() -> None:
     """Initialize the SQLite database, creating it if it doesn't exist."""
@@ -103,6 +138,9 @@ def init_db() -> None:
     # app.logger.info(f"{inspect.stack()[0][3]}()")
     if not os.path.exists(k_DB_Path):
         create_db()
+
+    # create full text search database
+    create_fts()
 
 
 # ----------------------------------------------------------------------
@@ -127,6 +165,29 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
             cursor.execute(query, exclude_ids)
         else:
             cursor.execute("SELECT id, question_html, answer_html FROM flashcards ORDER BY RANDOM() LIMIT 1")
+
+        # Fetch the result
+        return cursor.fetchone()
+
+
+# ----------------------------------------------------------------------
+def get_random_searched_flashcard(
+    exclude_searched_ids: List[int], keywords: List[str]
+) -> Optional[Tuple[int, str, str]]:
+
+    with sqlite3.connect(k_DB_Path) as conn:
+        cursor = conn.cursor()
+        if exclude_searched_ids:
+            query = "SELECT id, question_html, answer_html FROM flashcards_fts WHERE flashcards_fts MATCH '{kwds}' AND id NOT IN ({seq}) ORDER BY RANDOM() LIMIT 1".format(
+                seq=",".join(["?"] * len(exclude_searched_ids)), kwds=" AND ".join(keywords)
+            )
+            cursor.execute(query, exclude_searched_ids)
+        else:
+            cursor.execute(
+                "SELECT id, question_html, answer_html FROM flashcards_fts WHERE flashcards_fts MATCH '{kwds}' ORDER BY RANDOM() LIMIT 1".format(
+                    kwds=" AND ".join(keywords)
+                )
+            )
 
         # Fetch the result
         return cursor.fetchone()
@@ -169,13 +230,50 @@ def create_app() -> Flask:
         # Fetch a random flashcard from the database
         flashcard = get_random_flashcard(session["seen_ids"])
 
+        session["nb_cards"] = get_count()
+
         if flashcard:
             current_QA = {"id": flashcard[0], "question_html": flashcard[1], "answer_html": flashcard[2]}
             session["seen_ids"].append(current_QA["id"])  # Add this question to seen list
 
-            return render_template("index.html", Q_html=current_QA["question_html"], A_html=current_QA["answer_html"])
+            return render_template(
+                "index.html",
+                Q_html=current_QA["question_html"],
+                A_html=current_QA["answer_html"],
+                nb_cards=session["nb_cards"],
+            )
         else:
-            return render_template("index.html", Q_html="No more questions.", A_html="")
+            return render_template("index.html", Q_html="No more questions.", A_html="", nb_cards=session["nb_cards"])
+
+    # ----------------------------------------------------------------------
+    @app.route("/search", methods=["GET", "POST"])
+    def search() -> str:
+
+        # Form is submitted
+        if request.method == "POST":
+            # Create a clean session of searched_ids for unseen and seen searched question ids
+            session["searched_ids"] = []
+            session["keywords"] = request.form["keywords"].split()  # Séparer les mots par espace
+            # return render_template("search_results.html")
+            return redirect(url_for("search_results"))
+
+        # otherwise if GET then display the search page and the form
+        return render_template("search.html")
+
+    # ----------------------------------------------------------------------
+    @app.route("/search_results")
+    def search_results() -> str:
+        # Retrieve from the database a flashcard corresponding to the search criteria (keywords)
+        flashcard = get_random_searched_flashcard(session["searched_ids"], session["keywords"])
+
+        if flashcard:
+            current_QA = {"id": flashcard[0], "question_html": flashcard[1], "answer_html": flashcard[2]}
+            session["searched_ids"].append(current_QA["id"])  # Add this question to seen list
+            return render_template(
+                "search_results.html", Q_html=current_QA["question_html"], A_html=current_QA["answer_html"]
+            )
+        else:
+            return render_template("search_results.html", Q_html="No cards in search results.", A_html="")
 
     # ----------------------------------------------------------------------
     @app.route("/next")
