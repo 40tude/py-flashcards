@@ -1,16 +1,26 @@
 <!-- 
 TODO :
-* Display nb of cards in search
+* Add support for cards based on png images
+    * Load the paths to png files in a list
+    * insert it into the answer field
+    * insert de keyword in the question filed such that we know this is NOT a Q&A but just an illusion... an image
+    * in order to display
+        * check if it is an image (check the content of the question)
+        * if image display it
+        * otherwise display Q&A as usual
 * Add sample code in 04_fs_big_data.md
 * Add CI/CD for automatic testing once testing is working
 * Testing 
     * pytest with Flask
     * I don't know how to set it up
 
+* DONE - Fix logger issues such that any function can log properly
+    * add and configure a global logger
 * DONE - Create an SQL code snippet .md file
 * DONE - Create an sns code snippet .md file
 * DONE - Create a matplotlib code snippet .md file
 * DONE - Add serch engine (see /search route)
+* DONE - Display nb of cards in search
 * DONE - Display the total number of cards somewhere
 * DONE - Add an EDA code snippet .md file
 -->

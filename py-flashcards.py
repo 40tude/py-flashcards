@@ -16,6 +16,15 @@ from flask import Flask, render_template, session, request, redirect, url_for
 k_DB_Path = "./flashcards.db"
 k_QAFolder = "./static/md"
 
+# Logger global
+logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+#     datefmt='%Y-%m-%d %H:%M:%S'
+# )
+g_logger = logging.getLogger("app_logger")
+
 
 # ----------------------------------------------------------------------
 # Parse the markdown files and convert to HTML
@@ -30,6 +39,8 @@ def parse_markdown_to_html(markdown_text: str) -> List[Dict[str, str]]:
     """
 
     # app.logger.info(f"{inspect.stack()[0][3]}()")
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     markdown_text = re.sub(r"<!--.*?-->", "", markdown_text, flags=re.DOTALL)
     pattern = re.compile(r"Question\s*:\s*(.*?)\nAnswer\s*:\s*(.*?)(?=\nQuestion|\Z)", re.DOTALL)
     matches = pattern.findall(markdown_text)
@@ -58,6 +69,8 @@ def load_qa_files(directory: str) -> List[Dict[str, str]]:
     """
 
     # app.logger.info(f"{inspect.stack()[0][3]}()")
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     qa_pairs = []
     qa_files = [file for file in Path(directory).iterdir() if file.is_file()]
     for qa_file in qa_files:
@@ -75,6 +88,8 @@ def create_db() -> None:
     """Create the SQLite database and populate it with questions and answers in HTML format."""
 
     # app.logger.info(f"{inspect.stack()[0][3]}()")
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     with sqlite3.connect(k_DB_Path) as conn:
         cursor = conn.cursor()
         cursor.execute(
@@ -98,6 +113,9 @@ def create_db() -> None:
 
 # ----------------------------------------------------------------------
 def create_fts() -> None:
+
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     with sqlite3.connect(k_DB_Path) as conn:
         cursor = conn.cursor()
         cursor.execute(
@@ -119,6 +137,9 @@ def create_fts() -> None:
 
 # ----------------------------------------------------------------------
 def get_count() -> int:
+
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     with sqlite3.connect(k_DB_Path) as conn:
         cursor = conn.cursor()
         cursor.execute(
@@ -136,6 +157,8 @@ def init_db() -> None:
     """Initialize the SQLite database, creating it if it doesn't exist."""
 
     # app.logger.info(f"{inspect.stack()[0][3]}()")
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     if not os.path.exists(k_DB_Path):
         create_db()
 
@@ -155,6 +178,8 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
     """
 
     # app.logger.info(f"{inspect.stack()[0][3]}()")
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     with sqlite3.connect(k_DB_Path) as conn:
         cursor = conn.cursor()
         # Build query
@@ -198,6 +223,8 @@ def get_random_searched_flashcard(
     exclude_searched_ids: List[int], keywords: List[str]
 ) -> Optional[Tuple[Optional[Tuple[int, str, str]], int]]:
 
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
     with sqlite3.connect(k_DB_Path) as conn:
         cursor = conn.cursor()
 
@@ -231,7 +258,7 @@ def get_random_searched_flashcard(
 # double check the content of Procfile file
 def create_app() -> Flask:
 
-    logging.basicConfig(level=logging.INFO)
+    # logging.basicConfig(level=logging.INFO)
 
     app = Flask(__name__)
     app.logger.info(f"{inspect.stack()[0][3]}()")
@@ -254,7 +281,8 @@ def create_app() -> Flask:
             str: Rendered HTML with the question and answer or a message if no questions remain.
         """
 
-        app.logger.info(f"{inspect.stack()[0][3]}()")
+        # app.logger.info(f"{inspect.stack()[0][3]}()")
+        g_logger.info(f"{inspect.stack()[0][3]}()")
 
         # Initialize session for unseen and seen question IDs
         if "seen_ids" not in session:
@@ -284,6 +312,8 @@ def create_app() -> Flask:
     @app.route("/search", methods=["GET", "POST"])
     def search() -> str:
 
+        g_logger.info(f"{inspect.stack()[0][3]}()")
+
         # Form is submitted
         if request.method == "POST":
             # Create a clean session of searched_ids for unseen and seen searched question ids
@@ -298,6 +328,9 @@ def create_app() -> Flask:
     # ----------------------------------------------------------------------
     @app.route("/search_results")
     def search_results() -> str:
+
+        g_logger.info(f"{inspect.stack()[0][3]}()")
+
         # Retrieve from the database a flashcard corresponding to the search criteria (keywords)
         flashcard, nb_cards_in_search = get_random_searched_flashcard(session["searched_ids"], session["keywords"])
 
@@ -324,7 +357,8 @@ def create_app() -> Flask:
             str: Redirect to the index route.
         """
 
-        app.logger.info(f"{inspect.stack()[0][3]}()")
+        # app.logger.info(f"{inspect.stack()[0][3]}()")
+        g_logger.info(f"{inspect.stack()[0][3]}()")
         return redirect(url_for("index"))
 
     return app
@@ -353,5 +387,6 @@ if __name__ == "__main__":
             os.remove(k_DB_Path)
 
     app = create_app()
-    app.logger.info("main()")
+    # app.logger.info("main()")
+    g_logger.info("main()")
     app.run(debug=True)
