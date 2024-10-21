@@ -171,26 +171,59 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
 
 
 # ----------------------------------------------------------------------
+# def get_random_searched_flashcard(
+#     exclude_searched_ids: List[int], keywords: List[str]
+# ) -> Optional[Tuple[int, str, str]]:
+
+#     with sqlite3.connect(k_DB_Path) as conn:
+#         cursor = conn.cursor()
+#         if exclude_searched_ids:
+#             query = "SELECT id, question_html, answer_html FROM flashcards_fts WHERE flashcards_fts MATCH '{kwds}' AND id NOT IN ({seq}) ORDER BY RANDOM() LIMIT 1".format(
+#                 seq=",".join(["?"] * len(exclude_searched_ids)), kwds=" AND ".join(keywords)
+#             )
+#             cursor.execute(query, exclude_searched_ids)
+#         else:
+#             cursor.execute(
+#                 "SELECT id, question_html, answer_html FROM flashcards_fts WHERE flashcards_fts MATCH '{kwds}' ORDER BY RANDOM() LIMIT 1".format(
+#                     kwds=" AND ".join(keywords)
+#                 )
+#             )
+
+#         # Fetch the result
+#         return cursor.fetchone()
+
+
+# ----------------------------------------------------------------------
 def get_random_searched_flashcard(
     exclude_searched_ids: List[int], keywords: List[str]
-) -> Optional[Tuple[int, str, str]]:
+) -> Optional[Tuple[Optional[Tuple[int, str, str]], int]]:
 
     with sqlite3.connect(k_DB_Path) as conn:
         cursor = conn.cursor()
-        if exclude_searched_ids:
-            query = "SELECT id, question_html, answer_html FROM flashcards_fts WHERE flashcards_fts MATCH '{kwds}' AND id NOT IN ({seq}) ORDER BY RANDOM() LIMIT 1".format(
-                seq=",".join(["?"] * len(exclude_searched_ids)), kwds=" AND ".join(keywords)
-            )
-            cursor.execute(query, exclude_searched_ids)
-        else:
-            cursor.execute(
-                "SELECT id, question_html, answer_html FROM flashcards_fts WHERE flashcards_fts MATCH '{kwds}' ORDER BY RANDOM() LIMIT 1".format(
-                    kwds=" AND ".join(keywords)
-                )
-            )
 
-        # Fetch the result
-        return cursor.fetchone()
+        # WHERE clause with keywords and exclusions
+        where_clause = "flashcards_fts MATCH '{kwds}'".format(kwds=" AND ".join(keywords))
+        if exclude_searched_ids:
+            where_clause += " AND id NOT IN ({seq})".format(seq=",".join(["?"] * len(exclude_searched_ids)))
+
+        # Get total number of corresponding records
+        count_query = "SELECT COUNT(*) FROM flashcards_fts WHERE " + where_clause
+        cursor.execute(count_query, exclude_searched_ids if exclude_searched_ids else [])
+        total_count = cursor.fetchone()[0]
+
+        # Get a random record
+        random_query = (
+            "SELECT id, question_html, answer_html FROM flashcards_fts WHERE "
+            + where_clause
+            + " ORDER BY RANDOM() LIMIT 1"
+        )
+        cursor.execute(random_query, exclude_searched_ids if exclude_searched_ids else [])
+        random_flashcard = cursor.fetchone()
+
+        if random_flashcard:
+            return (random_flashcard, total_count)
+        else:
+            return (None, 0)
 
 
 # ----------------------------------------------------------------------
@@ -266,16 +299,21 @@ def create_app() -> Flask:
     @app.route("/search_results")
     def search_results() -> str:
         # Retrieve from the database a flashcard corresponding to the search criteria (keywords)
-        flashcard = get_random_searched_flashcard(session["searched_ids"], session["keywords"])
+        flashcard, nb_cards_in_search = get_random_searched_flashcard(session["searched_ids"], session["keywords"])
 
         if flashcard:
             current_QA = {"id": flashcard[0], "question_html": flashcard[1], "answer_html": flashcard[2]}
             session["searched_ids"].append(current_QA["id"])  # Add this question to seen list
             return render_template(
-                "search_results.html", Q_html=current_QA["question_html"], A_html=current_QA["answer_html"]
+                "search_results.html",
+                Q_html=current_QA["question_html"],
+                A_html=current_QA["answer_html"],
+                nb_cards=nb_cards_in_search,
             )
         else:
-            return render_template("search_results.html", Q_html="No cards in search results.", A_html="")
+            return render_template(
+                "search_results.html", Q_html="No cards in search results.", A_html="", nb_cards=nb_cards_in_search
+            )
 
     # ----------------------------------------------------------------------
     @app.route("/next")

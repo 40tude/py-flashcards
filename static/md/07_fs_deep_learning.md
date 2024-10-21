@@ -1033,6 +1033,110 @@ Answer   : Taking advantage of the hierarchical structure of images.
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - L'éxécution de la ligne de code ``model.summary()`` génère la sortie ci-dessous. Je vous confirme qu'on alimente le modèle avec des images RGB 100x100. Pouvez-vous recalculer les valeurs de la colonne Param ?
+
+
+```bash
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃           Param ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ conv2d_1 (Conv2D)                    │ (None, 50, 50, 32)          │             896 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_2 (Conv2D)                    │ (None, 25, 25, 64)          │          18,496 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_3 (Conv2D)                    │ (None, 13, 13, 64)          │          36,928 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_4 (Conv2D)                    │ (None, 7, 7, 128)           │          73,856 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ flatten (Flatten)                    │ (None, 6272)                │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │           6,273 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total         params: 136,449 (533.00 KB)
+ Trainable     params: 136,449 (533.00 KB)
+ Non-trainable params:       0 (  0.00 KB)
+ ```
+
+Answer   : 
+
+* On a  Nb_Params = Nb_Filtres x ( Nb_Channels_In x kernel x kernel + BIAIS)
+* On part d'images 100x100 en RGB
+* En mode "télégraphique" on peut écrire : 
+
+```bash
+Conv 2D f= 32 k=3x3 s=2 p=same  => sortie 32 matrices de 50x50  Params =  32 ( 3*3*3 + 1) =    896  
+Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 25x25  Params =  64 (32*3*3 + 1) = 18_496
+Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 3x3    Params =  64 (64*3*3 + 1) = 36_928
+Conv 2D f=128 k=3x3 s=2 p=same  => sortie 128 matrices de 7x7   Params = 128 (64*3*3 + 1) = 73_856
+Flatten                                                         Params                    =      0
+Dense   En entrée il y a 128 matrices 7x7 => 128*7*7 = 6_272    Params =        6_272 + 1 =  6_273
+ ```
+* Soit un total de 136_449 paramètres
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Pouvez-vous définir les termes ``stride``, ``padding`` et ``kernel_size`` ?
+
+Answer   : 
+
+* **Kernel size** 
+    * Résumé = Taille du filtre (ex. : 3x3 ou 5x5).
+    * Le **kernel** (filtre) est une matrice appliquée sur l'image (ou sur les données en entrée) pour extraire des caractéristiques comme des lignes verticales, des bords, des textures, etc.
+    * La taille du kernel (**kernel_size**) c'est la taille de la matrice en question
+    * Exemple : filtre 3x3 ou 5x5 
+  
+* **Stride** (Pas)
+    * Résumé = Nombre de pixels par lequel le filtre se déplace.
+    * Le **stride** détermine comment le filtre se déplace sur l'image d'entrée. 
+    * Il spécifie le nombre de pixels dont le filtre se déplace à chaque pas.
+    * Si le stride est de `1`, le filtre se déplace d'un pixel à la fois. Si le stride est de `2`, le filtre saute de deux pixels à chaque mouvement.
+    * Un stride plus grand réduit la taille de la sortie (moins de positions sont évaluées), tandis qu'un stride plus petit conserve plus de détails.
+    * Un stride de `(1, 1)` signifie que le filtre se déplace d'un pixel horizontalement et verticalement à chaque pas.
+    * Typique 1 ou 2 pas plus
+
+* **Padding** (Remplissage)
+    * Résumé = Gestion des bords de l'image pour ajuster la taille de sortie (e.g. `same` ou `valid`). 
+    * C'est l'ajout de pixels autour des bords de l'image d'entrée **avant** d'appliquer la convolution. 
+    * Permet de contrôler la taille de la sortie.
+    * Il existe principalement deux types de padding :
+        * **Same** : Le padding est ajouté de manière à ce que la sortie ait la même dimension que l'entrée.
+        * **Valid** : Aucune extension n'est effectuée, et la taille de la sortie diminue en fonction de la taille du filtre et du stride.
+    * Le padding permet de conserver plus de détails aux bords de l'image. 
+    * Sans padding (*valid*) on perd des pixels à chaque couche de convolution ce qui diminue progressivement la taille de l'image.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Data augmentation? Ca vous dit quoi ?
+
+Answer   : 
+
+* Avec les réseaux de neurones convolutifs (CNN) une fois que les poids du filtre sont fixés, il retrouve bien le motif quelque soit l'endroit où il se trouve
+* Par contre il faut que le motif ait toujours la même orientation
+* Le fitre détecte des lignes verticales mais pas des lignes droites (qui peuvent être horizontales, en biais...) 
+    * Invariance translation : oui
+    * Invariance rotation : non
+* Bref, il ya des soucis de rotation mais aussi de contraste, d'ombrage…
+* On va faire de la rotation sur les images = **data augmentation**
+* Idem pour contraste et luminosité
+
 
 
 

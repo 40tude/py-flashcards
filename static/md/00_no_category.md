@@ -379,6 +379,22 @@ Answer  :
 <img src="../static/md/assets/harmonic.png" alt="harmonic" width="577"/>
 </p>
 
+* Ci-dessus il faut remarquer  qu'on ne dit pas que la voiture roule pendant une heure à 40 km/h puis pendant une heure à 60 km/h
+    * Dans ce cas, elle aurait roulé 2H et parcouru 100 km 
+    * La valeur moyenne arithmétique de la vitesse serait alors de 50 km/h
+* Non, non, ici on dit qu'elle parcourt la moité de la distance à 40 km/h puis l'autre moitié à 60 km/h 
+    * On se demande à quelle vitesse constante elle aurait doit rouler pour parcourir la même distance dans le même temps.
+
+#### Raisonnement :
+* La voiture parcourt 40 km en 1H
+* Donc elle parcourt $\frac{D}{2}$ en $\frac{D}{2\cdot40}$ heures (c'est une règle de 3, ça reste gérable...)
+* De la même façon elle parcourt $\frac{D}{2}$ en $\frac{D}{2\cdot60}$ heures
+* La distance totale c'est $D$
+* Le temps total du parcours c'est :
+$$t = \frac{D}{2\cdot40} + \frac{D}{2\cdot60}$$
+* Donc la vitesse moyenne c'est : 
+$$V = \frac{d}{t} = \frac{D}{\frac{D}{2\cdot40} + \frac{D}{2\cdot60}} = \frac{2}{\frac{1}{40} + \frac{1}{60}}$$
+
 
 <!-- 
 ############################################################
@@ -882,3 +898,31 @@ Answer   :
 * Déploiement sur des environnements distribués ou dans le cloud (Kubernetes, AWS SageMaker, Google AI Platform) et utilisation de systèmes de streaming pour traiter des données en temps réel.
 * Stratégies de mise en cache, de gestion de clusters, et d'utilisation de pipelines CI/CD pour le déploiement continu.
 * Méthodologies pour surveiller et ajuster les modèles après leur mise en production.
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Vous avez un réseau de neurones. Vous ajoutez des features. Le modèle va avoir tendance à ... ? Pourquoi ?
+
+Answer  : 
+
+* Le modèle va avoir tendance à overfitté car on a toutes les chance de rajouter des dimensions non pertinentes qui complexifie la modélisation et empêche un bonne généralisation. 
+* On peut penser au cas contraire. Le modèle overfit. Je peux simplifier le réseau de neurones ou bien faire de la PCA et ne retenir que les features les plus pertientes (garder 20% des features qui expliquent 80% des prédictions)
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : Complétez la phrase suivante : "En NLP, la lemmatisation consiste à..."
+
+Answer  : 
+
+* En NLP, la lemmatisation consiste à réduire les mots à leur forme **canonique** ( lemme), c'est-à-dire la forme de base telle qu'on la trouverait dans un dictionnaire. 
+* Ainsi "mange", "mangé" et "mangeraient" seraient tous réduits à "manger".
+* Contrairement à la racinisation (**stemming**), qui tronque souvent les mots pour obtenir leur radical, la lemmatisation prend en compte le contexte et la morphologie du mot afin de produire un résultat linguistiquement correct.
