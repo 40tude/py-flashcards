@@ -1,18 +1,18 @@
 <!-- 
 TODO :
-* DONE - Add serch engine
-    * see /search
-* Testing ?
+* Display nb of cards in search
+* Add sample code in 04_fs_big_data.md
+* Add CI/CD for automatic testing once testing is working
+* Testing 
     * pytest with Flask
     * I don't know how to set it up
-* Add CI/CD for automatic testing once testing is working
-* Display the total number of cards somewhere
-* Create a route where 
+
+* DONE - Create an SQL code snippet .md file
+* DONE - Create an sns code snippet .md file
+* DONE - Create a matplotlib code snippet .md file
+* DONE - Add serch engine (see /search route)
+* DONE - Display the total number of cards somewhere
 * DONE - Add an EDA code snippet .md file
-* Add sample code in 04_fs_big_data.md
-* Create an SQL code snippet .md file
-* Create an sns code snippet .md file
-* Create a matplotlib code snippet .md file
 -->
 
 ### ATTENTION

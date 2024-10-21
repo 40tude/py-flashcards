@@ -230,7 +230,9 @@ def create_app() -> Flask:
         # Fetch a random flashcard from the database
         flashcard = get_random_flashcard(session["seen_ids"])
 
-        session["nb_cards"] = get_count()
+        # get nb card once per session
+        if "nb_cards" not in session:
+            session["nb_cards"] = get_count()
 
         if flashcard:
             current_QA = {"id": flashcard[0], "question_html": flashcard[1], "answer_html": flashcard[2]}
