@@ -446,3 +446,39 @@ ecrire_dans_fichier('fichier_output.txt', 'Zoubida for ever.')
 
 ```
 
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : PYTHON - Est-ce que les paramètres sont passés par valeurs ou par référence ?
+Answer  : 
+
+* Les paramètres des fonctions sont passés par **référence** pour les objets **mutables** (comme les listes, dictionnaires, objets définis par l'utilisateur)
+* Ils sont passés par **valeur** pour les objets **immuables** (comme les entiers, chaînes de caractères, tuples).
+
+Cela signifie que si on passe un objet :
+
+* **mutable** à une fonction (une liste, ...), et que la fonction modifie cet objet, cette modification affectera l'objet d'origine en dehors de la fonction.
+* **immuable** (un entier, une chaîne de caractères, ...), une modification au sein de la fonction ne changera pas l'objet d'origine. Si il est modifié, Python créera une nouvelle instance de cet objet.
+
+#### Code snippet 
+
+```python
+def modifier_liste(l):
+    l.append(4)  # Modifie l'objet d'origine
+
+def changer_entier(x):
+    x = 10       # Crée une nouvelle instance de x
+
+ma_liste = [1, 2, 3]
+mon_entier = 5
+
+modifier_liste(ma_liste)
+changer_entier(mon_entier)
+
+print(ma_liste)    # [1, 2, 3, 4]
+print(mon_entier)  # 5
+```

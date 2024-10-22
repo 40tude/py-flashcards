@@ -16,7 +16,7 @@ from flask import Flask, render_template, session, request, redirect, url_for
 k_DB_Path = "./flashcards.db"
 k_QAFolder = "./static/md"
 
-# Logger global
+# Globla logger
 logging.basicConfig(level=logging.INFO)
 # logging.basicConfig(
 #     level=logging.INFO,
@@ -383,8 +383,11 @@ if __name__ == "__main__":
     # That is, when WERKZEUG_RUN_MAIN is still “”.
 
     if os.environ.get("WERKZEUG_RUN_MAIN") == None:
-        if os.path.exists(k_DB_Path):
-            os.remove(k_DB_Path)
+        # if os.path.exists(k_DB_Path):
+        # os.remove(k_DB_Path)
+        db_path = Path(k_DB_Path)
+        if db_path.exists():
+            db_path.unlink()
 
     app = create_app()
     # app.logger.info("main()")

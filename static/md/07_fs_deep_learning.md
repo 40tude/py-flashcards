@@ -1072,13 +1072,23 @@ Answer   :
 
 ```bash
 Conv 2D f= 32 k=3x3 s=2 p=same  => sortie 32 matrices de 50x50  Params =  32 ( 3*3*3 + 1) =    896  
-Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 25x25  Params =  64 (32*3*3 + 1) = 18_496
-Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 3x3    Params =  64 (64*3*3 + 1) = 36_928
-Conv 2D f=128 k=3x3 s=2 p=same  => sortie 128 matrices de 7x7   Params = 128 (64*3*3 + 1) = 73_856
+Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 25x25  Params =  64 (3*3*32 + 1) = 18_496
+Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 3x3    Params =  64 (3*3*64 + 1) = 36_928
+Conv 2D f=128 k=3x3 s=2 p=same  => sortie 128 matrices de 7x7   Params = 128 (3*3*64 + 1) = 73_856
 Flatten                                                         Params                    =      0
 Dense   En entrée il y a 128 matrices 7x7 => 128*7*7 = 6_272    Params =        6_272 + 1 =  6_273
  ```
 * Soit un total de 136_449 paramètres
+
+#### À garder en tête
+* Les filtres sont des filtres 3D
+* Chacun des filtres d'une couche s'applique simultanément à l'ensemble des feature maps en entrée
+    * Au niveau de la couche 2, les filtres sont de dimmension (3,3,32) car en sortie de la couche 1 on a 32 feature maps
+* Le filtre va convoluer simultanément sur les 32 feature maps d'entrée.
+* Il effectue une convolution sur chaque feature map séparément, **mais** les résultats de ces convolutions sont **additionnés** pour former une seule feature map de sortie
+    * Les 32 résultats des convolutions (un pour chaque feature map) sont additionnés pixel par pixel pour produire une seule feature map de sortie.
+    * Le filtre peut également avoir un biais ajouté après cette somme, pour ajuster la valeur finale.
+* En sortie il y a autant de features maps que de filtres
 
 
 
