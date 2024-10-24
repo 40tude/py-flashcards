@@ -993,3 +993,34 @@ Réel |  Ham  |  930  |   0   |
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous me faire un inventaire des commandes git que vous utilisez le plus 
+
+Answer  : 
+
+
+| Commande         | Exemple de code pour "my_project"                                | Commentaire                                                                 |
+|------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `git clone`      | `git clone https://github.com/user/my_project.git`               | Clone un dépôt Git distant vers le dossier local "my_project"               |
+| `git init`       | `git init my_project`                                            | Initialise un nouveau dépôt Git dans le dossier "my_project"                |
+| `git remote`     | `git remote add origin https://github.com/user/main_project.git` | Ajoute un dépôt distant (remote) au projet Git local                        |
+| `git add`        | `git add my_file.py` ou `git add .`                              | Ajoute "my_file.py" (tous les fichiers) à l'index (staging area) pour le prochain commit |
+| `git commit`     | `git commit -m "Ajoute la mémoïsation dans my_file.py"`          | Crée un commit avec un message décrivant les modifications apportées        |
+| `git commit`     | `git commit -am "Add graphics in readma.md"`                     | Stage automatiquement les fichiers avant le commit                          |
+| `git status`     | `git status`                                                     | Affiche l'état actuel du dépôt (modifications, fichiers en attente, etc.)   |
+| `git push`       | `git push origin main`                                           | Pousse les commits locaux vers la branche "main" du dépôt distant "origin"  |
+| `git pull`       | `git pull origin main`                                           | Récupère les modifications de la branche "main" et les fusionne avec la branche locale |
+| `git branch`     | `git branch feature-branch`                                      | Crée une nouvelle branche nommée "feature-branch"                           |
+| `git checkout`   | `git checkout feature-branch`                                    | Change de branche pour travailler sur "feature-branch"                      |
+| `git merge`      | `git merge feature-branch`                                       | Fusionne la branche "feature-branch" dans la branche active actuelle        |
+
+<!-- git remote add heroku https://git.heroku.com/py-flashcards.git    Ajouter Heroku comme remote -->
+<!-- git subtree push --prefix web_app heroku main                                                 -->
+
+* Les messages dans les commits terminent la phrase en italique ci-dessous:
+    * *If applied, this commit will…* Update getting started documentation 
+    * Majuscule au début, pas de point à la fin
