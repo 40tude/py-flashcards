@@ -1,15 +1,38 @@
 <!-- 
+* Read this : 
+* https://www.techwithtim.net/tutorials/flask/sessions
+
 
 TODO :
-* Add a link to
+* Find a way to NOT send to heroku the whole content of Github
+    * Some directories are not necessary while online 
+    
+* Search engine is quite sensitive
+    * "mot-clé" doesn't work because "-"
+    * "blablabla()" doesn't work because "()"
+
+* Issues with sessions ?
+
+* Add a links to Chris Albon site under png cards
+    * Need to find a way to detect that I'm adding Chris cards
+        * Put them in chris_albon directory and treat them (load them) differently ?
     * https://machinelearningflashcards.com/
     * https://fr.slideshare.net/slideshow/machine-learning-flash-cards-by-chris-albonpart2/249940580
     * https://quizlet.com/537961036/chris-albon-ml-flashcards/
-* Add sample code in 04_fs_big_data.md
+
+* More sample code in 04_fs_big_data.md
 * Add CI/CD for automatic testing once testing is working
 * Testing 
     * pytest with Flask
-    * I don't know how to set it up
+    * I don't know yet how to set it up
+
+
+* ########################################################################
+* ########################################################################
+* ########################################################################
+* DONE - Add questions about books to read ?
+    * Should I create a non-technical category ?
+* DONE - Add non technical question about job interview ?    
 
 * DONE - Document how to add grahics in a directory close to the .md file 
     * For example ./static/md/my_directory/one_topic.md contains one question which display the image in 
@@ -45,8 +68,6 @@ TODO :
 * DONE - Add an EDA code snippet .md file
 
 
-* Read this : 
-* https://www.techwithtim.net/tutorials/flask/sessions
 -->
 
 ### ATTENTION

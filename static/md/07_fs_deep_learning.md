@@ -1090,8 +1090,8 @@ Dense   En entrée il y a 128 matrices 7x7 => 128*7*7 = 6_272    Params =       
 #### À garder en tête
 * Les filtres sont des filtres 3D
 * Chacun des filtres d'une couche s'applique simultanément à l'ensemble des feature maps qui sont en entrée
-    * Au niveau de la couche 2 ci-dessus, les filtres sont de dimmension (3,3,32) car en sortie de la couche 1 on a 32 feature maps
-    * Au niveau de la couche 1 ci-dessus, les filtres sont de dimmension (3,3, 3) car en entrée de la couche 1 on a une image RGB
+    * Au niveau de la couche 2 ci-dessus, les filtres sont de dimension (3,3,32) car en sortie de la couche 1 on a 32 feature maps
+    * Au niveau de la couche 1 ci-dessus, les filtres sont de dimension (3,3, 3) car en entrée de la couche 1 on a une image RGB
 
 * Dans la couche 2, le filtre va convoluer simultanément sur les 32 feature maps d'entrée.
 * Il effectue une convolution sur chaque feature map séparément, **mais** les résultats de ces convolutions sont **additionnés** pour former une seule feature map de sortie
