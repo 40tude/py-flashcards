@@ -15,8 +15,10 @@ from flask import Flask, render_template, session, request, redirect, url_for
 # ----------------------------------------------------------------------
 k_DB_Path = "./flashcards.db"
 k_QAFolder = "./static/md"
+k_PNGFolder = "./static/png"
 
-# Globla logger
+
+# Global logger
 logging.basicConfig(level=logging.INFO)
 # logging.basicConfig(
 #     level=logging.INFO,
@@ -72,7 +74,10 @@ def load_qa_files(directory: str) -> List[Dict[str, str]]:
     g_logger.info(f"{inspect.stack()[0][3]}()")
 
     qa_pairs = []
-    qa_files = [file for file in Path(directory).iterdir() if file.is_file()]
+    # qa_files = [file for file in Path(directory).iterdir() if file.is_file()]
+    # It now get all .md files no matter the directory organization underneath the ./md parent directory
+    qa_files = [file for file in Path(directory).rglob("*.md") if file.is_file()]
+
     for qa_file in qa_files:
         try:
             with qa_file.open("r", encoding="utf-8") as f:
@@ -81,6 +86,67 @@ def load_qa_files(directory: str) -> List[Dict[str, str]]:
         except Exception as e:
             print(f"Error reading file {qa_file.name}: {e}")
     return qa_pairs
+
+
+# ----------------------------------------------------------------------
+def create_fts() -> None:
+
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
+    with sqlite3.connect(k_DB_Path) as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            CREATE VIRTUAL TABLE IF NOT EXISTS flashcards_fts
+            USING fts5(id, question_html, answer_html);
+        """
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO flashcards_fts(id, question_html, answer_html)
+            SELECT id, question_html, answer_html FROM flashcards;
+        """
+        )
+        conn.commit()
+
+    return
+
+
+# ----------------------------------------------------------------------
+def load_png_files(directory: str) -> List[Dict[str, str]]:
+    # """Load and parse markdown files from the specified directory, converting them to HTML.
+
+    # Args:
+    #     directory (str): The directory containing markdown files.
+
+    # Returns:
+    #     List[Dict[str, str]]: A list of question-answer pairs in HTML format extracted from markdown files.
+    # """
+
+    # app.logger.info(f"{inspect.stack()[0][3]}()")
+    g_logger.info(f"{inspect.stack()[0][3]}()")
+
+    # png_pairs = []
+    # qa_files = [file for file in Path(directory).iterdir() if file.is_file()]
+    # It now get all .md files no matter the directory organization underneath the ./md parent directory
+    # qa_files = [file for file in Path(directory).rglob("*.md") if file.is_file()]
+    # g_logger.info(qa_files)
+
+    images = [file for file in Path(directory).rglob("*.png") if file.is_file()]
+    # images = [Path(*file.parts[2:]) for file in images]
+    # images = [str(file).replace("\\", "/") for file in images]
+
+    return [
+        {
+            "question_html": markdown("###Question :\n", extensions=["extra", "codehilite", "sane_lists"]),
+            "answer_html": markdown(
+                "###Answer :\n" + f"<img src='{img}' class='img-fluid' alt='Random Image'>",
+                extensions=["extra", "codehilite", "sane_lists"],
+            ),
+        }
+        for img in images
+    ]
 
 
 # ----------------------------------------------------------------------
@@ -110,29 +176,22 @@ def create_db() -> None:
             )
         conn.commit()
 
+    # once the text based cards are in the database, creates full text search database
+    create_fts()
 
-# ----------------------------------------------------------------------
-def create_fts() -> None:
-
-    g_logger.info(f"{inspect.stack()[0][3]}()")
-
+    # load the png based cards in the database
     with sqlite3.connect(k_DB_Path) as conn:
+        png_pairs = load_png_files(k_PNGFolder)
+
         cursor = conn.cursor()
-        cursor.execute(
-            """
-            CREATE VIRTUAL TABLE IF NOT EXISTS flashcards_fts
-            USING fts5(id, question_html, answer_html);
-        """
-        )
-
-        cursor.execute(
-            """
-            INSERT INTO flashcards_fts(id, question_html, answer_html)
-            SELECT id, question_html, answer_html FROM flashcards;
-        """
-        )
-
+        for png in png_pairs:
+            cursor.execute(
+                "INSERT INTO flashcards (question_html, answer_html) VALUES (?, ?)",
+                (png["question_html"], png["answer_html"]),
+            )
         conn.commit()
+
+    return
 
 
 # ----------------------------------------------------------------------
@@ -163,7 +222,7 @@ def init_db() -> None:
         create_db()
 
     # create full text search database
-    create_fts()
+    # create_fts()
 
 
 # ----------------------------------------------------------------------
@@ -187,6 +246,7 @@ def get_random_flashcard(exclude_ids: List[int]) -> Optional[Tuple[int, str, str
             query = "SELECT id, question_html, answer_html FROM flashcards WHERE id NOT IN ({seq}) ORDER BY RANDOM() LIMIT 1".format(
                 seq=",".join(["?"] * len(exclude_ids))
             )
+            # exclude_ids will fill the ?
             cursor.execute(query, exclude_ids)
         else:
             cursor.execute("SELECT id, question_html, answer_html FROM flashcards ORDER BY RANDOM() LIMIT 1")
@@ -261,11 +321,16 @@ def create_app() -> Flask:
     # logging.basicConfig(level=logging.INFO)
 
     app = Flask(__name__)
+
     app.logger.info(f"{inspect.stack()[0][3]}()")
     # If you run the app locally you must run ./secrets.ps1 first (see above)
     # In production on Heroku FLASHCARDS_SECRET_KEY must have been set manually (see readme.md)
     # Without session key, Flask does not allow the app to set or access the session dictionary
     app.secret_key = os.environ.get("FLASHCARDS_SECRET_KEY")
+
+    # app.config["SESSION_COOKIE_HTTPONLY"] = True  # Empêche l'accès au cookie via JavaScript
+    # app.config["SESSION_COOKIE_SECURE"] = False  # Assure que le cookie est accessible sur HTTP
+    # app.config["SESSION_PERMANENT"] = False  # Les sessions ne sont pas permanentes
 
     with app.app_context():
         init_db()  # Initialise la base de données quand l'application est créée
@@ -288,16 +353,29 @@ def create_app() -> Flask:
         if "seen_ids" not in session:
             session["seen_ids"] = []
 
+        # Get the total number of cards once per session
+        if "nb_cards" not in session:
+            session["nb_cards"] = get_count()
+            g_logger.info(f"Total number of cards : {session["nb_cards"]}")
+
+        # Check if all cards have been seen
+        if len(session["seen_ids"]) >= session["nb_cards"]:
+            # Reset the seen cards list since all cards have been seen
+            session["seen_ids"] = []
+            g_logger.info("All cards seen, resetting seen_ids.")
+
         # Fetch a random flashcard from the database
         flashcard = get_random_flashcard(session["seen_ids"])
 
-        # get nb card once per session
-        if "nb_cards" not in session:
-            session["nb_cards"] = get_count()
-
         if flashcard:
             current_QA = {"id": flashcard[0], "question_html": flashcard[1], "answer_html": flashcard[2]}
-            session["seen_ids"].append(current_QA["id"])  # Add this question to seen list
+            # session["seen_ids"].append(current_QA["id"])  # Add this question to seen list
+            seen_id_list = session["seen_ids"]
+            seen_id_list.append(current_QA["id"])
+            # ! I have lost too much time on this !!!!!
+            # ! This reassignment operation is crucial because it forces Flask to re-serialize and save the updated session in the underlying storage
+            # ! Flask should overload the "="" operator !!!!!!!!!!!!
+            session["seen_ids"] = seen_id_list
 
             return render_template(
                 "index.html",
@@ -360,6 +438,13 @@ def create_app() -> Flask:
         # app.logger.info(f"{inspect.stack()[0][3]}()")
         g_logger.info(f"{inspect.stack()[0][3]}()")
         return redirect(url_for("index"))
+
+    # ----------------------------------------------------------------------
+    # For debug ???
+    @app.route("/reset_session")
+    def reset_session() -> str:
+        session.clear()
+        return "Session cleared."
 
     return app
 

@@ -453,10 +453,10 @@ ecrire_dans_fichier('fichier_output.txt', 'Zoubida for ever.')
 ## 
 ############################################################ 
 -->
-Question : PYTHON - Est-ce que les paramètres sont passés par valeurs ou par référence ?
+Question : PYTHON - Est-ce que les paramètres sont passés par valeur ou par référence ?
 Answer  : 
 
-* Les paramètres des fonctions sont passés par **référence** pour les objets **mutables** (comme les listes, dictionnaires, objets définis par l'utilisateur)
+* Les paramètres des fonctions sont passés par **référence** pour les objets **mutables** (listes, dictionnaires, objets définis par l'utilisateur)
 * Ils sont passés par **valeur** pour les objets **immuables** (comme les entiers, chaînes de caractères, tuples).
 
 Cela signifie que si on passe un objet :

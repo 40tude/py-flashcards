@@ -613,6 +613,9 @@ Answer  :
 * It is generally good practice to have more neurons on bottom layers and progressively decrease the number of neurons going up the network.
 
 
+
+
+
 <!-- 
 ############################################################
 ## 
@@ -710,10 +713,10 @@ Answer   : To prevent overfitting
 
 Question : Deep Learning - Neural networks with TensorFlow - Which of the following :
 
-* BatchNormalization
-* Regularization
-* Dense
-* ReLU 
+1. BatchNormalization
+1. Regularization
+1. Dense
+1. ReLU 
 
 is an activation function used in neural networks?
 
@@ -1044,25 +1047,26 @@ Question : Deep Learning - CNN with TensorFlow - L'éxécution de la ligne de co
 
 ```bash
 Model: "sequential"
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
-┃ Layer (type)                         ┃ Output Shape                ┃           Param ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ conv2d_1 (Conv2D)                    │ (None, 50, 50, 32)          │             896 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ conv2d_2 (Conv2D)                    │ (None, 25, 25, 64)          │          18,496 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ conv2d_3 (Conv2D)                    │ (None, 13, 13, 64)          │          36,928 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ conv2d_4 (Conv2D)                    │ (None, 7, 7, 128)           │          73,856 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ flatten (Flatten)                    │ (None, 6272)                │               0 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense (Dense)                        │ (None, 1)                   │           6,273 │
-└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ 
++--------------------------------------+-----------------------------+-----------------+
+| Layer (type)                         | Output Shape                |           Param |
++--------------------------------------+-----------------------------+-----------------+
+| conv2d_1 (Conv2D)                    | (None, 50, 50, 32)          |             896 |
++--------------------------------------+-----------------------------+-----------------+
+| conv2d_2 (Conv2D)                    | (None, 25, 25, 64)          |          18,496 |
++--------------------------------------+-----------------------------+-----------------+
+| conv2d_3 (Conv2D)                    | (None, 13, 13, 64)          |          36,928 |
++--------------------------------------+-----------------------------+-----------------+
+| conv2d_4 (Conv2D)                    | (None, 7, 7, 128)           |          73,856 |
++--------------------------------------+-----------------------------+-----------------+
+| flatten (Flatten)                    | (None, 6272)                |               0 |
++--------------------------------------+-----------------------------+-----------------+
+| dense (Dense)                        | (None, 1)                   |           6,273 |
++--------------------------------------+-----------------------------+-----------------+
  Total         params: 136,449 (533.00 KB)
  Trainable     params: 136,449 (533.00 KB)
  Non-trainable params:       0 (  0.00 KB)
- ```
+```
 
 Answer   : 
 
@@ -1077,14 +1081,19 @@ Conv 2D f= 64 k=3x3 s=2 p=same  => sortie 64 matrices de 3x3    Params =  64 (3*
 Conv 2D f=128 k=3x3 s=2 p=same  => sortie 128 matrices de 7x7   Params = 128 (3*3*64 + 1) = 73_856
 Flatten                                                         Params                    =      0
 Dense   En entrée il y a 128 matrices 7x7 => 128*7*7 = 6_272    Params =        6_272 + 1 =  6_273
- ```
+```
 * Soit un total de 136_449 paramètres
+
+
+
 
 #### À garder en tête
 * Les filtres sont des filtres 3D
-* Chacun des filtres d'une couche s'applique simultanément à l'ensemble des feature maps en entrée
-    * Au niveau de la couche 2, les filtres sont de dimmension (3,3,32) car en sortie de la couche 1 on a 32 feature maps
-* Le filtre va convoluer simultanément sur les 32 feature maps d'entrée.
+* Chacun des filtres d'une couche s'applique simultanément à l'ensemble des feature maps qui sont en entrée
+    * Au niveau de la couche 2 ci-dessus, les filtres sont de dimmension (3,3,32) car en sortie de la couche 1 on a 32 feature maps
+    * Au niveau de la couche 1 ci-dessus, les filtres sont de dimmension (3,3, 3) car en entrée de la couche 1 on a une image RGB
+
+* Dans la couche 2, le filtre va convoluer simultanément sur les 32 feature maps d'entrée.
 * Il effectue une convolution sur chaque feature map séparément, **mais** les résultats de ces convolutions sont **additionnés** pour former une seule feature map de sortie
     * Les 32 résultats des convolutions (un pour chaque feature map) sont additionnés pixel par pixel pour produire une seule feature map de sortie.
     * Le filtre peut également avoir un biais ajouté après cette somme, pour ajuster la valeur finale.
@@ -1104,8 +1113,11 @@ Answer   :
 
 * **Kernel size** 
     * Résumé = Taille du filtre (ex. : 3x3 ou 5x5).
-    * Le **kernel** (filtre) est une matrice appliquée sur l'image (ou sur les données en entrée) pour extraire des caractéristiques comme des lignes verticales, des bords, des textures, etc.
+    * Le **kernel** (filtre) est une matrice appliquée sur l'image (ou sur les feature maps en entrée) pour extraire des caractéristiques comme des lignes verticales, des bords, des textures, etc.
     * La taille du kernel (**kernel_size**) c'est la taille de la matrice en question
+    * La taille du kernel c'est la taille max du motif qu'on pourra reconnaitre
+    * Si il y a 32 features en entrée, le filtre s'applique simultanément aux 32 features
+    * Le filtre est donc un filtre 3D : x, y, z où z est le nombre features en entrée
     * Exemple : filtre 3x3 ou 5x5 
   
 * **Stride** (Pas)
@@ -1125,7 +1137,7 @@ Answer   :
         * **Same** : Le padding est ajouté de manière à ce que la sortie ait la même dimension que l'entrée.
         * **Valid** : Aucune extension n'est effectuée, et la taille de la sortie diminue en fonction de la taille du filtre et du stride.
     * Le padding permet de conserver plus de détails aux bords de l'image. 
-    * Sans padding (*valid*) on perd des pixels à chaque couche de convolution ce qui diminue progressivement la taille de l'image.
+    * Sans padding (**valid**) on perd des pixels à chaque couche de convolution ce qui diminue progressivement la taille de l'image.
 
 
 <!-- 
@@ -1148,9 +1160,216 @@ Answer   :
 * Idem pour contraste et luminosité
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Qu'est-ce qu'un réseau de neurones convolutif (CNN) ?
+
+Answer   : 
+
+* Un CNN est un type de réseau de neurones spécialement conçu pour traiter les données structurées sous forme de grille (images par exemple). 
+* Il utilise des convolutions pour en extraire les caractéristiques principales
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Quels sont les principaux types de couches dans un CNN ?
+
+Answer   : 
+
+* **Couche convolutionnelle** (de convolution): applique des filtres sur l'image d'entrée pour détecter des caractéristiques locales comme des bords, des textures.
+* **Couche de pooling** (de sous-échantillonnage) : réduit la dimensionnalité en conservant les informations les plus importantes.
+* **Couche entièrement connectée** (dense) : connecte chaque neurone de la couche précédente à chaque neurone de la couche suivante. Utilisées en fin de réseau pour la classification.
+* **Couche d'activation** : applique une fonction non linéaire (comme ReLU) pour ajouter de la complexité au modèle.
+* **Dropout** : Active uniquement pendant l'entrainement. Eteint aléatoirement des neurones. 
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Qu'est-ce que la convolution et comment fonctionne-t-elle dans un CNN ?
+
+Answer   : 
+
+* La convolution est une opération mathématique où un filtre (ou noyau) de petite taille est appliqué à l'entrée (par exemple, une image). 
+* Le filtre glisse sur l'image, et à chaque position, il calcule un produit scalaire entre le filtre et la région correspondante de l'image
+* Ca produit une carte de caractéristiques. 
+* La convolution permet d'extraire dans la feature maps des motifs locaux comme des bords ou des textures.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Pourquoi utilise-t-on la fonction d'activation ReLU ?
+
+Answer   : 
+
+* La fonction ReLU (**Rectified Linear Unit**) remplace les valeurs négatives par zéro et conserve les valeurs positives. 
+* Elle introduit de la non-linéarité dans le réseau, ce qui permet de modéliser des relations plus complexes. 
+* ReLU est beaucoup plus simple à calculer que les autres fonctions d'activation telles que Sigmoïde ou Tanh (fonctions transcendantes)
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Quel est le rôle de la couche de pooling dans un CNN ?
+
+Answer   : 
+
+* La couche de pooling réduit la dimensionnalité de la carte de caractéristiques tout en conservant les informations les plus importantes
+* Par exemple, max pooling ou average pooling (max pool prefered) 
+* Permet 
+    1. de rendre le modèle plus efficace
+    1. de réduire le surapprentissage
+    1. de rendre les caractéristiques extraites plus robustes aux variations dans les images (translation mais aussi un peu en rotation)
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Comment se fait la régularisation dans un CNN ?
+
+Answer   : 
+
+* Faut simplifier le modèle !   
+* **Dropout** : Pendant l'entraînement. Consistant à **désactiver** aléatoirement des neurones (20% par exemple), réduisant ainsi le surapprentissage.
+* **Régularisation L2** : ajoute une pénalité basée sur les poids du modèle pour encourager des poids plus petits.
+* **Early stopping** : arrêt de l'entraînement lorsque la performance sur les données de **validation** commence à se dégrader.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Qu'est-ce qu'une carte de caractéristiques (feature map) ?
+
+Answer   : 
+
+* Une carte de caractéristiques est le résultat de l'application d'un filtre (ou noyau) sur l'image d'entrée. 
+* Elle contient les réponses locales détectées par le filtre à chaque position de l'image 
+* Ell met en évidence des motifs spécifiques comme des bords, des lignes verticales, horizontales ou des textures.
 
 
 
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Quelle est la différence entre un CNN et un MLP (perceptron multicouche) ?
+
+Answer   : 
+
+* Un CNN exploite la structure spatiale des données (comme les images) grâce à la convolution et le pooling
+* Un MLP connecte chaque neurone de chaque couche à tous les neurones de la couche suivante (dense). 
+* Les CNN sont mieux adaptés aux données ayant une structure locale, comme les images
+* Les MLP sont plus adaptés aux données vectorielles ou tabulaires.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Comment choisir la taille d'un filtre dans un CNN ?
+
+Answer   : 
+
+* La taille du filtre est un hyperparamètre que l'on choisit souvent par expérimentation. 
+* Des petits filtres (comme 3x3) sont souvent utilisés car ils capturent efficacement les motifs locaux tout en nécessitant moins de calculs. 
+* Des filtres plus grands peuvent être utilisés pour capturer des motifs plus globaux, mais ils peuvent entraîner plus de surapprentissage et une augmentation du coût en calcul.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Qu'est-ce que le "stride" dans un CNN et quel est son impact ?
+
+Answer   : 
+
+* Le stride est le nombre de pixels que le filtre déplace à chaque fois qu'il glisse sur l'image. 
+* Un stride de 1 signifie que le filtre se déplace pixel par pixel, tandis qu'un stride de 2 signifie qu'il se déplace de deux pixels à chaque étape. 
+* Un stride plus élevé réduit la taille de la carte de caractéristiques, augmentant ainsi l'efficacité du calcul, mais peut également perdre des détails.
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Quelle est l'importance de la régularisation dans les CNN et quels types de régularisation sont couramment utilisés ?
+
+Answer   : 
+
+* La régularisation aide à prévenir le surapprentissage (overfitting) en pénalisant les grands poids dans le réseau. 
+* Les types de régularisation courants sont la régularisation L2 (weight decay), L1 (lasso), L1L2 (elastic), le dropout, et la normalisation par batch (batch normalization).
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Qu'est-ce que le "padding" dans le contexte des convolutions et pourquoi est-il utilisé ?
+
+Answer   : 
+
+* Le padding consiste à ajouter des pixels (généralement des zéros) autour de l'image d'entrée pour préserver la taille spatiale de la sortie après la convolution. 
+* Cela permet également aux filtres de balayer toutes les parties de l'image d'entrée, incluant les bords.
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Deep Learning - CNN with TensorFlow - Peux-tu expliquer comment fonctionne une architecture populaire de CNN, comme AlexNet, VGGNet ou ResNet ?
+
+Answer   : 
+
+* **AlexNet** utilise 
+    * des couches convolutives avec des tailles de filtres et des strides différents
+    * suivies de couches de pooling 
+    * et de plusieurs couches entièrement connectées. 
+    * Il utilise également le dropout pour réduire le surapprentissage.
+
+* **VGGNet** 
+    * est connu pour sa simplicité avec l'utilisation de petites convolutions (3x3) 
+    * des couches très profondes
+    * lui permet d'extraire des caractéristiques complexes.
+
+* ResNet (Residual Network) 
+    * introduit les connexions résiduelles qui permettent d'ajouter directement l'entrée à la sortie de certaines couches
+    * ça facilite l'apprentissage et permettant de construire des réseaux extrêmement profonds sans problème de dégradation.
 
 
 

@@ -1,6 +1,31 @@
 <!-- 
+
 TODO :
-* Add support for cards based on png images
+* Add a link to
+    * https://machinelearningflashcards.com/
+    * https://fr.slideshare.net/slideshow/machine-learning-flash-cards-by-chris-albonpart2/249940580
+    * https://quizlet.com/537961036/chris-albon-ml-flashcards/
+* Add sample code in 04_fs_big_data.md
+* Add CI/CD for automatic testing once testing is working
+* Testing 
+    * pytest with Flask
+    * I don't know how to set it up
+
+* DONE - Document how to add grahics in a directory close to the .md file 
+    * For example ./static/md/my_directory/one_topic.md contains one question which display the image in 
+    * .static/md/my_directory/assets/graph1.png
+    * Then it MUST use
+    ```
+    <p align="center">
+    <img src="../static/md/dummy_test/assets/dummy.png" alt="dummy" width="577"/>
+    </p>
+    ```
+    * Indeed, the html page "is" in .\py-flashcards\templates\index.html and the path to the resource must take it inot account
+    * Is there a way to use kinfd of "url_for("blablabla") ??????
+
+* DONE - Add a favicon
+* DONE - Add support for cards based on png images
+    * png cards are available here : https://app.jedha.co/course/technical-interviews-part-2-ft/practice-machine-learning-ft
     * Load the paths to png files in a list
     * insert it into the answer field
     * insert de keyword in the question filed such that we know this is NOT a Q&A but just an illusion... an image
@@ -8,14 +33,9 @@ TODO :
         * check if it is an image (check the content of the question)
         * if image display it
         * otherwise display Q&A as usual
-* Add sample code in 04_fs_big_data.md
-* Add CI/CD for automatic testing once testing is working
-* Testing 
-    * pytest with Flask
-    * I don't know how to set it up
-
+* DONE - Allow .md or .png to be in sub-directories under ./static/md and ./static/png respectively 
 * DONE - Fix logger issues such that any function can log properly
-    * add and configure a global logger
+    * => add and configure a global logger
 * DONE - Create an SQL code snippet .md file
 * DONE - Create an sns code snippet .md file
 * DONE - Create a matplotlib code snippet .md file
@@ -23,6 +43,10 @@ TODO :
 * DONE - Display nb of cards in search
 * DONE - Display the total number of cards somewhere
 * DONE - Add an EDA code snippet .md file
+
+
+* Read this : 
+* https://www.techwithtim.net/tutorials/flask/sessions
 -->
 
 ### ATTENTION
@@ -102,12 +126,71 @@ $env:FLASHCARDS_SECRET_KEY = "blablabla"
 * type ``heroku open`` in the terminal (or visit the app web page)
 
 # Q&A
+
+---
 * Q : How to check gunicorn is serving the app on Heroku?
 * A : Open a terminal locally
     * heroku logs --tail
     * CTRL+C 
     * CTRL+F gunicorn
     * You should see a line similar to : `[INFO] Starting gunicorn 23.0.0`
+
+---
+* Q : Can I organize the markdown files in directories and sub-directories ?
+* A : Yes as long as they are under the ``./static/md`` directory 
+
+---
+* Q : Can I organize the .png cards in directories and sub-directories ?
+* A : Yes as long as they are under the ``./static/png`` directory 
+
+---
+* Q : Can I insert a link to a .png file or a link to a web page into the answer ?
+* A : Yes. Answers are plain markdown files so you can insert 
+    * link to images
+    * source code
+    * bold, italic fonts
+    * equations and math symbols (Latex syntax)
+
+
+---
+* Q : The answer includes a link to a ``.png`` file. What is the path I should use in the content of the answer ? 
+* A : Let's take an example :
+    1. Your markdown file (which includes one or more set of question/answer) is in ``.\static\md\dummy_test`` directory
+    1. The name of the markdown file is ``dummy.md``
+    1. Underneath ``dummy.md`` there is an ``assets`` where there is `dummy.png`
+    
+To make it clear, so far, the organization of the files looks like :
+
+```
+./md
+│   other_QA_file_01.md
+│   other_QA_file_02.md
+│
+└───dummy_test
+    │   dummy.md
+    │
+    └───assets
+            dummy.png
+```
+
+Here is how to point the ``./md/dummy_test/assets/dummy.png`` from the file ``./md/dummy_test/dummy.md``.
+
+```
+Question : The question I want to ask
+
+Answer  : 
+This is the expected answer with a link to the ``./assets/dummy.png`` 
+
+
+<p align="center">
+<img src="../static/md/dummy_test/assets/dummy.png" alt="dummy" width="577"/>
+</p>
+
+```
+* Keep in mind you **MUST** point the ``dummy.png`` as if you were in ``./templates/index.html``
+* Indeed the markdown text of the questions and answers is inserted into the ``index.html``
+ 
+
 
 # About contributions
 This project was developed for personal and educational purposes. Feel free to explore and use it to enhance your own learning in machine learning.

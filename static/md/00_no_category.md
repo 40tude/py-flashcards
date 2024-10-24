@@ -919,10 +919,77 @@ Answer  :
 ## 
 ############################################################ 
 -->
-Question : Complétez la phrase suivante : "En NLP, la lemmatisation consiste à..."
+Question : No category yet - Complétez la phrase suivante : "En NLP, la lemmatisation consiste à..."
 
 Answer  : 
 
 * En NLP, la lemmatisation consiste à réduire les mots à leur forme **canonique** ( lemme), c'est-à-dire la forme de base telle qu'on la trouverait dans un dictionnaire. 
 * Ainsi "mange", "mangé" et "mangeraient" seraient tous réduits à "manger".
 * Contrairement à la racinisation (**stemming**), qui tronque souvent les mots pour obtenir leur radical, la lemmatisation prend en compte le contexte et la morphologie du mot afin de produire un résultat linguistiquement correct.
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Vous faites de la détection de spam. Vous avez reçu 1_000 mails dont 7% sont des spams. Votre modèle répond toujours ham (vs spam). Dressez la matrice de confusion et calculez precision, recall, accuracy et F1 score. Conclusion ?
+
+Answer  : 
+
+Dans un scénario de détection de spam avec un modèle idiot qui prédit toujours "ham", voici la matrice de confusion ASCII pour un ensemble de données où 93% des emails sont des "ham" et 7% sont des "spam" :
+
+#### Matrice de confusion
+On peut la voir comme ça : 
+
+|               | Prédiction Ham | Prédiction Spam |
+|---------------|----------------|-----------------|
+| **Réel Ham**  | 930            | 0               |
+| **Réel Spam** | 70             | 0               |
+
+
+Ou plus classiquement comme ça :
+
+```
++----------------------------+
+Réel |  Ham  |  930  |   0   |
+     | Spam  |   70  |   0   |
+     +-------+-------+-------+      
+     |       |  Ham  | Spam  |
+     +-------+-------+-------+      
+     |       |   Prédiction  |
++------------+---------------+      
+```
+
+#### Métriques
+
+1. **Recall** : proportion de spams détectés correctement.
+   $$
+   \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{0}{0 + 70} = 0
+   $$
+   
+1. **Précision** : proportion des mails prédits comme spam qui sont effectivement des spams.
+   $$
+   \text{Précision} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{0}{0 + 0} = 0
+   $$
+   Ici, on ne peut pas calculer la précision car le dénominateur est nul (aucune prédiction de spam).
+
+1. **Accuracy** (précision globale) : proportion des prédictions correctes (ham ou spam).
+   $$
+   \text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{Total}} = \frac{0 + 930}{1000} = 0.93
+   $$
+
+1. **F1 Score** : moyenne harmonique entre Recall et Precision   
+   $$
+   \text{F1 Score} = \frac{2}{\frac{1}{\text{Precision}} + \frac{1}{\text{Recall}}} = \frac{2}{\infty + \infty} = 0
+   $$
+
+**Conclusion :** 
+
+1. Bien que l'**Accuracy** soit élevée, le modèle est inutile pour détecter les spams, car il ne les détecte jamais.
+1. Dans l'EDA il faut toujours déterminer l'équilibre des classes. On pourra être amené à utiliser SMOTE ou RandomUnderSampler lors du training du modèle.
+
+
+
