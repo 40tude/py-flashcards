@@ -313,6 +313,8 @@ Answer  :
 <img src="../static/md/book_covers/black_swan.png" alt="dummy" width="577"/>
 </p>
 
+To get one of the best explanation (FR) about the power law [watch this video](https://youtu.be/MrsjMiL9W9o?si=qaIUySUA72djVVdA). 
+
 
 
 <!-- 
@@ -356,6 +358,8 @@ Answer  :
 Question : Non-technical - Book - Did you ever read ?
 Answer  :
 
+* Versions exist in US/FR...
+
 <p align="center">
 <img src="../static/md/book_covers/nexus.png" alt="dummy" width="577"/>
 </p>
@@ -369,6 +373,8 @@ Answer  :
 
 Question : Non-technical - Book - Did you ever read ?
 Answer  :
+
+* Versions exist in US/FR...
 
 <p align="center">
 <img src="../static/md/book_covers/superintellignece.png" alt="dummy" width="577"/>
@@ -428,6 +434,8 @@ Answer  :
 
 Question : Non-technical - Book - Did you ever read ?
 Answer  :
+
+* Versions exist in US/FR...
 
 <p align="center">
 <img src="../static/md/book_covers/la_vie_30.png" alt="dummy" width="577"/>
