@@ -832,6 +832,7 @@ Question : No category yet - Comment choisir entre une régression linéaire et 
 Answer   : 
 
 Ca va dépendre de la nature des données
+
 * **Régression linéaire :** utile si la relation entre les variables d'entrée et de sortie est linéaire ou quasi-linéaire. Modèle simple, facile à interpréter et rapide à entraîner.
 * **Forêt aléatoire :** utile lorsque les relations sont plus complexes et non linéaires. Moins sensible aux variables bruitées et outliers. Plus difficile à interpréter. Préférable quand la performance prime sur l'interprétabilité.
 
@@ -1024,3 +1025,204 @@ Answer  :
 * Les messages dans les commits terminent la phrase en italique ci-dessous:
     * *If applied, this commit will…* Update getting started documentation 
     * Majuscule au début, pas de point à la fin
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Peux tu me faire un point sur MLflow Projects et me dire à quoi servent les fichiers MLproject ?
+
+Answer  : 
+
+* MLflow Projects est une composante de MLflow 
+* Dédiée à la gestion et à la reproductibilité des projets de machine learning
+* Objectif = simplifier l’exécution de scripts ML en les encapsulant dans une structure standardisée, portable et partageable. L'idée c'est de garantir que les modèles peuvent être entraînés et évalués de manière cohérente sur différentes machines.
+
+#### Caractéristiques principales de MLflow Projects
+
+1. **Portabilité** : MLflow Projects permet de définir et de documenter toutes les dépendances et configurations nécessaires pour exécuter un projet. Cela inclut les librairies, les paramètres et les scripts.
+
+2. **Définition des dépendances** : Les projets MLflow peuvent inclure des informations sur les dépendances Python (ou d'autres langages) dans des fichiers comme `requirements.txt` ou `conda.yaml`. Ces informations permettent à MLflow de gérer les environnements virtuels pour l'exécution.
+
+3. **Reproductibilité** : En encapsulant les scripts ML dans un projet MLflow avec des configurations bien définies, il est plus facile de reproduire exactement les mêmes résultats à l'avenir, ou de partager le projet avec d'autres.
+
+4. **Exécution standardisée** : Grâce aux définitions de projets, MLflow simplifie l'exécution en ligne de commande ou en script, notamment pour gérer les arguments et les configurations d'entrée.
+
+#### Fichier MLproject
+
+Un fichier `MLproject` est un fichier de configuration YAML qui sert de "point d'entrée" pour définir la structure et les paramètres d’un projet. Ce fichier permet de :
+
+- **Définir les dépendances** : Vous pouvez indiquer quel environnement Conda ou Pip utiliser pour exécuter le projet.
+- **Spécifier les entrées et sorties** : Le fichier `MLproject` peut définir des paramètres de manière explicite pour rendre les exécutions flexibles et contrôlables.
+- **Déclarer le script principal** : Vous pouvez définir quel script est exécuté lorsque vous lancez le projet MLflow, ainsi que les options de paramètres attendues.
+  
+Exemple simplifié d’un fichier `MLproject` :
+
+```yaml
+name: my_ml_project
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      learning_rate: {type: float, default: 0.01}
+      n_estimators: {type: int, default: 100}
+    command: "python train.py --learning_rate {learning_rate} --n_estimators {n_estimators}"
+```
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Quels sont les avantages d’un fichier MLproject ?
+
+Answer  : 
+
+Dans le cadre de MLProjects, le fichier `MLproject` 
+1. simplifie l'intégration dans des pipelines MLOps 
+1. facilite l'exécution reproductible d’expériences
+
+En effet, le fichier `MLproject` rend l'exécution de projets intuitive et standardisée. Par exemple, pour lancer un projet MLflow avec des paramètres spécifiques, on va utiliser :
+
+```bash
+mlflow run . -P learning_rate=0.02 -P n_estimators=200
+```
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Qu'est-ce qui se passe après la commande suivante `mlflow run . -P learning_rate=0.02 -P n_estimators=200`
+
+Answer  : 
+
+MLflow va :
+
+1. **Recherche du fichier `MLproject`** : MLflow vérifie dans le répertoire courant (`.`) si un fichier `MLproject` est présent. Ce fichier agit comme une feuille de route pour l’exécution, définissant les dépendances, les paramètres, et le point d’entrée principal.
+
+2. **Configuration de l’environnement d'exécution** : 
+   - Si le fichier `MLproject` spécifie un environnement Conda (via `conda_env: conda.yaml` par exemple), MLflow va créer et activer cet environnement.
+   - Si `MLproject` définit d'autres fichiers de dépendances, comme `requirements.txt` ou `conda.yaml`, ils seront également pris en compte pour configurer l’environnement.
+
+3. **Exécution de la commande** : Une fois l’environnement configuré, MLflow exécute la commande spécifiée dans le fichier `MLproject` (`command` dans la section `entry_points`). Dans l'exemple donné, cela lance `train.py` en injectant les valeurs de paramètres `learning_rate=0.02` et `n_estimators=200`.
+
+C'est vraiment ce qui permet de garantir une exécution cohérente d’une machine à l’autre car cela permet :
+* de reproduire l'exécution 
+* avec une configuration stable 
+* et des dépendances bien définies
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Vous êtes dans un environnement Python minimal. Vous utilisez MLProjects et un fichier MLproject dans lequel il y a une ligne `conda_env: conda.yaml`. À quoi ça sert, qu'est ce qui va se passer ?
+
+Answer  : 
+
+* Le champ `conda_env` dans le fichier `MLproject` permet de spécifier un fichier de configuration Conda (`conda.yaml`) 
+* Ce dernier contient les dépendances nécessaires, comme `scikit-learn`, `pandas`, etc. 
+
+Quand on exécute le projet dans un environnement minimal, MLflow va :
+
+1. **Créer un nouvel environnement Conda** spécifiquement pour l'exécution du projet, en se basant sur les dépendances listées dans le fichier `conda.yaml`.
+2. **Installer toutes les dépendances** spécifiées dans `conda.yaml` (`scikit-learn` par exemple) dans cet environnement.
+3. **Exécuter le script Python dans cet environnement isolé**, garantissant que toutes les dépendances sont présentes sans interférer avec l’environnement global ou actuel.
+
+#### Exemple de fichier `MLproject` 
+
+```yaml
+name: my_ml_project
+conda_env: conda.yaml
+entry_points:
+  main:
+    parameters:
+      learning_rate: {type: float, default: 0.01}
+    command: "python train.py --learning_rate {learning_rate}"
+```
+
+#### Exemple de fichier `conda.yaml`
+
+```yaml
+name: my_ml_project_env
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - scikit-learn
+  - pandas
+  - numpy
+```
+
+Lorsque qu'on lance `mlflow run .`, MLflow utilise `conda.yaml` pour créer un environnement avec Python 3.8, `scikit-learn`, `pandas`, et `numpy`. Il active cet environnement et y exécute ensuite `train.py`. C'est ça qui garantit un environnement reproductible sans nécessiter de préinstallation des dépendances sur la machine, et facilite le déploiement dans des environnements variés ou des pipelines MLOps.
+
+Au lieu de ``conda_env`` on peut aussi utiliser `docker_env`. C'est le même principe, on précise l'image docker à lancer (plus paramètres type volume, var d'environnement...). MLflow va alors lancer l'image et y lancer l'exécution du script  
+
+#### Exemple
+```yaml
+name: fraud_detection 
+
+docker_env:
+  image: sklearn_fraud_trainer
+  volumes: ["%cd%:/home/app"]
+  environment: [ 
+      "MLFLOW_TRACKING_URI", 
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+    ]
+    
+entry_points:
+  main:
+    command: "python train.py" 
+    # Shows how to pass default parameters
+    # train.py will need to : import argparse
+    # Uncomment all the lines below
+    # parameters:
+      # n_estimators: {type: int, default: 15} 
+      # min_samples_split: {type: int, default: 3} 
+    # command: "python train.py --n_estimators {n_estimators} --min_samples_split {min_samples_split}" 
+```
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : En back propagation on fait des approximations au premier ordre. Quel pourrait être l'intérêt de travailler au second ordre?
+
+Answer  : 
+
+L'objectif principal de l'utilisation des méthodes de second ordre est de **converger vers le minimum avec moins d'itérations** en tenant compte de la courbure de la fonction de coût. En ajustant la direction et l'amplitude des pas en fonction de la courbure locale, ces méthodes permettent souvent de :
+
+1. **Trouver des minima plus rapidement en nombre d'itérations**, ce qui est utile lorsque chaque itération est coûteuse en raison de la taille des données ou du modèle.
+2. **Naviguer les régions de plateaux ou de "vallées étroites"** où les gradients sont faibles ou mal orientés. Ces méthodes peuvent ajuster les pas pour éviter de rester bloqué dans de telles régions ou de faire des oscillations, ce qui peut accélérer la convergence.
+3. **Améliorer la stabilité des étapes de descente**, car elles adaptent leur approche aux changements locaux de la pente et permettent parfois d'éviter les oscillations dans les directions non souhaitées.
+
+Il y a un compromis à trouver entre moins de pas et plus de temps de calcul à chaque pas. Cela signifie que le bénéfice des méthodes de second ordre dépend du problème spécifique :
+
+- Pour des réseaux profonds modernes, où chaque itération coûte peu relativement à la taille du modèle, la descente de gradient de premier ordre reste souvent préférable.
+- Pour des modèles plus petits ou lorsque les itérations sont très coûteuses (par exemple, en formation de grands modèles linguistiques), des approximations de second ordre peuvent être bénéfiques.
+
+#### Exemples
+
+1. **Méthode de Newton** : Cette méthode repose sur l'inversion de la matrice Hessienne (les dérivées secondes) pour ajuster les poids. Elle est plus précise et peut converger plus rapidement que la descente de gradient de premier ordre, car elle utilise des informations de courbure pour prendre en compte la géométrie locale de la fonction de coût. Toutefois, calculer et inverser la Hessienne est coûteux en termes de mémoire et de temps, surtout pour des réseaux de grande taille.
+
+2. **Quasi-Newton (ex. BFGS)** : Les algorithmes quasi-Newton comme BFGS (Broyden-Fletcher-Goldfarb-Shanno) approchent la Hessienne sans avoir à la calculer entièrement. Cela permet de bénéficier de certaines informations de courbure sans le coût complet de calcul de la Hessienne. Cependant, ces méthodes restent souvent plus lourdes que la descente de gradient standard.
+
+3. **Algorithmes basés sur l'approximation de la Hessienne** : Certains algorithmes, comme les méthodes de Hessian-Free Optimization (optimisation sans Hessienne explicite), utilisent des techniques pour estimer des produits matrice-vecteur avec la Hessienne, sans la stocker ni la calculer entièrement. Cela réduit le coût de calcul mais reste plus complexe que la simple descente de gradient.
+
+4. **Optimisation naturelle du gradient** : Cette approche, qui peut être vue comme une méthode de second ordre, adapte le pas de descente en fonction de la métrique de l’espace des paramètres (en utilisant la matrice de Fisher, une approximation de la Hessienne). Cela permet souvent une convergence plus rapide dans les espaces de haute dimension.
+
+**ATTENTION** malgré leurs avantages théoriques, les méthodes de second ordre sont peu utilisées dans les réseaux de neurones profonds pour des raisons de complexité de calcul. Cependant, elles sont plus courantes dans des modèles avec un nombre limité de paramètres ou des réseaux peu profonds.

@@ -260,7 +260,7 @@ Answer  :
 ############################################################ 
 -->
 
-Question : Deep Learning - Gradient Descent - Peux tu m'expliquer point par point la backpropagation ? Afin de simplifier les choses on se place dans le cas d'un réseau de neurones à 1 neurone et on fait les hypothèses suivantes : 
+Question : Deep Learning - Gradient Descent - Peux tu m'expliquer point par point la back propagation ? Afin de simplifier les choses on se place dans le cas d'un réseau de neurones à 1 neurone et on fait les hypothèses suivantes : 
 
 * Entrée $x_1 = 2$ 
 * Poids initial  $w_1 = 0.5 $
@@ -296,7 +296,7 @@ $$
 Dans le cas du poids on va vouloir écrire un truc du style :
 
 $$
-w_1 \leftarrow w_1 -\eta \cdot \frac{\partial J}{\partial w_1} = -\eta \cdot \frac{\partial J}{\partial y_{\text{prévu}}} \cdot \frac{\partial y_{\text{prévu}}}{\partial z} \cdot \frac{\partial z}{\partial w_1}
+w_1 \leftarrow w_1 -\eta \cdot \frac{\partial J}{\partial w_1} = w_1-\eta \cdot \frac{\partial J}{\partial y_{\text{prévu}}} \cdot \frac{\partial y_{\text{prévu}}}{\partial z} \cdot \frac{\partial z}{\partial w_1}
 $$
 
 Il faut donc calculer les 3 dérivées partielles suivantes : $\frac{\partial J}{\partial y_{\text{prévu}}}$, $\frac{\partial y_{\text{prévu}}}{\partial z}$ et $\frac{\partial z}{\partial w_1}$
@@ -366,7 +366,7 @@ Les mises à jour se font en tenant compte du taux d'apprentissage $ \eta = 0.1 
 
 ##### Mise à jour du poids $ w_1 $ :
 
-La variation de poids est : 
+La variation de poids c'est bien : 
 
 $$
 \Delta w_1 = -\eta \cdot \frac{\partial J}{\partial w_1} = -\eta \cdot \frac{\partial J}{\partial y_{\text{prévu}}} \cdot \frac{\partial y_{\text{prévu}}}{\partial z} \cdot \frac{\partial z}{\partial w_1}
@@ -434,7 +434,7 @@ $$
 Question : Deep Learning - Neural networks - What is the purpose of an activation function in a neural network? 
 Answer   : To add non-linearity to the network's behavior
 
-Question : Deep Learning - Neural networks - Which activation function is known for being computationally efficient and allowing for backpropagation? 
+Question : Deep Learning - Neural networks - Which activation function is known for being computationally efficient and allowing for back propagation? 
 Answer   : ReLu
 
 Question : Deep Learning - Neural networks - What is the disadvantage of the ReLu activation function? 
@@ -465,7 +465,7 @@ Answer   : To add non-linearity to the network's behavior
 ## 
 ############################################################ 
 -->
-Question : Deep Learning - Neural networks - Comment interprétez-vous le bais associé à un neurone particulier d'un réseau ?
+Question : Deep Learning - Neural networks - Comment interprétez-vous le bias associé à un neurone particulier d'un réseau ?
 Answer  : 
 
 #### Métaphore du biais

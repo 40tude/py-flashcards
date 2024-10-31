@@ -1455,3 +1455,78 @@ llist.print_list()
 
 * Time Complexity : O(n) 
 * Space Complexity : O(n) (next is created in each loop) 
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+
+Question : Data Structures - What is a **Merge Sort** algorithm, what are the use cases and can you implement a Merge Sort from scratch in Python? 
+
+Answer   : 
+
+This is a **divide-and-conquer algorithm** that recursively divides an input array into two halves, sorts each half, and then merges the two sorted halves back together. It's an efficient, stable, and comparison-based sorting algorithm with a time complexity of \( O(n \log n) \).
+
+#### Steps of the Merge Sort Algorithm:
+1. **Divide**: Split the array into two halves until each sub-array contains a single element or is empty.
+2. **Conquer**: Sort each of the two halves.
+3. **Merge**: Merge the two sorted halves back into a single sorted array.
+
+#### Complexity and Efficiency
+- **Time Complexity**: \( O(n \log n) \) for all cases (worst, average, and best) because it consistently divides the array in half.
+- **Space Complexity**: \( O(n) \) because it requires additional space for the temporary arrays during merging.
+- **Stability**: Merge Sort is stable, meaning it maintains the relative order of equal elements in the sorted array.
+
+#### Use Cases of Merge Sort
+1. **Large Datasets**: Suitable for large datasets because it guarantees \( O(n \log n) \) time complexity, unlike algorithms like Quick Sort that can degrade to \( O(n^2) \) in the worst case.
+2. **Linked Lists**: Often used for sorting linked lists, where the cost of random access is high, making merges more efficient.
+3. **External Sorting**: Used in external sorting (e.g., sorting data on disk) where merging is efficient for handling large datasets that don't fit in memory.
+
+#### Implementation in Python
+
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    # Step 1: Divide the array in half
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+
+    # Recursively sort each half
+    left_sorted = merge_sort(left_half)
+    right_sorted = merge_sort(right_half)
+
+    # Step 3: Merge the sorted halves
+    return merge(left_sorted, right_sorted)
+
+def merge(left, right):
+    sorted_array = []
+    i = j = 0
+
+    # Merge the two halves into a sorted array
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            sorted_array.append(left[i])
+            i += 1
+        else:
+            sorted_array.append(right[j])
+            j += 1
+
+    # Append any remaining elements from both halves
+    sorted_array.extend(left[i:])
+    sorted_array.extend(right[j:])
+
+    return sorted_array
+
+# Usage
+arr = [38, 27, 43, 3, 9, 82, 10]
+sorted_arr = merge_sort(arr)
+print("Sorted array:", sorted_arr) # [3, 9, 10, 27, 38, 43, 82]
+```
+
