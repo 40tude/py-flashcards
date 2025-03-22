@@ -75,7 +75,7 @@ def load_qa_files(directory: str) -> List[Dict[str, str]]:
 
     qa_pairs = []
     # qa_files = [file for file in Path(directory).iterdir() if file.is_file()]
-    # It now get all .md files no matter the directory organization underneath the ./md parent directory
+    # Now it get all .md files no matter the directory organization underneath the ./md parent directory
     qa_files = [file for file in Path(directory).rglob("*.md") if file.is_file()]
 
     for qa_file in qa_files:
@@ -153,7 +153,6 @@ def load_png_files(directory: str) -> List[Dict[str, str]]:
 def create_db() -> None:
     """Create the SQLite database and populate it with questions and answers in HTML format."""
 
-    # app.logger.info(f"{inspect.stack()[0][3]}()")
     g_logger.info(f"{inspect.stack()[0][3]}()")
 
     with sqlite3.connect(k_DB_Path) as conn:

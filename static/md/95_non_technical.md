@@ -313,8 +313,8 @@ Answer  :
 <img src="../static/md/book_covers/black_swan.png" alt="dummy" width="577"/>
 </p>
 
-To get one of the best explanation (FR) about the power law [watch this video](https://youtu.be/MrsjMiL9W9o?si=qaIUySUA72djVVdA). 
-
+* To get one of the best explanation (FR) about the power law [watch this video](https://youtu.be/MrsjMiL9W9o?si=qaIUySUA72djVVdA). 
+* Power laws are much more common than we might think. For example, the Pareto principle (80% of results with 20% of investment) is a power law ($\alpha = $1.16) and Pareto is everywhere (or almost everywhere).
 
 
 <!-- 

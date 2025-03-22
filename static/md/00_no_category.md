@@ -65,6 +65,134 @@ Answer   :
 -->
 
 
+
+
+
+<!--  
+Differences entre docker-compose et docker compose ?
+Differences entre docker compose up et docker compose run ...
+
+-->
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Dans un contexte MLflow Tracking Server est ce que les notions de experiments, models, runs et version de modèle sont claires pour vous? 
+Answer  : 
+
+
+Sur le site voilà comment MLflow organise les éléments :
+
+<p align="center">
+<img src="../static/md/assets/models_runs_mlflow.png" alt="mlflow" width="577"/>
+</p>
+
+
+1. **Experiment** : 
+   - Un *Experiment* est un regroupement de plusieurs *Runs* qui partagent un même objectif de suivi (par exemple, tous les essais d’entraînement pour un certain modèle ou un projet).
+   - Un *Experiment* a un nom unique et un ID.
+
+2. **Run** :
+   - Un *Run* est une exécution spécifique de l’entraînement d'un modèle ou d'une étape du pipeline. 
+   - Chaque *Run* est associé à un *Experiment* et a un ID unique (`run_id`).
+   - Les *Runs* contiennent des informations comme les métriques, les paramètres, les artefacts, et les tags enregistrés lors de l'entraînement.
+   - Lorsque qu'on sauvegarde un modèle avec MLflow, il est associé à un *Run* dans un *Experiment*.
+
+3. **Model Registry (ou Registered Model)** :
+   - Le *Model Registry* permet d'enregistrer un modèle sous un **nom** (le *model_name*) qui le rend accessible pour le chargement, la mise à jour, et la gestion des versions.
+   - Un *model_name* dans le registre de modèles peut avoir plusieurs versions (chaque version correspond à un *Run* spécifique associé).
+
+4. **Model Version** :
+   - Chaque modèle dans le *Model Registry* a une ou plusieurs **versions** (le *model_version*). Chaque version est liée à un *Run* spécifique d'un *Experiment*.
+   - Par exemple, si on entraîne plusieurs fois un modèle et qu'on souhaite sauvegarder une version stable, on enregistres le *Run* correspondant en tant que version dans le *Model Registry*.
+
+### Bref :
+- **model_name** correspond au nom d'un modèle dans le *Model Registry*, et il permet de retrouver facilement un modèle sans connaître l'ID d'un *Run*.
+- **model_version** fait référence à une version spécifique d'un modèle dans le *Model Registry*. Chaque version correspond à un *Run* précis dans un *Experiment*.
+
+### Code Python :
+```python
+client = MlflowClient()
+model_name = "random_forest"  
+model_version = "3"  
+model_version_info = client.get_model_version(name=model_name, version=model_version)
+print("Version       :", model_version_info.version)  
+print("Source Run ID :", model_version_info.run_id)  
+```
+
+
+
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous me faire un point sur les détails de la création d'une image et d'un container Docker ?
+Answer  : 
+
+* Pour lancer un conteneur, il faut une image. Cette image est créée en suivant la "recette" fournie dans un Dockerfile. Lors du processus de création de l'image, Docker empile des **couches** (layers) qui représentent chaque étape définie dans le Dockerfile. Ces couches sont immuables et incluent des instructions comme `RUN`, `COPY`, et `WORKDIR`. Les couches permettent de construire une image efficacement, car Docker peut réutiliser des couches déjà construites si elles n’ont pas changé.
+
+* Les instructions `RUN`, `COPY`, etc., s'exécutent dans un contexte défini par l'instruction `WORKDIR` du Dockerfile. Par exemple, si `WORKDIR` est défini à `/home/app`, l'instruction `COPY bob.txt .` copie le fichier `bob.txt` dans ce répertoire (`/home/app`) au sein de l'image en cours de création.
+
+* Concernant la **source** des fichiers à copier, l'instruction `COPY` utilise un chemin relatif par rapport au **contexte de construction** (build context) défini par `context` dans un fichier `docker-compose.yml`. Ce contexte est le répertoire de l'hôte à partir duquel les fichiers seront copiés vers l'image. Quand on exécute la commande `docker build`, le contexte de construction c'est le répertoire qu'on précises en argument :
+
+```bash
+docker build -t mon_image .
+docker build -t mon_image /chemin/vers/contexte
+```
+* Dans le cas des instructions exécutées par le shell (comme `RUN cp docker/requirements_4tests.txt .`), elles s'exécutent dans le contexte de l'image en cours de construction, pas du répertoire de l’hôte. Par conséquent, tous les fichiers et répertoires auxquels ces instructions accèdent doivent avoir été copiés ou créés dans une couche précédente de l'image. Autrement dit, pour que ces fichiers ou répertoires soient accessibles, ils doivent être déjà présents dans l'image.
+
+* Une fois l'image construite, elle peut être instanciée autant de fois que nécessaire. Chaque instance est un **conteneur**. Avec `docker-compose`, grâce à l'instruction `build`, on peut spécifier comment créer une image si elle n'existe pas encore. Si l'image existe déjà, `docker-compose` instancie directement un nouveau conteneur à partir de cette image, sans la reconstruire.
+
+
+
+<!-- 
+############################################################
+## 
+############################################################ 
+-->
+Question : No category yet - Pouvez-vous me faire un point sur les couches dans un contexte Docker ?
+Answer  : 
+
+Les **couches** dans Docker sont des niveaux de fichiers qui s'empilent pour constituer une image complète. Chaque couche est un **système de fichiers immutable** qui représente une étape dans la construction de l’image. Elles fonctionnent comme suit :
+
+1. **Chaque instruction dans le Dockerfile génère une couche** : Chaque fois que Docker exécute une instruction comme `RUN`, `COPY`, ou `ADD`, il crée une nouvelle couche. Cette couche contient uniquement les changements effectués par l'instruction. Par exemple, si on a `RUN apt-get update`, cette instruction va générer une couche contenant les modifications du système de fichiers après avoir mis à jour les packages.
+
+2. **Couches de système de fichiers** : Une couche peut inclure de nouveaux fichiers ou dossiers, des modifications apportées aux fichiers existants, ou des suppressions de fichiers. Cependant, comme les couches sont immuables, une "suppression" de fichier est en réalité une opération marquée pour être masquée dans les couches ultérieures.
+
+3. **Empilement en lecture seule** : Lorsqu’une image est terminée, elle est constituée de plusieurs couches en lecture seule, empilées les unes sur les autres. Lorsque vous lancez un conteneur, Docker ajoute une couche finale, qui est en lecture-écriture, au sommet de cette pile. Cela permet aux conteneurs de faire des changements temporaires pendant leur exécution, sans modifier l'image sous-jacente.
+
+4. **Optimisation et réutilisation des couches** : Docker utilise un mécanisme de mise en cache qui permet de réutiliser les couches non modifiées dans les builds successifs. Si une couche existe déjà et n'a pas changé, Docker peut la réutiliser sans la recréer, ce qui accélère le processus de création d’image et optimise le stockage.
+
+### Exemple concret de couches dans une image
+Supposons un Dockerfile avec les instructions suivantes :
+
+```Dockerfile
+FROM python:3.12         # 1ère couche : Image Python de base (grande couche préexistante)
+WORKDIR /app             # 2ème couche : Définit le répertoire de travail
+COPY requirements.txt .  # 3ème couche : Copie requirements.txt
+RUN pip install -r requirements.txt  # 4ème couche : Installe les packages Python
+COPY . .                 # 5ème couche : Copie tous les fichiers de l'hôte
+CMD ["python", "app.py"] # Instruction finale : commande pour démarrer l'app
+```
+
+Dans cet exemple :
+- La première couche (l'image de base Python) est souvent téléchargée et réutilisée. 
+- Ensuite, chaque instruction ajoute une couche avec uniquement les changements associés. 
+- Si `requirements.txt` ne change pas, la couche de l'instruction `RUN pip install -r requirements.txt` sera mise en cache et réutilisée. 
+
+### Avantages des couches
+- **Efficacité de stockage** : En empilant uniquement les changements, Docker optimise le stockage et évite les duplications inutiles.
+- **Rapidité des builds** : En réutilisant les couches mises en cache, Docker accélère le processus de build, car il ne recrée pas les couches inchangées.
+
+
 <!-- 
 ############################################################
 ## 

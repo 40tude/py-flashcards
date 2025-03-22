@@ -34,7 +34,7 @@ TODO :
     * Should I create a non-technical category ?
 * DONE - Add non technical question about job interview ?    
 
-* DONE - Document how to add grahics in a directory close to the .md file 
+* DONE - Document how to add graphics in a directory close to the .md file 
     * For example ./static/md/my_directory/one_topic.md contains one question which display the image in 
     * .static/md/my_directory/assets/graph1.png
     * Then it MUST use
@@ -135,10 +135,16 @@ $env:FLASHCARDS_SECRET_KEY = "blablabla"
 * Modify files etc.
 * Optional - Commit on github from VSCode    
 * Strike F5 while ``py-flashcards.py`` is open
-    * If the app complains
-        1. Stop the app (CTRL+C)
-        1. The Python Debug Console should be opened
-        1. Run ``./secrets.ps1`` once in the Python Debug Console
+* Open ``http://127.0.0.1:5000/`` with your browser
+* If you can't open the page with the browser
+    1. Stop the app (CTRL+C)
+    1. The Python Debug Console should be opened
+    1. Run ``./secrets.ps1`` once in the **Python Debug Console**
+    1. Click in ``py-flashcards.py``, F5 then ``http://127.0.0.1:5000/``
+
+### Note
+* Visit ``http://127.0.0.1:5000/search`` and type in `data structures`
+* You will then **ONLY** get cards containing ``data`` and ``structures``  
 
 ## To deploy on Heroku
 * Modify files etc.
